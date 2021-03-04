@@ -1,4 +1,4 @@
-package com.alibaba.dubbo.demo;
+package com.jef.dubbo.demo;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.alibaba.dubbo.demo.impl;
+package com.jef.dubbo.demo.impl;
 
-import com.alibaba.dubbo.demo.DemoService;
+import com.jef.dubbo.demo.DemoService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.jef.dubbo.demo;
+package com.jef.dubbo.api;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package com.jef.dubbo.demo.impl;
+package com.jef.dubbo.provider.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.jef.dubbo.demo.DemoService;
+import com.jef.dubbo.api.DemoService;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

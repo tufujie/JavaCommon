@@ -1,6 +1,7 @@
 package com.jef.dubbo.consumer;
 
 import com.jef.dubbo.api.DemoService;
+import com.jef.dubbo.entity.User;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ReferenceConfig;
@@ -20,7 +21,7 @@ public class Consumer {
     private static String zookeeperHost = System.getProperty("zookeeper.address", "127.0.0.1");
 
     public static void main(String[] args) throws IOException, InterruptedException {
-       startConsumerV2();
+        startConsumer();
     }
 
     /**
@@ -36,6 +37,8 @@ public class Consumer {
         DemoService demoService = context.getBean(DemoService.class);
         System.out.println("消费者1号 获取权限" + demoService.getPermissions(1L));
         System.out.println("消费者1号 结束消费...");
+        User user = demoService.getByID("1");
+        System.out.println("获取用户名称=" + user.getName());
     }
 
     /**

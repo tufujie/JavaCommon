@@ -1,5 +1,7 @@
 package com.jef.dubbo.api;
 
+import com.jef.dubbo.entity.User;
+
 import java.util.List;
 
 /**
@@ -9,4 +11,6 @@ import java.util.List;
  */
 public interface DemoService {
     List<String> getPermissions(Long id);
+
+    User getByID(String id);
 }

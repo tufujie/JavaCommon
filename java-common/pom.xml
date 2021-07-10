@@ -9,9 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>java-common</artifactId>
-    <packaging>war</packaging>
-    <name>dubbo-consumer2 Maven Webapp</name>
-    <url>http://maven.apache.org</url>
 
     <properties>
         <jackson.verson>2.4.4</jackson.verson>
@@ -346,7 +343,16 @@
             <artifactId>hutool-all</artifactId>
             <version>5.3.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.5</version>
+        </dependency>
 
 
 

@@ -134,6 +134,7 @@ public class TestAllTest {
         SqlSession session = ConnectSessionUtil.getSqlSession();
         TestAllDao testAllDao = session.getMapper(TestAllDao.class);
         List<Long> ids = Lists.newArrayList();
+        ids.add(1L);
         Boolean flag = testAllDao.deleteByIds(ids);
         System.out.println(flag);
     }

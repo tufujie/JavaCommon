@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jef.dao.ShopDao">
+    <resultMap id="shopResultMap" type="com.jef.entity.Shop">
+        <id property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="shopId" column="shop_id"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="shopResultMap" parameterType="java.lang.Long">
+        select * from shop
+        where id = #{id}
+    </select>
+</mapper>

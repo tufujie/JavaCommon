@@ -1,0 +1,144 @@
+@RequestMapping(value = "handleImportSkuAlias", method = RequestMethod.POST)
+	public String handleImportSkuAlias(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IOException {
+
+
+		ShiroUser currentUser = ControllerUtil.getCurrentUser();
+
+		Map<String,Object>  retMap = Maps.newHashMap();
+
+		MultipartHttpServletRequest mulRequest = (MultipartHttpServletRequest) request;
+		MultipartFile file = mulRequest.getFile("excel");
+		String filename = file.getOriginalFilename();
+		if (!StringUtils.hasText(filename)) {
+			retMap.putAll(ControllerUtil.returnFail4Json("Excel文件异常"));
+		} else if (filename.endsWith(".xlsx") || filename.endsWith(".xls")) {
+
+			InputStream is = null;
+			try{
+
+				is = file.getInputStream();
+				HSSFWorkbook workBook = new HSSFWorkbook(is);
+				saleSkuService.handleImportSkuAlias(workBook, currentUser.getCompanyId(), retMap);
+				retMap.putAll(ControllerUtil.returnSuccess4Json());
+
+			}catch(IOException e){
+				retMap.putAll(ControllerUtil.returnFail4Json("导入sku简称异常(IO)"));
+				log.error("导入sku简称异常IO："+e.getMessage(), e);
+			}catch(BasicException e){
+				retMap.putAll(ControllerUtil.returnFail4Json(e.getMessage()));
+				log.error("导入sku简称异常："+e.getMessage(), e);
+			}catch(Exception e){
+				retMap.putAll(ControllerUtil.returnFail4Json("导入sku简称异常"));
+				log.error("导入sku简称异常："+e.getMessage(), e);
+			}finally{
+
+				if(is != null){
+
+					is.close();
+				}
+			}
+		} else {
+			retMap.putAll(ControllerUtil.returnFail4Json("请选择Excel表格"));
+		}
+
+		redirectAttributes.addFlashAttribute("importInfo", retMap);
+
+		return "redirect:/admin/product/importSaleSkuAlias";
+	}
+
+
+
+	public void handleImportSkuAlias(HSSFWorkbook workBook, Long companyId, Map<String,Object> retMap)
+			throws IOException, BasicException {
+
+		List<Map<String,String>> lists = Lists.newArrayList();
+		retMap.put("msgs",lists);
+
+		HSSFSheet sheet = workBook.getSheetAt(0);
+        int allNum = sheet.getLastRowNum();
+		if(sheet == null){
+			throw new BasicException("表格sheet不存在");
+		}
+
+		int index = 1;
+		boolean continueFlag = true;
+		do{
+			Map<String,String> map = Maps.newHashMap();
+
+			HSSFRow row = sheet.getRow(index);
+
+            if(index == allNum + 1){
+                break;
+            }
+
+            //excel操作，最后一行直接退出
+            if(row == null){
+                index++;
+                continue;
+            }
+
+			String extraProductId = ExcelUtils.getStringCellValue(row.getCell(0));
+			String skuCode = ExcelUtils.getStringCellValue(row.getCell(1));
+			String alias = ExcelUtils.getStringCellValue(row.getCell(2));
+
+			if(!StringUtils.hasText(skuCode)){
+				continueFlag = false;
+				break;
+			}
+
+			Long productId = null;
+			if(StringUtils.hasText(extraProductId)){
+				//校验产品是否存在
+				Product dbProduct = productService.getProductByExtraProductId(extraProductId,companyId);
+				if(dbProduct == null){
+					map.put("extraProductId",extraProductId+"：产品ID不存在");
+					map.put("skuCode", StringUtils.hasText(skuCode) ? skuCode : "");
+					map.put("alias", StringUtils.hasText(alias) ? alias : "");
+					lists.add(map);
+					//自增
+					index ++;
+					continue;
+				}
+				productId = dbProduct.getId();
+			}
+
+			if(productId == null){
+
+				List<SaleSku> saleSkus = this.getSaleSkuBySkuCode(skuCode, companyId);
+				if(saleSkus == null || saleSkus.size() == 0){
+
+					map.put("extraProductId","");
+					map.put("skuCode", skuCode+"：sku编码无对应sku数据");
+					map.put("alias", StringUtils.hasText(alias) ? alias : "");
+					lists.add(map);
+					//自增
+					index ++;
+					continue;
+				}else{
+
+					for(SaleSku saleSku : saleSkus){
+
+						this.updateSaleSkuAlias(companyId, saleSku.getId(), alias);
+					}
+				}
+			}else{
+
+				SaleSku dbSaleSku = this.getBySkuCode(skuCode, productId);
+				if(dbSaleSku == null){
+					map.put("extraProductId",extraProductId);
+					map.put("skuCode", skuCode+"：sku编码无对应sku数据");
+					map.put("alias", StringUtils.hasText(alias) ? alias : "");
+					lists.add(map);
+					//自增
+					index ++;
+					continue;
+				}else{
+
+					this.updateSaleSkuAlias(companyId, dbSaleSku.getId(), alias);
+				}
+			}
+
+			//自增
+			index ++;
+		}while(continueFlag);
+	}

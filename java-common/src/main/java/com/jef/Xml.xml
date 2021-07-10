@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<orders>
+    <access_token>f06d703a71e4412aad8a579925aef656</access_token>
+    <mark></mark>
+    <bid>0</bid>
+    <order>
+        <extraOrderId>12345</extraOrderId>
+    </order>
+    <order>
+        <extraOrderId>67890</extraOrderId>
+    </order>
+</orders>

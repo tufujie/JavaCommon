@@ -10,6 +10,7 @@
     <module>dubbo-provider</module>
     <module>dubbo-consumer</module>
     <module>dubbo-consumer2</module>
+    <module>java-common</module>
   </modules>
   <name>DubboDemo Maven Webapp</name>
   <url>http://maven.apache.org</url>

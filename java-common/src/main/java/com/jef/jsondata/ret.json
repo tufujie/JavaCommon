@@ -1,0 +1,26 @@
+{
+  "code": "0",
+  "data": [
+    {
+      "productCode": "ChinaPostTracked",
+      "productName": "中邮挂号"
+    },
+    {
+      "productCode": "42300",
+      "productName": "hunan-最后一公里"
+    },
+    {
+      "productCode": "CNPUnTracked",
+      "productName": "中邮平邮"
+    },
+    {
+      "productCode": "PPTestProduct",
+      "productName": "测试产品勿动1"
+    },
+    {
+      "productCode": "YWPickup",
+      "productName": "燕文提货服务（winit）"
+    }
+  ],
+  "msg": "操作成功"
+}

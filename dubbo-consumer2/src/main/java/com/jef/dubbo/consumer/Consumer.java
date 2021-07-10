@@ -1,6 +1,6 @@
 package com.jef.dubbo.consumer;
 
-import com.jef.dubbo.demo.DemoService;
+import com.jef.dubbo.api.DemoService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**

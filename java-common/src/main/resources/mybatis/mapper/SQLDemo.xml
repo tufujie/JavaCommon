@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jef.dao.SQLDemoDao" >
+    <sql id="Base_Column_List" >
+      sd.FID id, sd.FStatus status
+    </sql>
+
+    <insert id="insert" parameterType="com.jef.entity.SQLDemo">
+        insert into t_rt_sqldemo(
+        FID,
+        FStatus
+        )
+        values (
+        #{id},
+        #{status}
+        )
+    </insert>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into t_rt_sqldemo(
+        FID,
+        FStatus
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.id},
+            #{item.status}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    update t_rt_sqldemo set FIsDelete = 1, FDeleteTime = now() where FID = #{id}
+    </delete>
+
+    <update id="batchDeleteByPrimaryKey" parameterType="java.util.List">
+        update t_rt_sqldemo set FIsDelete = 1, FDeleteTime = now()
+        where FID in
+        <foreach collection="list" open="(" close=")" item="item" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.jef.entity.SQLDemo">
+        update t_rt_sqldemo
+        <set>
+            <if test="status != null">
+                FStatus = #{status},
+            </if>
+        </set>
+        where FID = #{id}
+    </update>
+
+    <select id="selectByPrimaryKey" resultType="com.jef.entity.SQLDemo" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_rt_sqldemo sd
+        where sd.FID = #{id}
+    </select>
+
+    <select id="listSQLDemo" resultType="com.jef.entity.SQLDemo" parameterType="java.util.Map">
+        select <include refid="Base_Column_List" />
+        from t_rt_sqldemo sd
+        where FIsDelete = 0
+        <if test="status != null">
+            and sd.FStatus = #{status}
+        </if>
+    </select>
+
+</mapper>

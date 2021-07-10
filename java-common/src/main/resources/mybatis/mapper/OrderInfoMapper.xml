@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace是接口的位置 -->
+<mapper namespace="com.jef.dao.OrderInfoDao">
+    <resultMap id="orderInfoResultMap" type="com.jef.entity.OrderInfo">
+        <!-- 表字段和实体类的属性可能名称不同，可用下面方式进行映射，相同的情况下可设置可不设置 -->
+        <id property="id" column="id"/>
+        <result property="extraOrderId" column="extra_order_id"/>
+        <result property="shopId" column="shop_id"/>
+    </resultMap>
+    <!-- 指明返回的是orderInfoResuleMap，也就是指明OrderInfo实体 -->
+    <select id="selectByPrimaryKey" resultMap="orderInfoResultMap" parameterType="java.lang.Long">
+        select * from order_info
+        where id = #{id}
+    </select>
+    <select id="getByShopAndExtraOrderId" resultMap="orderInfoResultMap" parameterType="java.util.Map">
+        select * from order_info
+        where extra_order_id = #{extraOrderId}
+        and shop_id = #{shopId}
+    </select>
+    <select id="getByUserId" resultMap="orderInfoResultMap" parameterType="java.lang.Long">
+        select * from order_info
+        where user_id = #{userId}
+    </select>
+    
+    <resultMap id="orderInfoProductMap" type="com.jef.entity.OrderInfo">
+        <result property="id" column="id"/>
+        <result property="extraOrderId" column="extraOrderId"/>
+        <result property="shopId" column="shopId"/>
+        <collection property="orderProductList" resultMap="orderProductMap"/>
+    </resultMap>
+    <resultMap id="orderProductMap" type="com.jef.entity.OrderProduct">
+        <result property="id" column="orderProductID"/>
+        <result property="orderId" column="orderId"/>
+        <result property="productName" column="productName"/>
+        <result property="num" column="num"/>
+    </resultMap>
+
+    <!-- 副表字段，展示完整的1对多关系 -->
+    <sql id="orderProductColum">
+        orderProduct.id orderProductID, orderProduct.order_id orderId, orderProduct.product_name productName, orderProduct.num num
+    </sql>
+    <select id="getAllOrderInfo" parameterType="java.util.Map" resultMap="orderInfoProductMap">
+        select orderInfo.id id, orderInfo.extra_order_id extraOrderId, orderInfo.shop_id shopId, <include refid="orderProductColum" />
+        from order_info orderInfo left join order_product orderProduct on orderInfo.id = orderProduct.order_id
+    </select>
+
+    <resultMap id="orderInfoProductMapTwo" type="com.jef.entity.OrderInfo">
+        <result property="id" column="id"/>
+        <result property="extraOrderId" column="extraOrderId"/>
+        <result property="shopId" column="shopId"/>
+        <collection property="orderProductList" ofType="com.jef.entity.OrderProduct">
+            <result property="id" column="orderProductID"/>
+            <result property="orderId" column="orderId"/>
+            <result property="productName" column="productName"/>
+            <result property="num" column="num"/>
+        </collection>
+    </resultMap>
+
+    <!-- 副表字段，展示完整的1对多关系 -->
+    <sql id="orderProductColumTwo">
+        orderProduct.id orderProductID, orderProduct.order_id orderId, orderProduct.product_name productName, orderProduct.num num
+    </sql>
+    <select id="getAllOrderInfoTwo" parameterType="java.util.Map" resultMap="orderInfoProductMapTwo">
+        select orderInfo.id id, orderInfo.extra_order_id extraOrderId, orderInfo.shop_id shopId, <include refid="orderProductColumTwo" />
+        from order_info orderInfo left join order_product orderProduct on orderInfo.id = orderProduct.order_id
+    </select>
+</mapper>

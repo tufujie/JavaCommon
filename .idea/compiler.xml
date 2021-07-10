@@ -10,14 +10,18 @@
         <module name="dubbo-consumer" />
         <module name="dubbo-consumer2" />
         <module name="dubbo-provider" />
+        <module name="java-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="dubbo-api" target="1.8" />
       <module name="dubbo-consumer" target="1.8" />
       <module name="dubbo-consumer2" target="1.8" />
+      <module name="dubbo-consumer2 (1)" target="1.8" />
       <module name="dubbo-provider" target="1.8" />
       <module name="DubboDemo" target="1.8" />
+      <module name="java-common" target="1.8" />
+      <module name="java-consumer" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

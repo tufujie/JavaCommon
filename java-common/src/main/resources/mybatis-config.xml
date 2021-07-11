@@ -6,7 +6,7 @@
     <properties resource="jdbc.properties">
     </properties>
     <settings>
-        <setting name="logImpl" value="LOG4J"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
         <setting name="localCacheScope" value="SESSION"/>
     </settings>
 

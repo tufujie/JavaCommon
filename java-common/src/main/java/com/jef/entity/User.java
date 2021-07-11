@@ -218,7 +218,4 @@ public class User implements Serializable {
         this.age2 = age2;
     }
 
-    public boolean isAdmin() {
-        return admin;
-    }
 }

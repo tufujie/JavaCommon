@@ -24,7 +24,7 @@ public class ExecutorConfiguration {
     private Integer maxPoolSize;
     @Value("${thread.executor.queueCapacity:300}")
     private Integer queueCapacity;
-    @Bean("asyncServiceExecutor")
+//    @Bean("asyncServiceExecutor")
     public ThreadPoolTaskExecutor asyncServiceExecutor(){
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //配置核心线程数

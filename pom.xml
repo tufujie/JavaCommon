@@ -422,7 +422,7 @@
       <version>${export.fo.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.commons.compress</groupId>
+      <groupId>org.apache.commons</groupId>
       <artifactId>commons-compress</artifactId>
       <version>1.20</version>
     </dependency>

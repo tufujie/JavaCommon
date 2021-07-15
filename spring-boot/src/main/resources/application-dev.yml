@@ -1,0 +1,15 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8080/eureka
+
+# 阿波罗配置
+app:
+  id: spring-mvc-jef
+apollo:
+  # 注册路径，阿波罗默认注册配置 Eureka
+  meta: http://localhost:8080
+  bootstrap:
+    enabled: true
+    # 指定阿波罗中配置项名称，多个用逗号隔开
+    namespaces: application

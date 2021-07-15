@@ -3,11 +3,15 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DubboDemo.iml" filepath="$PROJECT_DIR$/DubboDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCommon.iml" filepath="$PROJECT_DIR$/JavaCommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/dubbo-api/dubbo-api.iml" filepath="$PROJECT_DIR$/dubbo-api/dubbo-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/dubbo-consumer/dubbo-consumer.iml" filepath="$PROJECT_DIR$/dubbo-consumer/dubbo-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot/dubbo-consumer (1).iml" filepath="$PROJECT_DIR$/spring-boot/dubbo-consumer (1).iml" />
       <module fileurl="file://$PROJECT_DIR$/dubbo-consumer2/dubbo-consumer2.iml" filepath="$PROJECT_DIR$/dubbo-consumer2/dubbo-consumer2.iml" />
       <module fileurl="file://$PROJECT_DIR$/dubbo-provider/dubbo-provider.iml" filepath="$PROJECT_DIR$/dubbo-provider/dubbo-provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-common/java-common.iml" filepath="$PROJECT_DIR$/java-common/java-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-jdk/java-jdk.iml" filepath="$PROJECT_DIR$/java-jdk/java-jdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot/spring-boot.iml" filepath="$PROJECT_DIR$/spring-boot/spring-boot.iml" />
     </modules>
   </component>
 </project>

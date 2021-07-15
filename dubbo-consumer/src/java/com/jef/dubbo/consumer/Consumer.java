@@ -33,12 +33,14 @@ public class Consumer {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("consumer.xml");
         context.start();
-        System.out.println("消费者1号 开始消费...");
         DemoService demoService = context.getBean(DemoService.class);
+        System.out.println("消费者1号 开始消费...");
         System.out.println("消费者1号 获取权限" + demoService.getPermissions(1L));
         System.out.println("消费者1号 结束消费...");
+        System.out.println("消费者2号 开始消费...");
         User user = demoService.getByID("1");
-        System.out.println("获取用户名称=" + user.getName());
+        System.out.println("消费者2号 获取用户名称=" + user.getName());
+        System.out.println("消费者2号 结束消费...");
     }
 
     /**

@@ -1,0 +1,22 @@
+用vue-cli脚手架工具构建项目成功后 当需要引入JQ，可用以下方法：
+1.首先在package.json里的dependencies加入"jquery": "^3.4.1"
+
+2.在终端里输入npm install jquery –-save-dev  当然用 淘宝镜像 cnpm 也是可以的
+注意：jquery 一定要小写 不然会提示  Please use 'jquery' (all lowercase)
+
+
+3.找到build文件夹下的webpack.config.js文件，打开，添加：
+let webpack = require('webpack');
+在module.exports里输入：
+plugins: [
+    new webpack.ProvidePlugin({
+      $:"jquery",
+      jQuery:"jquery",
+      "windows.jQuery":"jquery"
+    })
+  ]
+
+4.在入口文件main.js中输入：
+import $ from 'jquery';
+
+5.在终端输入npm run dev 启用即可

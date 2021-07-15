@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <title>Vue 测试实例</title>
+  <script src="js/vue.min.js"></script>
+</head>
+<style>
+
+</style>
+<body>
+
+<div id="myInfo">
+  <h1>goal : {{goal}}</h1>
+  <h1>age : {{age}}</h1>
+  <h1>{{details()}}</h1>
+</div>
+<div id="app">
+  <div v-html="message"></div>
+</div>
+
+<script type="text/javascript">
+  let data = {
+    age: 18,
+    goal: "learn",
+    site: "杰克思勒的博客"
+  };
+  let vm = new Vue({
+    el: '#myInfo',
+    data: data,
+    methods: {
+      details: function() {
+        return  this.goal + " and learn";
+      }
+    }
+  });
+
+  // 它们引用相同的对象！  true
+  document.write(vm.site === data.site);
+  document.write("<br>");
+  // 设置属性也会影响到原始数据
+  vm.age = 16;
+  // 16
+  document.write(data.age + "<br>");
+
+  // ……反之亦然
+  data.age = 14;
+  document.write(vm.age);
+  document.write("<br>");
+  // true
+  document.write(vm.$data === data);
+  document.write("<br>");
+  // true
+  document.write(vm.$el === document.getElementById('myInfo'));
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,18 @@
+在学习vue期间，刚开始配置element-ui时总是遇到各种各样的问题，记录一下解决问题的一些大致思路，方便以后做项目，也希望对别人有所帮助。
+
+产生的错误：
+./node_modules/_element-ui@2.3.7@element-ui/lib/theme-chalk/fonts/element-icons.ttfModule parse failed: Unexpected character '' (1:0)You may need an appropriate loader to handle this file type.(Source code omitted for this binary file) @ ./node_modules/_css-loader@0.28.11@css-loader!./node_modules/_element-ui@2.3.7@element-ui/lib/theme-chalk/index.css 7:411-447 @ ./node_modules/_element-ui@2.3.7@element-ui/lib/theme-chalk/index.css @ ./src/main.js @ multi ./node_modules/_webpack-dev-server@2.11.2@webpack-dev-server/client?http://localhost:8080 webpack/hot/dev-server ./src/main.js
+
+对应解决方案“
+在main.js添加以下内容
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+记得要全局注册
+Vue.use(ElementUI)
+做完这些后，我直接npm run dev，报了一个错误
+然后我查了好久发现要在webpack.config.js里配置
+{
+  test: /\.(eot|svg|ttf|woff|woff2)$/,
+  loader: 'file-loader'
+},
+最后npm run dev可以顺利打开项目

@@ -38,22 +38,18 @@ public class BusinessDemo {
     }
 
     /**
-     * 业务任务
+     * 具体的业务任务
      * 封装出来的执行任务方法
      * @param num 值，任务传参1
      * @param useType 使用方式，任务传参2
      */
     public static void taskOfDemo(int num, String useType) {
+        // 具体的业务任务开始
         int sum = 0;
         for(int i = num; i > 0; i--) {
             sum += i;
         }
         System.out.println(useType + " end, num=" + num + ", sum=" + sum);
-        try {
-            // 睡0.01秒，模拟每个任务都需要花费0.01秒
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // 具体的业务任务结束
     }
 }

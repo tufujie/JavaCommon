@@ -21,6 +21,8 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/12/14 17:38
  */
 public class ThreadUtil {
+    private static ThreadUtil threadUtil = null;
+
     static LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue<Runnable>(1024);
 
     /**
@@ -166,7 +168,10 @@ public class ThreadUtil {
     }
 
     public static ThreadUtil getInstance() {
-        return new ThreadUtil();
+        if (threadUtil == null ) {
+            threadUtil = new ThreadUtil();
+        }
+        return threadUtil;
     }
 
     public static ThreadPoolTaskExecutor createExecutor(int maxPoolSize, int keepAliveSeconds, int queueCapacity) {

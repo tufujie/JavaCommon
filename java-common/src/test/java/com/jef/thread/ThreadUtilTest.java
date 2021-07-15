@@ -85,7 +85,6 @@ public class ThreadUtilTest {
         Integer count = 100;
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        ThreadUtil threadUtil = ThreadUtil.getInstance();
         for (int num = count; num > 0; num--) {
             int finalNum = num;
             Runnable runnable = () -> {
@@ -95,7 +94,7 @@ public class ThreadUtilTest {
 
                 }
             };
-            threadUtil.execute(runnable, "测试");
+            ThreadUtil.getInstance().submit(runnable, "测试");
         }
         stopWatch.stop();
         System.out.println("使用线程执行时间" + stopWatch.getTotalTimeSeconds() + "s");

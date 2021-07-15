@@ -12,6 +12,7 @@
     <module>dubbo-consumer2</module>
     <module>java-jdk</module>
     <module>spring-boot</module>
+    <module>shiro-info</module>
   </modules>
   <name>JavaCommon Maven Webapp</name>
   <url>http://maven.apache.org</url>

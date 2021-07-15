@@ -1,0 +1,50 @@
+Shiro安全框架简介
+
+学习目标：
+1、认识 Shiro 的整体架构，各组件的概念
+2、Shiro 认证，授权的过程
+3、Shiro 自定义的Realm，Filter
+4、Shiro Session管理
+5、Shiro 缓存管理
+6、Shiro 集成 Spring
+
+Shiro功能：
+Authentication(身份认证), Authorization(权限控制), Session Management(Session管理), and Cryptography(加密)
+简介：
+Shiro为解决应用安全的四要素提供了保护应用的API：
+认证 - 用户身份识别，常被称为用户“登录”；
+授权 - 访问控制；
+会话管理 - 每个用户相关的时间敏感的状态。
+密码加密 - 保护或隐藏数据防止被偷窥；
+前面四个是核心的。
+还具有Web支持，缓存，并发，伪装，“记住我”等
+
+使用场景：
+可为任何应用提供安全保障 - 从命令行应用、移动应用到大型网络及企业应用
+
+Shiro与Spring Security比较
+Apache Shiro
+简单、灵活
+可脱离Spring
+粒度较粗
+
+Spring Security
+复杂、笨重
+不可脱离Spring
+粒度更细
+
+详解：
+Shiro认证：
+创建SecurityManager -> 主体提交认证 -> SecurityManager认证 -> Authenticator认证 -> Realm认证
+AuthentiationTest.java
+
+Shiro授权：
+创建SecurityManager -> 主体授权 -> SecurityManager授权 -> Authorizer认证 -> Realm获取角色权限数据
+Authentiation2Test.java
+
+内置Realm：
+IniRealm
+IniRealmTest.java
+JdbcRealm
+test.sql JdbcRealmTest.java
+

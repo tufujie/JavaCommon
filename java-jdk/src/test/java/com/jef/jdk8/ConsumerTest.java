@@ -8,6 +8,8 @@ import com.jef.util.StringUtils;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -44,7 +46,16 @@ public class ConsumerTest {
         orderInfo.setTotalPrice(new BigDecimal(100));
         consumerDiscount.andThen(consumerSub).accept(orderInfo);
         System.out.println("折扣优惠后的价格为=" + orderInfo.getTotalPrice());
-
+        // 使用字典方式
+        Map<Integer, Consumer> consumerMap = new HashMap<>();
+        consumerMap.put(1, consumerDiscount);
+        consumerMap.put(2, consumerSub);
+        orderInfo.setTotalPrice(new BigDecimal(200));
+        orderInfo.setDiscountType(1);
+        consumerMap.get(orderInfo.getDiscountType()).accept(orderInfo);
+        orderInfo.setDiscountType(2);
+        consumerMap.get(orderInfo.getDiscountType()).accept(orderInfo);
+        System.out.println("折扣优惠后的价格为=" + orderInfo.getTotalPrice());
     }
 
     @Test

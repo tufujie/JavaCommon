@@ -29,6 +29,11 @@ public class OrderInfo implements Serializable {
      */
     private List<OrderProduct> orderProductList;
 
+    /**
+     * 折扣方式
+     */
+    private int discountType;
+
     public Long getId() {
         return id;
     }
@@ -75,5 +80,13 @@ public class OrderInfo implements Serializable {
 
     public void setOrderProductList(List<OrderProduct> orderProductList) {
         this.orderProductList = orderProductList;
+    }
+
+    public int getDiscountType() {
+        return discountType;
+    }
+
+    public void setDiscountType(int discountType) {
+        this.discountType = discountType;
     }
 }

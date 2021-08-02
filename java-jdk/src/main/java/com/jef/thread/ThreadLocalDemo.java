@@ -1,5 +1,7 @@
 package com.jef.thread;
 
+import com.jef.constant.BasicConstant;
+
 /**
  * ThreadLocal的demo
  * 1）实际的通过ThreadLocal创建的副本是存储在每个线程自己的threadLocals中的；
@@ -11,11 +13,31 @@ package com.jef.thread;
 public class ThreadLocalDemo {
     ThreadLocal<Long> longLocal = new ThreadLocal<Long>();
     ThreadLocal<String> stringLocal = new ThreadLocal<String>();
+    // 变量，这里是用户名
+    ThreadLocal<String> userNameLocal = new ThreadLocal<String>();
+
+    public static void main(String[] args) throws InterruptedException {
+        final ThreadLocalDemo threadLocalDemo = new ThreadLocalDemo();
+        threadLocalDemo.setThreadAndUserName(BasicConstant.USER_NAME);
+        printThreadLocal(threadLocalDemo);
+
+        for (int i = 1; i < 3; i++) {
+            int finalI = i;
+            Thread thread1 = new Thread(() -> {
+                threadLocalDemo.setThreadAndUserName(finalI + BasicConstant.STR_ONE);
+                printThreadLocal(threadLocalDemo);
+            });
+            thread1.start();
+            thread1.join();
+        }
+        printThreadLocal(threadLocalDemo);
+    }
 
 
-    public void set() {
+    public void setThreadAndUserName(String userName) {
         longLocal.set(Thread.currentThread().getId());
         stringLocal.set(Thread.currentThread().getName());
+        userNameLocal.set(userName);
     }
 
     public long getLong() {
@@ -26,23 +48,9 @@ public class ThreadLocalDemo {
         return stringLocal.get();
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        final ThreadLocalDemo threadLocalDemo = new ThreadLocalDemo();
 
-
-        threadLocalDemo.set();
-        printThreadLocal(threadLocalDemo);
-
-        Thread thread1 = new Thread(){
-            @Override
-            public void run() {
-                threadLocalDemo.set();
-                printThreadLocal(threadLocalDemo);
-            }
-        };
-        thread1.start();
-        thread1.join();
-        printThreadLocal(threadLocalDemo);
+    public String getUserName() {
+        return userNameLocal.get();
     }
 
     /**
@@ -53,6 +61,6 @@ public class ThreadLocalDemo {
      * @return void
      */
     public static void printThreadLocal(ThreadLocalDemo threadLocalDemo) {
-        System.out.printf("线程ID=%s,线程名称=%s\n", threadLocalDemo.getLong(), threadLocalDemo.getString());
+        System.out.printf("线程ID=%s,线程名称=%s 用户名称=%s\n", threadLocalDemo.getLong(), threadLocalDemo.getString(), threadLocalDemo.getUserName());
     }
 }

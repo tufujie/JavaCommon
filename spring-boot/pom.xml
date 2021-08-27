@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
     <groupId>com.jef</groupId>
-    <artifactId>jef_springboot</artifactId>
+    <artifactId>spring-boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>jef_springboot</name>

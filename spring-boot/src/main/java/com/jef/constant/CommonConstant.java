@@ -9,6 +9,6 @@ public interface CommonConstant {
     /**
      * appID
      */
-    String APOLLO_APP_ID = "spring-mvc-jef";
+    String APOLLO_APP_ID = "spring_jef";
 
 }

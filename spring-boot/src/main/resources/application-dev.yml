@@ -1,3 +1,4 @@
+# 配置文件
 eureka:
   client:
     service-url:
@@ -5,7 +6,7 @@ eureka:
 
 # 阿波罗配置
 app:
-  id: spring-mvc-jef
+  id: spring_jef
 apollo:
   # 注册路径，阿波罗默认注册配置 Eureka
   meta: http://localhost:8080
@@ -13,3 +14,15 @@ apollo:
     enabled: true
     # 指定阿波罗中配置项名称，多个用逗号隔开
     namespaces: application
+
+spring:
+  thymeleaf:
+    # controller 返回 String 后跳转到指定界面时的路径前缀，下面路径的两个 / 都不能省略
+    prefix: classpath:/static/
+
+  mvc:
+    static-path-pattern: /**
+
+  resources:
+    # 静态资源的默认访问路径前缀
+    static-locations: classpath:/static

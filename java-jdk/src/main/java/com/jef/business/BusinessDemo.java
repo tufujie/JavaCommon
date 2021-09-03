@@ -23,14 +23,14 @@ public class BusinessDemo {
         System.out.println("taskNum=" + taskNum + "开始工作..");
         ThreadUtil.print();
         Date dateTmp1 = new Date();
-        // 模拟业务工作中
+        // 模拟业务工作开始
         int size = 100;
         int num = 0;
         for (int i = 1; i <= size; i++) {
             num += i;
         }
         System.out.println("taskNum=" + taskNum + "工作中..，内容为输出1到100的和加上taskNum，总和=" + num);
-        // 模拟业务工作中
+        // 模拟业务工作结束
         System.out.println("taskNum=" + taskNum + "工作结束..");
         Date dateTmp2 = new Date();
         long time = dateTmp2.getTime() - dateTmp1.getTime();

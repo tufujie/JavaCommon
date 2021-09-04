@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <import resource="importBeans.xml" />
+    <!-- 为了让应用的每一个组件能更容易的对公共组件进行引用 -->
+    <alias name="chineseService" alias="cnForAndroidService" />
+    <alias name="chineseService" alias="cnForIOSService" />
+    <!-- 配置名为 chineseService 的bean，其实现类为com.jef.service.impl.ChineseServiceImpl -->
+    <bean id="chineseService" class="com.jef.service.impl.ChineseServiceImpl">
+        <!-- 设值注入，控制调用 setAxeService() 方法，将 stoneAxeService bean作为参数传入，等效于执行 new ChineseServiceImpl().setAxeService(stoneAxeService) -->
+        <property name="axeService" ref="steelAxeService"/>
+    </bean>
+    <!-- 配置名为 oldChineseService 的bean，其实现类为com.jef.service.impl.OldChineseServiceImpl -->
+    <bean id="oldChineseService" class="com.jef.service.impl.OldChineseServiceImpl">
+        <!-- 设值注入，控制调用 setAxeService() 方法，将 steelAxeService bean作为参数传入，等效于执行 new OldChineseServiceImpl().setAxeService(steelAxeService) -->
+        <property name="axeService" ref="stoneAxeService"/>
+    </bean>
+    <!-- 配置名为 originalChineseService 的bean，其实现类为com.jef.service.impl.OriginalChineseService -->
+    <bean id="originalChineseService" class="com.jef.service.impl.OriginalChineseServiceImpl">
+        <!-- 构造注入，控制调用 OriginalChineseServiceImpl() 带一个参数的构造方法，多个参数就设置constructor-arg为多个 -->
+        <constructor-arg ref="woodAxeService"/>
+    </bean>
+</beans>

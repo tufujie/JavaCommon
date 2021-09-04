@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-lazy-init="true">
+
+    <bean id="userConstructorArg" class="com.jef.entity.User">
+        <!-- 构造方法参数 -->
+        <constructor-arg>
+            <bean class="com.jef.entity.OrderInfo">
+                <property name="extraOrderId" value="0001"/>
+                <property name="shopId" value="2" />
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="userConstructorArgV2" class="com.jef.entity.User">
+        <!-- 构造方法参数 -->
+        <constructor-arg>
+            <ref bean="orderInfoBean"/>
+        </constructor-arg>
+    </bean>
+    <bean id="userAgePhoneBean" class="com.jef.entity.User">
+        <!-- 构造方法参数 -->
+        <constructor-arg type="int" value="28"/>
+        <constructor-arg type="java.lang.String" value="Jef"/>
+    </bean>
+    <bean id="userAgePhoneBeanByIndex" class="com.jef.entity.User">
+        <!-- 构造方法参数 -->
+        <constructor-arg index="0" value="27"/>
+        <constructor-arg index="1" value="Jef1"/>
+    </bean>
+    <!-- setter方法 -->
+    <bean id="orderInfoBean" class="com.jef.entity.OrderInfo">
+        <property name="extraOrderId" value="0001"/>
+        <property name="shopId" value="2" />
+    </bean>
+    <!-- setter方法 -->
+    <bean id="userSetter" class="com.jef.entity.User">
+        <property name="name" value="Jef001"/>
+        <property name="age" value="27"/>
+        <property name="orderInfo" ref="orderInfoBean"/>
+    </bean>
+    <bean id="userConstructorArgAndSetter" class="com.jef.entity.User">
+        <!-- 构造方法和setter结合 -->
+        <constructor-arg>
+            <ref bean="orderInfoBean"/>
+        </constructor-arg>
+        <property name="name" value="Jef001"/>
+        <property name="age" value="27"/>
+    </bean>
+    <bean id="userNameBean" class="java.lang.String"/>
+    <bean id="userConstructorArgV3" class="com.jef.entity.User">
+        <property name="name">
+            <idref bean="userNameBean"/>
+        </property>
+    </bean>
+    <!-- 内部bean -->
+    <bean id="userInnerBean" class="com.jef.entity.User">
+        <property name="name" value="Jef001"/>
+        <property name="age" value="27"/>
+        <property name="orderInfo">
+            <bean class="com.jef.entity.OrderInfo">
+                <property name="extraOrderId" value="0001"/>
+                <property name="shopId" value="2" />
+            </bean>
+        </property>
+    </bean>
+    <!-- p名称空间 -->
+    <bean id="userInnerBeanUseP" class="com.jef.entity.User" p:name="Jef" p:age="27" p:orderInfo-ref="orderInfoBean"/>
+    <!-- 组合属性名称 -->
+    <bean id="userInnerBeanUseJoin" class="com.jef.entity.User">
+        <property name="orderInfo.extraOrderId" value="test"/>
+    </bean>
+    <!-- -->
+    <bean id="userDependOn" class="com.jef.entity.User" depends-on="orderInfoBean" lazy-init="true" />
+</beans>

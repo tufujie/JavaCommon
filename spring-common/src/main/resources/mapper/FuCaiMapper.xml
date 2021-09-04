@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jef.dao.IFuCaiDao">
+    <sql id="COLUMN_LIST">
+   id, fuDate, red1, red2, red3, red4, red5, red6, blue, editNum
+    </sql>
+    <select id="selectByPrimaryKey" resultType="com.jef.entity.FuCai" parameterType="java.lang.Long">
+        select <include refid="COLUMN_LIST"/> from fu_cai
+        where id = #{id}
+    </select>
+    <select id="getByParams" resultType="com.jef.entity.FuCai" parameterType="java.util.Map">
+        select <include refid="COLUMN_LIST"/> from fu_cai
+        <where>
+            <if test="fuDate != null and fuDate != ''">
+                fuDate = #{fuDate}
+            </if>
+        </where>
+        order by fuDate desc
+    </select>
+    <select id="insert" parameterType="com.jef.entity.FuCai">
+        insert into fu_cai (fuDate, red1, red2, red3, red4, red5, red6, blue, editNum)
+        values (#{fuDate}, #{red1}, #{red2}, #{red3}, #{red4}, #{red5}, #{red6}, #{blue}, #{editNum})
+    </select>
+    <update id="update" parameterType="com.jef.entity.FuCai">
+        update fu_cai
+        <set>
+        <if test="red1 != null and red1 != ''">
+            red1 = #{red1},
+        </if>
+        <if test="red2 != null and red2 != ''">
+            red2 = #{red2},
+        </if>
+        <if test="red3 != null and red3 != ''">
+            red3 = #{red3},
+        </if>
+        <if test="red4 != null and red4 != ''">
+            red4 = #{red4},
+        </if>
+        <if test="red5 != null and red5 != ''">
+            red5 = #{red5},
+        </if>
+        <if test="red6 != null and red6 != ''">
+            red6 = #{red6},
+        </if>
+        <if test="blue != null and blue != ''">
+            blue = #{blue},
+        </if>
+        <if test="editNum != null">
+            editNum = #{editNum},
+        </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="getByGroup1" resultType="java.util.Map" parameterType="java.util.Map">
+        select red1 red, count(red1) numCount from fu_cai
+        group by red1
+    </select>
+    <select id="getByGroup2" resultType="java.util.Map" parameterType="java.util.Map">
+        select red2 red, count(red2) numCount from fu_cai
+        group by red2
+    </select>
+    <select id="getByGroup3" resultType="java.util.Map" parameterType="java.util.Map">
+        select red3 red, count(red3) numCount from fu_cai
+        group by red3
+    </select>
+    <select id="getByGroup4" resultType="java.util.Map" parameterType="java.util.Map">
+        select red4 red, count(red4) numCount from fu_cai
+        group by red4
+    </select>
+    <select id="getByGroup5" resultType="java.util.Map" parameterType="java.util.Map">
+        select red5 red, count(red5) numCount from fu_cai
+        group by red5
+    </select>
+    <select id="getByGroup6" resultType="java.util.Map" parameterType="java.util.Map">
+        select red6 red, count(red6) numCount from fu_cai
+        group by red6
+    </select>
+    <select id="getByGroupBlue" resultType="java.util.Map" parameterType="java.util.Map">
+        select blue, count(blue) numCount from fu_cai
+        group by blue
+    </select>
+</mapper>

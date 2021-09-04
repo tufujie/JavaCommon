@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jef.dao.IUserDao">
+    <cache type="com.jef.redis.cache.RedisCache" />
+
+    <select id="selectByPrimaryKey" resultType="com.jef.entity.User" parameterType="java.lang.Long">
+        select * from user
+        where id = #{id}
+    </select>
+    <select id="getByNameAndPhone" resultType="com.jef.entity.User" parameterType="java.util.Map">
+        select * from user
+        where name = #{name}
+        and phone = #{phone}
+    </select>
+    <select id="getByUser" resultType="com.jef.entity.User" parameterType="com.jef.entity.User">
+        select * from user
+        where name = #{name}
+        and phone = #{phone}
+    </select>
+    <select id="getByNameAndPassWord" resultType="com.jef.entity.User" parameterType="com.jef.entity.User">
+        select * from user${tableIndex}
+        where name = #{name}
+        and password = #{password}
+    </select>
+    <select id="insert" parameterType="com.jef.entity.User">
+        insert into user (name, password, phone, age) values (#{name}, #{password}, #{phone}, #{age})
+    </select>
+    <select id="getByName" resultType="com.jef.entity.User" parameterType="java.lang.String">
+        select * from user
+        where name = #{name}
+    </select>
+    <select id="getAllUser" resultType="com.jef.entity.User">
+        select * from user
+    </select>
+    <update id="updateUser" parameterType="com.jef.entity.User">
+        update user
+        <set>
+        <if test="permission != null">
+            permission = #{permission},
+        </if>
+        <if test="password != null">
+            password = #{password},
+        </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="getUserByParams" resultType="com.jef.entity.User" parameterType="java.util.Map">
+        select * from user${tableIndex}
+        where id = #{id}
+    </select>
+    <select id="insertSubUser" parameterType="com.jef.entity.User">
+        insert into user${tableIndex} (id, name, password, phone, age) values (#{id}, #{name}, #{password}, #{phone}, #{age})
+    </select>
+    <select id="getMaxUserID" resultType="java.lang.Long" parameterType="java.util.Map">
+        select max(id) from user
+    </select>
+    <select id="getUserList" resultType="com.jef.entity.User" parameterType="java.util.Map">
+        select id, name from user
+        <if test="searchPhrase != null">
+            where name = #{searchPhrase}
+        </if>
+    </select>
+    <select id="getUserListV2" resultType="com.jef.entity.User" parameterType="com.jef.dto.RequestParamDto">
+        select id, name from user
+        <if test="searchPhrase != null">
+            where name = #{searchPhrase}
+        </if>
+    </select>
+</mapper>

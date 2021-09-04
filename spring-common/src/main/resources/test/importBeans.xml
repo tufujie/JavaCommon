@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--配置名为 steelAxeService 的bean，其实现类为 com.jef.service.impl.SteelAxeServiceImpl -->
+    <bean id="steelAxeService" class="com.jef.service.impl.SteelAxeServiceImpl"/>
+    <!--配置名为 stoneAxeService 的bean，其实现类为 com.jef.service.impl.StoneAxeServiceImpl -->
+    <bean id="stoneAxeService" class="com.jef.service.impl.StoneAxeServiceImpl"/>
+    <!--配置名为 woodAxeService 的bean，其实现类为 com.jef.service.impl.WoodAxeServiceImpl -->
+    <bean id="woodAxeService" class="com.jef.service.impl.WoodAxeServiceImpl"/>
+</beans>

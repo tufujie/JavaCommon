@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jef.dao.IFoundationDao">
+    <sql id="COLUMN_LIST">
+   code, name
+    </sql>
+    <select id="selectByPrimaryKey" resultType="com.jef.entity.Foundation" parameterType="java.lang.String">
+        select <include refid="COLUMN_LIST"/> from foundation
+        where code = #{code}
+    </select>
+    <select id="getByParams" resultType="com.jef.entity.Foundation" parameterType="java.util.Map">
+        select <include refid="COLUMN_LIST"/> from foundation
+        where showFlag = 1
+        order by level desc
+    </select>
+    <insert id="insert" parameterType="com.jef.entity.Foundation">
+        insert into foundation(code, name)
+        values (#{code}, #{name})
+    </insert>
+    <sql id="SHOP_COLUMN_LIST">
+      id, code, shopDate, shopRatePrice, linkBuyDate
+    </sql>
+    <select id="getShopByParams" resultType="com.jef.entity.FoundationShop" parameterType="java.util.Map">
+        select <include refid="SHOP_COLUMN_LIST"/> from foundationshop
+        where code = #{code}
+        order by shopDate desc
+    </select>
+    <select id="getShopByID" resultType="com.jef.entity.FoundationShop" parameterType="java.lang.String">
+        select <include refid="SHOP_COLUMN_LIST"/> from foundationshop
+        where id = #{id}
+    </select>
+    <sql id="BUY_COLUMN_LIST">
+      id, code, money, buyDate, buyRatePrice
+    </sql>
+    <select id="getBuyByParams" resultType="com.jef.entity.FoundationBuy" parameterType="java.util.Map">
+        select <include refid="BUY_COLUMN_LIST"/> from foundationbuy
+        where code = #{code}
+        <if test="buyDateList != null and buyDateList.size() > 0">
+            and buyDate in
+            <foreach collection="buyDateList" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        order by buyDate desc
+    </select>
+    <select id="getBuyByID" resultType="com.jef.entity.FoundationBuy" parameterType="java.lang.String">
+        select <include refid="BUY_COLUMN_LIST"/> from foundationbuy
+        where id = #{id}
+    </select>
+    <insert id="insertBuy" parameterType="com.jef.entity.FoundationBuy">
+        insert into foundationbuy(code, money, buyDate, buyRatePrice)
+        values (#{code}, #{money}, #{buyDate}, #{buyRatePrice})
+    </insert>
+    <insert id="insertShop" parameterType="com.jef.entity.FoundationShop">
+        insert into foundationshop(code, shopDate, shopRatePrice, linkBuyDate)
+        values (#{code}, #{shopDate}, #{shopRatePrice}, #{linkBuyDate})
+    </insert>
+</mapper>

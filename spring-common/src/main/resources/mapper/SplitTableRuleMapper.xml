@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jef.dao.ISplitTableRuleDao" >
+
+    <!-- 使用二级缓存 -->
+    <cache type="com.jef.redis.cache.RedisCache" />
+
+
+    <select id="getSplitTableRuleVoList" resultType="com.jef.entity.SplitTableRuleVo" parameterType="map">
+        select FID id,FSName sufSName,FTableName tableName,FIsShopID isShopID,FShopID shopID,FActualTable actualTable
+        from t_bdc_splittablerule
+        <where>
+            <if test="isShopID != null and isShopID != ''">
+                and FIsShopID = #{isShopID}
+            </if>
+            <if test="shopID != null and shopID != ''">
+                and FShopID = #{shopID}
+            </if>
+            <if test="logicTable != null and logicTable != ''">
+                and FTableName = #{logicTable}
+            </if>
+        </where>
+    </select>
+
+    <select id="getSplitTableRuleVo" resultType="com.jef.entity.SplitTableRuleVo">
+		select FID id,FSName sufSName,FTableName tableName,FIsShopID isShopID,FShopID shopID,FActualTable actualTable
+		from t_bdc_splittablerule where FIsECID = 1
+	</select>
+
+    <select id="getTableByShopID" resultType="com.jef.entity.SplitTableRuleVo">
+        select FID id,FSName sufSName,FTableName tableName,FIsShopID isShopID,FShopID shopID,FActualTable actualTable
+        from t_bdc_splittablerule
+        where FShopID = #{shopID} and FIsShopID = 1 and FTableName in
+        <foreach collection="tableNameList" item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

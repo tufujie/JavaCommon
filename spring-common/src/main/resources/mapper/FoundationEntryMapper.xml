@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jef.dao.IFoundationEntryDao">
+    <sql id="COLUMN_LIST">
+   code, createDate, unitPrice
+    </sql>
+    <select id="selectByPrimaryKey" resultType="com.jef.entity.FoundationEntry" parameterType="java.lang.String">
+        select <include refid="COLUMN_LIST"/> from foundationentry
+        where code = #{code}
+    </select>
+    <select id="getByParams" resultType="com.jef.entity.FoundationEntry" parameterType="java.util.Map">
+        select <include refid="COLUMN_LIST"/> from foundationentry
+        <where>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="createDate != null and createDate != ''">
+                and createDate = #{createDate}
+            </if>
+        </where>
+        order by createDate desc limit #{day}
+    </select>
+    <insert id="insert" parameterType="com.jef.entity.FoundationEntry">
+        insert into foundationentry(code, createDate, unitPrice)
+        values (#{code}, #{createDate}, #{unitPrice})
+    </insert>
+    <select id="getEntryLastByCode" resultType="com.jef.entity.FoundationEntry" parameterType="java.lang.String">
+        select <include refid="COLUMN_LIST"/> from foundationentry
+        where code = #{code}
+        order by createDate desc limit 1
+    </select>
+    <select id="getEntryLastByCodeAndCreate" resultType="com.jef.entity.FoundationEntry">
+        select <include refid="COLUMN_LIST"/> from foundationentry
+        where code = #{code}
+        and createDate = #{createDate}
+    </select>
+</mapper>

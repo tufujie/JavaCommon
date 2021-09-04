@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <!-- 描述性的文字说明，没实际意义，一般情况下直接删除掉 -->
+    <description>Jef Web Application</description>
+    <display-name>Jef Web Application</display-name>
+
+    <!-- spring容器初始化，应用上下文配置文件 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <!-- 默认为applicationContext.xml，可修改成其他的文件名进入引入 -->
+        <param-value>classpath:spring/spring-application.xml</param-value>
+    </context-param>
+
+    <!-- 指定 Log4J 配置文件的地址 -->
+    <context-param>
+        <description>日志配置文件的路径</description>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:common/log4j2.xml</param-value>
+    </context-param>
+
+    <!-- 使用该监听器初始化 Log4J 日志引擎 -->
+    <!-- log4j2-begin -->
+    <listener>
+        <listener-class>com.jef.common.listener.Log4j2ConfigListener</listener-class>
+    </listener>
+    <filter>
+        <filter-name>log4jServletFilter</filter-name>
+        <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>log4jServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <!-- log4j2-end -->
+
+
+    <context-param>
+        <param-name>log4jRefreshInterval</param-name>
+        <param-value>3000</param-value>
+    </context-param>
+
+    <!-- 为避免项目间冲突，定义唯一的 RelativePath 指明相对路径 -->
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>RelativePath</param-value>
+    </context-param>
+
+    <!-- 自定义监听器 -->
+    <listener>
+        <listener-class>com.jef.service.MySocket</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Introspector 缓存清除监听器,防止内存泄露 -->
+    <listener>
+        <listener-class>
+            org.springframework.web.util.IntrospectorCleanupListener
+        </listener-class>
+    </listener>
+
+    <!-- Servlet映射 -->
+    <!-- Servlet设置的名称，可任意 -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!-- 设置配置文件的路径，如果使用默认文件名dispatcher-servlet.xml而不修改的话可以不用配置，否则一定需要配置文件名路径 -->
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!-- 添加验证码的servlet的映射 -->
+    <servlet-mapping>
+        <servlet-name>verifyCodeServlet</servlet-name>
+        <url-pattern>/verifyCodeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>verifyCodeServlet</servlet-name>
+        <servlet-class>com.jef.servlet.VerifyCodeServlet</servlet-class>
+    </servlet>
+
+    <!-- 编码过滤器，进行字符编码配置 -->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>druidWebStatFilter</filter-name>
+        <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+        <init-param>
+            <param-name>exclusions</param-name>
+            <param-value>*.ttf,*.woff,*.woff2</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>druidWebStatFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+<!--    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+
+
+    <!-- 设置首页 -->
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/view/jsp/index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

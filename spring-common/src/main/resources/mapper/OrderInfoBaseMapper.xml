@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jef.dao.IOrderInfoBaseDao">
+  <select id="listOrderInfoBySplitTableV3" resultType="com.jef.entity.OrderInfo" parameterType="com.jef.entity.OrderInfo">
+    select id, extra_order_id extraOrderId, shop_id shopId, user_id userId from ${dbName}.${tbName}
+    <where>
+      <if test="shopId != null">
+        and shop_id = #{shopId}
+      </if>
+    </where>
+  </select>
+  <select id="listOrderInfoBySplitTableV4" resultType="com.jef.entity.OrderInfo" parameterType="com.jef.entity.OrderInfo">
+    select id, extra_order_id extraOrderId, shop_id shopId, user_id userId from ${tbName}
+    <where>
+      <if test="shopId != null">
+        and shop_id = #{shopId}
+      </if>
+    </where>
+  </select>
+</mapper>

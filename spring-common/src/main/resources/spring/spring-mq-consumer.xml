@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <bean id="mq_messageListener" class="com.jef.mq.ReMessageListener">
+    </bean>
+
+    <bean id="listenerContainer"
+          class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="mq_targetConnectionFactory"></property>
+        <property name="destination" ref="mq_queueDestination"></property>
+        <property name="messageListener" ref="mq_messageListener"></property>
+        <property name="concurrency" value="3-6"/>
+    </bean>
+
+</beans>

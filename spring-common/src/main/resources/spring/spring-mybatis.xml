@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!-- 定义mysql 数据源，连接数据库主机的连接信息 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="dataSource2" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url2}"/>
+        <property name="username" value="${jdbc.username2}"/>
+        <property name="password" value="${jdbc.password2}"/>
+    </bean>
+
+    <bean id="dataSourceRead" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.urlRead}"/>
+        <property name="username" value="${jdbc.usernameRead}"/>
+        <property name="password" value="${jdbc.passwordRead}"/>
+    </bean>
+
+    <bean id="mysqlDynamicDataSource" class="com.jef.dbRouting.db.DynamicDataSource">
+        <property name="targetDataSources">
+            <!-- 标识符类型 -->
+            <map>
+                <entry key="master1" value-ref="dataSource"/>
+                <entry key="master2" value-ref="dataSource2"/>
+                <entry key="slave" value-ref="dataSourceRead"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="dbRuleSet" class="com.jef.dbRouting.bean.RouterSet">
+        <property name="routeFieldStart" value="0"></property>
+        <property name="routeFieldEnd" value="9200000000000000000"></property>
+        <property name="dbNumber" value="2"></property>
+        <property name="routeType" value="2"></property>
+        <property name="ruleType" value="3"></property>
+        <property name="tableNumber" value="5"></property>
+        <property name="dbKeyArray">
+            <list>
+                <value>master1</value>
+                <value>master2</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dBRouter" class="com.jef.dbRouting.router.DBRouterImpl">
+        <property name="routerSetList">
+            <!-- 标识符类型 -->
+            <list>
+                <ref bean="dbRuleSet"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件，定义session工厂，指定数据访问映射文件和使用的数据源 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="mysqlDynamicDataSource"/>
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
+        <property name="configLocation" value="classpath:spring/spring-mybatis-log.xml" />
+<!--        <property name="plugins" ref="paginationInterceptor"/>-->
+    </bean>
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="mysqlDynamicDataSource"/>
+    </bean>
+
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"></property>
+        <property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"></property>
+    </bean>
+
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类，定义session工厂和DAO扫描路径，自动进行DAO与session工厂的绑定 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.jef.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!-- transaction-manager：引用上面定义的事务管理器-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- MyBatis 分页拦截器-->
+<!--    <bean id="paginationInterceptor" class="com.jef.common.interceptor.PageInterceptor">
+        <property name="dialect" value="mysql"/>
+        &lt;!&ndash; 拦截Mapper.xml文件中，id包含list字符的语句 &ndash;&gt;
+        <property name="pageSqlId" value=".*"/>
+    </bean>-->
+
+    <bean id="theTracingBeforeAdvice" class="com.jef.common.interceptor.TracingBeforeAdvice"/>
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="proxyTargetClass" value="true"/>
+        <property name="interceptorNames">
+            <list>
+                <value>theTracingBeforeAdvice</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--定义session工厂，指定数据访问映射文件和使用的数据源-->
+    <bean id="test1-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:mapper/*Mapper.xml</value>
+            </list>
+        </property>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--定义session工厂和DAO扫描路径，自动进行DAO与session工厂的绑定-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.jef.daoOne"/>
+        <property name="sqlSessionFactoryBeanName" value="test1-sqlSessionFactory"/>
+    </bean>
+
+    <!--定义session工厂，指定数据访问映射文件和使用的数据源-->
+    <bean id="test2-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:mapper/*Mapper.xml</value>
+            </list>
+        </property>
+        <property name="dataSource" ref="dataSourceRead"/>
+    </bean>
+    <!--定义session工厂和DAO扫描路径，自动进行DAO与session工厂的绑定-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.jef.daoTwo"/>
+        <property name="sqlSessionFactoryBeanName" value="test2-sqlSessionFactory"/>
+    </bean>
+
+</beans>

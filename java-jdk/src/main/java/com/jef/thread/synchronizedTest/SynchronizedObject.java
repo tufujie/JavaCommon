@@ -1,10 +1,12 @@
 package com.jef.thread.synchronizedTest;
+
 /**
  * 对象锁实例: 代码块形式
+ *
  * @author Jef
  */
-public class SynchronizedTestTwo implements Runnable{
-    static SynchronizedTestTwo st = new SynchronizedTestTwo();
+public class SynchronizedObject implements Runnable {
+    static SynchronizedObject st = new SynchronizedObject();
 
     public static void main(String[] args) {
         Thread t1 = new Thread(st);
@@ -20,7 +22,7 @@ public class SynchronizedTestTwo implements Runnable{
 
     @Override
     public void run() {
-        synchronized(this) {
+        synchronized (new SynchronizedObject()) {
             System.out.println("开始执行:" + Thread.currentThread().getName());
             try {
                 // 模拟执行内容

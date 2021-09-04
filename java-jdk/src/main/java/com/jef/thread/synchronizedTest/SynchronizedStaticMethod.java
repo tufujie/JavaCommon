@@ -1,12 +1,13 @@
 package com.jef.thread.synchronizedTest;
 /**
- * 类锁：synchronized加载static方法上
+ * 类锁：synchronized加在static方法上
+ *
  * @author Jef
  * @date 2020/7/23
  */
-public class SynchronizedTestFour implements Runnable {
-    static SynchronizedTestFour st1 = new SynchronizedTestFour();
-    static SynchronizedTestFour st2 = new SynchronizedTestFour();
+public class SynchronizedStaticMethod implements Runnable {
+    static SynchronizedStaticMethod st1 = new SynchronizedStaticMethod();
+    static SynchronizedStaticMethod st2 = new SynchronizedStaticMethod();
 
     public static void main(String[] args) throws Exception {
         Thread t1 = new Thread(st1);

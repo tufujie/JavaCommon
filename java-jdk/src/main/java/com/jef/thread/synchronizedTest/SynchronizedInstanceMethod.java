@@ -4,8 +4,8 @@ package com.jef.thread.synchronizedTest;
  * @author Jef
  * @date 2020/7/23
  */
-public class SynchronizedTestThree implements Runnable {
-    static SynchronizedTestThree st = new SynchronizedTestThree();
+public class SynchronizedInstanceMethod implements Runnable {
+    static SynchronizedInstanceMethod st = new SynchronizedInstanceMethod();
 
     public static void main(String[] args) throws Exception {
         Thread t1 = new Thread(st);

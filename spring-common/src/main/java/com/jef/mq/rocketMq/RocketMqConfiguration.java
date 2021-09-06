@@ -9,21 +9,27 @@ import org.springframework.context.annotation.Configuration;
  * @author Jef
  * @date: 2021/4/6 14:33
  */
-/*@Data
-@Configuration*/
-public class RocketMqConfiguration {
+public interface RocketMqConfiguration {
 
     /**
      * RocketMQ服务端地址
      */
-    private String mqAddr = "127.0.0.1:9876";
+    String NAMESRV_ADDR = "127.0.0.1:9876";
     /**
      * 消费组名称
      */
-    private String consumerGroup = "consumer-test";
+    String COMSUMER_GROU_NAME = "consumer_group_name_test";
     /**
      * 生产组名称
      */
-    private String producerGroup = "producer-test";
+    String PRODUCER_GROUP_NAME = "producer_group_name_test";
+    /**
+     * 主题topic
+     */
+    String TOPIC_NAME = "topic_name_test";
+    /**
+     * 二级主题tag
+     */
+    String TAG_NMAE = "tag_name_test";
 
 }

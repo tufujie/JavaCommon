@@ -31,5 +31,12 @@ public interface RocketMqConfiguration {
      * 二级主题tag
      */
     String TAG_NMAE = "tag_name_test";
+    /**
+     * 二级主题tag
+     */
+    String KEY_NMAE = "key_name_test";
+
+    // 自定义一个tag数组
+    String[] TAGS = new String[]{"tag_name_testA", "tag_name_testB", "tag_name_testC", "tag_name_testD", "tag_name_testE"};
 
 }

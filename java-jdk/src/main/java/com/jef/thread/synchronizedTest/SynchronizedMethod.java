@@ -5,8 +5,8 @@ package com.jef.thread.synchronizedTest;
  * @author Jef
  * @date 2020/7/23
  */
-public class SynchronizedSceneOne implements Runnable {
-    static SynchronizedSceneOne ss = new SynchronizedSceneOne();
+public class SynchronizedMethod implements Runnable {
+    static SynchronizedMethod ss = new SynchronizedMethod();
 
     public static void main(String[] args) throws Exception {
         Thread t1 = new Thread(ss);

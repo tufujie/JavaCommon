@@ -1,6 +1,7 @@
 package com.jef.designpattern.duty;
 
-import com.jef.util.ReflectionUtils;
+import com.jef.util.ReflectionUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class CustomerHandlerContainerV2 {
     public static List<ICustomerHandler> getReceiptHandlerList(){
         List<ICustomerHandler> receiptHandlerList = new ArrayList<>();
         //获取IReceiptHandler接口的实现类
-        Set<Class<?>> classList = ReflectionUtils.getClassSetBySuper(ICustomerHandler.class);
+        Set<Class<?>> classList = ReflectionUtil.getClassSetBySuper(ICustomerHandler.class);
         if (classList != null && classList.size() > 0) {
             for (Class<?> clazz : classList) {
                 try {

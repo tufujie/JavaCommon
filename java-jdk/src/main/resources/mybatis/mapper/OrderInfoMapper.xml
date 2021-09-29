@@ -56,6 +56,15 @@
             <result property="num" column="num"/>
         </collection>
     </resultMap>
+    <resultMap id="orderInfoUserMap" type="com.jef.entity.OrderInfo">
+        <result property="id" column="id"/>
+        <result property="extraOrderId" column="extraOrderId"/>
+        <result property="shopId" column="shopId"/>
+        <association property="user" javaType="com.jef.entity.User">
+            <id property="id" column="userID" />
+            <result property="name" column="userName" />
+        </association>
+    </resultMap>
 
     <!-- 副表字段，展示完整的1对多关系 -->
     <sql id="orderProductColumTwo">
@@ -64,5 +73,12 @@
     <select id="getAllOrderInfoTwo" parameterType="java.util.Map" resultMap="orderInfoProductMapTwo">
         select orderInfo.id id, orderInfo.extra_order_id extraOrderId, orderInfo.shop_id shopId, <include refid="orderProductColumTwo" />
         from order_info orderInfo left join order_product orderProduct on orderInfo.id = orderProduct.order_id
+    </select>
+    <!-- 展示完整的1对1关系 -->
+    <select id="getAllOrderInfoUser" parameterType="java.util.Map" resultMap="orderInfoUserMap">
+        select orderInfo.id id, orderInfo.extra_order_id extraOrderId, orderInfo.shop_id shopId,
+        u.name userName, u.id userID
+        from order_info orderInfo
+        left join user u on orderInfo.user_id = u.id
     </select>
 </mapper>

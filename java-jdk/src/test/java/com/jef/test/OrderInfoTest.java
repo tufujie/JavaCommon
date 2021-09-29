@@ -84,4 +84,24 @@ public class OrderInfoTest {
         }
         System.out.println("end");
     }
+
+    /**
+     * 获取订单及用户
+     */
+    @Test
+    public void testGetAllOrderInfoUser() {
+        SqlSession session = ConnectSessionUtil.getSqlSession();
+        OrderInfoDao orderInfoDao = session.getMapper(OrderInfoDao.class);
+        List<OrderInfo> orderInfoList = orderInfoDao.getAllOrderInfoUser(Maps.newHashMap());
+        for (OrderInfo orderInfo : orderInfoList) {
+            String message = "订单号= " + orderInfo.getExtraOrderId() + " 购买者：";
+            if (orderInfo.getUser() != null) {
+                User user = orderInfo.getUser();
+                message += user.getName();
+            }
+            System.out.println(message);
+            System.out.println("------");
+        }
+        System.out.println("end");
+    }
 }

@@ -147,7 +147,7 @@
         </trim>
     </insert>
     <!-- 单个插入实体 -->
-    <insert id="insert" parameterType="com.jef.entity.TestAll">
+    <insert id="insert" parameterType="com.jef.entity.TestAll" useGeneratedKeys="true" keyProperty="id">
         insert into test_all
         (
         test_name, test_phone, createTime

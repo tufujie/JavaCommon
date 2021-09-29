@@ -69,7 +69,7 @@ public interface TestAllDao {
      * @param test Test对象
      * @return boolean
      */
-    boolean insert(TestAll test);
+    int insert(TestAll test);
 
     /**
      * 根据id集合删除，实际操作中需要判断集合不为null和集合大小不为0

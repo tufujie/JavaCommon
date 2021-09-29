@@ -58,7 +58,9 @@ public class TestAllTest {
         testAllOne.setTestPhone(BasicConstant.USER_PHONE);
         TestAll testAllDb = testAllDao.getByNameAndPhone(testAllOne.getTestName(), testAllOne.getTestPhone());
         if (testAllDb == null) {
-            testAllDao.insert(testAllOne);
+            int rows = testAllDao.insert(testAllOne);
+            System.out.println("新增成功，rows=" + rows);
+            System.out.println("新增成功，生成id=" + testAllOne.getId());
         } else {
             System.out.println("已存在");
         }

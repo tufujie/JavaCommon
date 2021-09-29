@@ -34,6 +34,11 @@ public class OrderInfo implements Serializable {
      */
     private int discountType;
 
+    /**
+     * 购买的用户信息
+     */
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -88,5 +93,13 @@ public class OrderInfo implements Serializable {
 
     public void setDiscountType(int discountType) {
         this.discountType = discountType;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

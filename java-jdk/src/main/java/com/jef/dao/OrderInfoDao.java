@@ -42,5 +42,9 @@ public interface OrderInfoDao {
      * 查询订单信息
      */
     List<OrderInfo> getAllOrderInfoTwo(Map<String, Object> requestParams);
+    /**
+     * 查询订单信息
+     */
+    List<OrderInfo> getAllOrderInfoUser(Map<String, Object> requestParams);
 
 }

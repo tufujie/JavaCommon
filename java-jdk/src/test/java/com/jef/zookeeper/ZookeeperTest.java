@@ -152,7 +152,7 @@ public class ZookeeperTest {
     }
 
     @Test
-    public void createPersistentSequentialNodeV2() throws Exception {
+    public void testCreatePersistentSequentialNod() throws Exception {
         ZooKeeper zookeeperObj = ZookeeperUtil.getZookeeper();
         /**
          * 创建一个持久顺序定时节点，如果在10000毫秒内 未修改node，并且没有子节点,那么它将被删掉
@@ -345,6 +345,13 @@ public class ZookeeperTest {
             }
         }, "传给服务端的内容,会在异步回调时传回来");
         Thread.sleep(2000);
+    }
+
+    @Test
+    public void testGetChildren() throws Exception {
+        ZooKeeper zookeeperObj = ZookeeperUtil.getZookeeper();
+        List<String> children = zookeeperObj.getChildren(ZookeeperUtil.NODE_1, new ZookeeperWatcher(), new Stat());
+        System.out.println(children);
     }
 
     @Test

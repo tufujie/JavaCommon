@@ -25,9 +25,13 @@ public class ZookeeperUtil {
      */
     public static final String USER_NAME_PASS_DIGEST = "jef:otDVfHKK4YU8a0pm8GMo3/0olPA=";
     /**
-     * NODE3
+     * NODE1
      */
     public static final String NODE_1 = "/node1";
+    /**
+     * NODE1
+     */
+    public static final String NODE_1_CHILDREN_1 = "/node1/children1";
     /**
      * 数据
      */

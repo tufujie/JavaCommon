@@ -20,13 +20,13 @@
     <dubbo:protocol name="dubbo" port="20880" />
     <!-- 服务提供者暴露服务配置，声明需要暴露的服务接口，使用 dubbo 协议实现定义好的 api.DemoService 接口 -->
     <dubbo:service interface="com.jef.dubbo.api.DemoService" ref="demoService" protocol="dubbo">
-      <!--  &lt;!&ndash; 方法级配置 &ndash;&gt;
-        <dubbo:method name="getByNameAndPhone" retries="2" timeout="3000">
-            &lt;!&ndash; 方法参数配置 &ndash;&gt;
-            <dubbo:argument index="0" callback="true" />
-        </dubbo:method>
-        &lt;!&ndash; 选项参数配置 &ndash;&gt;
-        <dubbo:parameter key="" value="" />-->
+        <!-- 方法级配置 -->
+<!--        <dubbo:method name="getByNameAndPhone" retries="2" timeout="3000">-->
+            <!-- 方法参数配置 -->
+<!--            <dubbo:argument index="0" callback="true" />-->
+<!--        </dubbo:method>-->
+        <!-- 选项参数配置 -->
+<!--        <dubbo:parameter key="" value="" />-->
     </dubbo:service>
     <!-- 和本地服务一样实现远程服务，具体实现该接口的bean -->
     <bean id="demoService" class="com.jef.dubbo.provider.impl.DemoServiceImpl" />

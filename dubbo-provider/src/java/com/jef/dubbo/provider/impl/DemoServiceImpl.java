@@ -1,9 +1,9 @@
 package com.jef.dubbo.provider.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.jef.dubbo.api.DemoService;
 import com.jef.dubbo.entity.User;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -30,6 +30,16 @@ public class DemoServiceImpl implements DemoService {
         user.setName("Jef");
         user.setPhone("13266860001");
         System.out.println("消费者" + id + "号 结束消费获取用户信息...");
+        return user;
+    }
+
+    @Override
+    public User getByNameAndPhone(String name, String phone) {
+        System.out.println("消费者N号 开始消费获取用户信息...");
+        User user = new User();
+        user.setName(name);
+        user.setPhone(phone);
+        System.out.println("消费者N号 结束消费获取用户信息...");
         return user;
     }
 }

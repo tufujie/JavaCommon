@@ -8,12 +8,26 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <!-- 定义了提供方应用信息，用于计算依赖关系；在 dubbo-admin 或 dubbo-monitor 会显示这个名字，方便辨识 -->
     <dubbo:application name="demotest-provider" owner="programmer" organization="dubbox" />
-    <!-- 使用 zookeeper 注册中心暴露服务地址，注意要先开启 zookeeper -->
+    <!-- 模块信息配置 -->
+    <dubbo:module name="demotest-module" owner="programmer" organization="dubbox" />
+    <!-- 注册中心配置。使用 zookeeper 注册中心暴露服务地址，注意要先开启 zookeeper -->
     <dubbo:registry address="zookeeper://127.0.0.1:2181" />
-    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <!-- 监控中心配置 -->
+    <dubbo:monitor protocol="registry" />
+    <!-- 服务提供者缺省值配置 -->
+    <dubbo:provider protocol="registry" />
+    <!-- 服务提供者协议配置。用dubbo协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20880" />
-    <!-- 增加暴露远程服务配置，声明需要暴露的服务接口，使用 dubbo 协议实现定义好的 api.DemoService 接口 -->
-    <dubbo:service interface="com.jef.dubbo.api.DemoService" ref="demoService" protocol="dubbo" />
+    <!-- 服务提供者暴露服务配置，声明需要暴露的服务接口，使用 dubbo 协议实现定义好的 api.DemoService 接口 -->
+    <dubbo:service interface="com.jef.dubbo.api.DemoService" ref="demoService" protocol="dubbo">
+      <!--  &lt;!&ndash; 方法级配置 &ndash;&gt;
+        <dubbo:method name="getByNameAndPhone" retries="2" timeout="3000">
+            &lt;!&ndash; 方法参数配置 &ndash;&gt;
+            <dubbo:argument index="0" callback="true" />
+        </dubbo:method>
+        &lt;!&ndash; 选项参数配置 &ndash;&gt;
+        <dubbo:parameter key="" value="" />-->
+    </dubbo:service>
     <!-- 和本地服务一样实现远程服务，具体实现该接口的bean -->
     <bean id="demoService" class="com.jef.dubbo.provider.impl.DemoServiceImpl" />
 </beans>

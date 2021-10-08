@@ -9,6 +9,7 @@ import com.alibaba.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.ConfigCenterConfig;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,8 @@ public class ConsumerTest {
         System.out.println("消费者1号 获取权限" + demoService.getPermissions(1L));
         User user = demoService.getByID("1");
         System.out.println("消费者2号 获取用户名称=" + user.getName());
+        User userNameAndPhone = demoService.getByNameAndPhone("Jef", "13266860001");
+        System.out.println("消费者3号 获取用户名称=" + userNameAndPhone.getName());
     }
 
     /**

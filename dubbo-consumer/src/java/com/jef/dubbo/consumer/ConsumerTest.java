@@ -5,9 +5,9 @@ import com.jef.dubbo.api.DemoService;
 import com.jef.dubbo.entity.User;
 import com.jef.dubbo.util.DubooUtil;
 
-import com.alibaba.dubbo.config.MethodConfig;
-import com.alibaba.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.ConfigCenterConfig;
+import org.apache.dubbo.config.MethodConfig;
+import org.apache.dubbo.config.ReferenceConfig;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

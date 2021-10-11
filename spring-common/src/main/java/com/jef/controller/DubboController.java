@@ -1,9 +1,9 @@
 package com.jef.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.jef.entity.BaseJSONVo;
 import com.jef.service.IDubboDemoService;
 import com.jef.util.REJSONUtils;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

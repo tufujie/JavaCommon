@@ -480,13 +480,8 @@
     </dependency>
     <!-- dubbo -->
     <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>dubbo</artifactId>
-      <version>2.5.3</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.dubbo</groupId>
-      <artifactId>dubbo-common</artifactId>
+      <artifactId>dubbo</artifactId>
       <version>${dubbo.version}</version>
     </dependency>
     <dependency>

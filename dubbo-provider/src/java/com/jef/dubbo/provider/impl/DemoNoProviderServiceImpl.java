@@ -3,11 +3,9 @@ package com.jef.dubbo.provider.impl;
 import com.jef.dubbo.api.DemoNoProviderService;
 import com.jef.dubbo.entity.User;
 
-import com.alibaba.dubbo.config.annotation.Service;
-import org.springframework.stereotype.Component;
+import org.apache.dubbo.config.annotation.DubboService;
 
-@Service
-@Component
+@DubboService(version = "1.0.1")
 public class DemoNoProviderServiceImpl implements DemoNoProviderService {
 
     @Override

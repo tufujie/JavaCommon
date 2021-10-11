@@ -3,14 +3,12 @@ package com.jef.dubbo.provider.impl;
 import com.jef.dubbo.api.DemoService;
 import com.jef.dubbo.entity.User;
 
-import com.alibaba.dubbo.config.annotation.Service;
-import org.springframework.stereotype.Component;
+import org.apache.dubbo.config.annotation.DubboService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-@Component
+@DubboService(version = "1.0.1")
 public class DemoServiceImpl implements DemoService {
     @Override
     public List<String> getPermissions(Long id) {

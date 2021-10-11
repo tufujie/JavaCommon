@@ -25,21 +25,21 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public User getByID(String id) {
-        System.out.println("消费者" + id + "号 开始消费获取用户信息...");
+        System.out.println("消费者" + id + "号 开始消费根据ID获取用户信息...");
         User user = new User();
         user.setName("Jef");
         user.setPhone("13266860001");
-        System.out.println("消费者" + id + "号 结束消费获取用户信息...");
+        System.out.println("消费者" + id + "号 结束消费根据ID获取用户信息...");
         return user;
     }
 
     @Override
     public User getByNameAndPhone(String name, String phone) {
-        System.out.println("消费者N号 开始消费获取用户信息...");
+        System.out.println("消费者" + name + "，" + phone + " 开始消费根据姓名和手机号获取用户信息...");
         User user = new User();
         user.setName(name);
         user.setPhone(phone);
-        System.out.println("消费者N号 结束消费获取用户信息...");
+        System.out.println("消费者" + name + "，" + phone + " 结束消费根据姓名和手机号获取用户信息...");
         return user;
     }
 }

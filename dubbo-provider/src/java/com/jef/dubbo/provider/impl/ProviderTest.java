@@ -3,10 +3,14 @@ package com.jef.dubbo.provider.impl;
 import com.jef.dubbo.api.DemoService;
 import com.jef.dubbo.util.DubooUtil;
 
-import com.alibaba.dubbo.config.ServiceConfig;
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.extension.ExtensionLoader;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ProtocolConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
+import com.alibaba.dubbo.config.ServiceConfig;
+import com.alibaba.dubbo.registry.Registry;
+import com.alibaba.dubbo.registry.RegistryFactory;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -73,6 +77,19 @@ public class ProviderTest {
         service.export();
         System.out.println("dubbo服务已经启动...");
         new CountDownLatch(1).await();
+    }
+
+    /**
+     * 注册工厂测试
+     *
+     * @author Jef
+     * @date 2021/10/11
+     */
+    @Test
+    public void testRegistryFactory() {
+        RegistryFactory registryFactory = ExtensionLoader.getExtensionLoader(RegistryFactory.class).getAdaptiveExtension();
+        Registry registry = registryFactory.getRegistry(URL.valueOf("zookeeper://127.0.0.1:2181"));
+        registry.register(URL.valueOf("memcached://127.0.0.1/com.jef.dubbo.api.DemoService?category=providers&dynamic=false&application=demotest-provider"));
     }
 
 }

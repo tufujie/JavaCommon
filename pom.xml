@@ -24,7 +24,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- spring版本号 -->
-    <spring.version>4.2.8.RELEASE</spring.version>
+    <spring.version>4.3.16.RELEASE</spring.version>
 
     <!-- mybatis版本号 -->
     <mybatis.version>3.2.8</mybatis.version>
@@ -42,6 +42,7 @@
     <poi.version>3.15</poi.version>
     <docx4j.version>6.1.1</docx4j.version>
     <export.fo.version>8.1.1</export.fo.version>
+    <dubbo.version>3.0.3</dubbo.version>
 
   </properties>
   <dependencies>
@@ -247,18 +248,6 @@
       <groupId>org.apache.zookeeper</groupId>
       <artifactId>zookeeper</artifactId>
       <version>3.7.0</version>
-    </dependency>
-    <!-- dubbo -->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>dubbo</artifactId>
-      <version>2.5.3</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.101tec</groupId>
@@ -489,12 +478,23 @@
       <version>RELEASE</version>
       <scope>compile</scope>
     </dependency>
+    <!-- dubbo -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>dubbo</artifactId>
+      <version>2.5.3</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.dubbo</groupId>
       <artifactId>dubbo-common</artifactId>
-      <version>3.0.3</version>
+      <version>${dubbo.version}</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.dubbo</groupId>
+      <artifactId>dubbo-dependencies-zookeeper</artifactId>
+      <version>${dubbo.version}</version>
+      <type>pom</type>
+    </dependency>
 
   </dependencies>
   <build>

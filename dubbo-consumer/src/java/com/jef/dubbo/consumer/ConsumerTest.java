@@ -1,5 +1,6 @@
 package com.jef.dubbo.consumer;
 
+import com.jef.dubbo.api.DemoNoProviderService;
 import com.jef.dubbo.api.DemoService;
 import com.jef.dubbo.entity.User;
 import com.jef.dubbo.util.DubooUtil;
@@ -94,9 +95,20 @@ public class ConsumerTest {
     @Test
     public void testPointToPoint() {
         ReferenceConfig<DemoService> reference = DubooUtil.getConsumerConfig();
-    // 如果点对点直连，可以用reference.setUrl()指定目标地址，设置url后将绕过注册中心，
-    // 其中，协议对应provider.setProtocol()的值，端口对应provider.setPort()的值，
-    // 路径对应service.setPath()的值，如果未设置path，缺省path为接口名
+        // 如果点对点直连，可以用reference.setUrl()指定目标地址，设置url后将绕过注册中心，
+        // 其中，协议对应provider.setProtocol()的值，端口对应provider.setPort()的值，
+        // 路径对应service.setPath()的值，如果未设置path，缺省path为接口名
         reference.setUrl("dubbo://127.0.0.1:20880/com.jef.dubbo.api.DemoService");
+    }
+
+    /**
+     * 测试消费无生产者
+     */
+    @Test
+    public void testStartConsumerNoProvider() {
+        ClassPathXmlApplicationContext context = DubooUtil.getConsumerContext();
+        DemoNoProviderService demoNoProviderService = context.getBean(DemoNoProviderService.class);
+        User user = demoNoProviderService.getByID("1");
+        System.out.println("消费者1号 获取用户名称=" + user.getName());
     }
 }

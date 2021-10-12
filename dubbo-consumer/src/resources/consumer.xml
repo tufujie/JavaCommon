@@ -20,6 +20,6 @@
 <!--    <dubbo:protocol name="hessian" serialization="kryo" optimizer="com.jef.dubbo.demo.impl.DemoServiceImpl"/>-->
 <!--    方法级别-->
 <!--    <dubbo:method name="getPermissions" timeout="4000" />-->
-    <dubbo:reference id="demoNoProviderService" interface="com.jef.dubbo.api.DemoNoProviderService" />
+    <dubbo:reference id="demoNoProviderService" interface="com.jef.dubbo.api.DemoNoProviderService" check="false" />
 
 </beans>

@@ -10,8 +10,10 @@
     <dubbo:application name="demotest-provider" owner="programmer" organization="dubbox" />
     <!-- 模块信息配置 -->
     <dubbo:module name="demotest-module" owner="programmer" organization="dubbox" />
+    <!-- 配置中心 -->
+    <dubbo:config-center address="zookeeper://127.0.0.1:2181" timeout="60000" />
     <!-- 注册中心配置。使用 zookeeper 注册中心暴露服务地址，注意要先开启 zookeeper -->
-    <dubbo:registry id="shenzhenRegistry" address="zookeeper://127.0.0.1:2181" />
+    <dubbo:registry id="shenzhenRegistry" address="zookeeper://127.0.0.1:2181" timeout="60000" />
     <!-- 多注册中心配置 -->
     <dubbo:registry id="beijingRegistry" address="zookeeper://localhost:2181" default="false" />
     <!-- 监控中心配置 -->

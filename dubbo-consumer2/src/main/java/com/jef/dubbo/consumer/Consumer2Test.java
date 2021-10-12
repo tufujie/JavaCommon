@@ -1,15 +1,20 @@
 package com.jef.dubbo.consumer;
 
 import com.jef.dubbo.api.DemoService;
+
+import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * dubbo消费者2
+ *
  * @author Jef
  * @date 2021/3/4
  */
-public class Consumer {
-    public static void main(String[] args) {
+public class Consumer2Test {
+
+    @Test
+    public void testStartConsumer() {
         // 测试常规服务
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("consumer.xml");
         context.start();

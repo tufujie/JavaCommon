@@ -1,23 +1,13 @@
 package com.jef.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import org.apache.http.*;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -38,6 +28,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
@@ -45,6 +36,25 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
 
 public class HttpClientUtil {
     private static final Logger log = LoggerFactory
@@ -1368,6 +1378,50 @@ public class HttpClientUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 发送Basic Auth请求
+     *
+     * @param url
+     * @param requestParams
+     * @param userName
+     * @param passWord
+     * @return java.lang.String
+     * @author Administrator
+     * @date 2021/10/25
+     */
+    public static String httpClientWithBasicAuth(String url, Map<String, Object> requestParams, String userName, String passWord) {
+        String result = "";
+        try {
+            // 创建HttpClientBuilder
+            HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+            CloseableHttpClient closeableHttpClient = httpClientBuilder.build();
+            HttpPost httpPost = new HttpPost(url);
+            //添加http头信息
+            httpPost.addHeader("Authorization", "Basic " + Base64.getUrlEncoder().encodeToString((userName + ":" + passWord).getBytes()));
+            httpPost.addHeader("Content-type", "application/json; charset=UTF-8");
+            StringEntity stringEntity = new StringEntity(JSONObject.toJSONString(requestParams));
+            httpPost.setEntity(stringEntity);
+            HttpResponse httpResponse;
+            HttpEntity entity;
+            try {
+                httpResponse = closeableHttpClient.execute(httpPost);
+                entity = httpResponse.getEntity();
+                if (entity != null) {
+                    result = EntityUtils.toString(entity);
+                }
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // 关闭连接
+            closeableHttpClient.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

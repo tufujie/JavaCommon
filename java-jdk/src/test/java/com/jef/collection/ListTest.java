@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  * @author Jef
  * @date 2018/10/9 19:16
  */
-public class ListInitTest {
+public class ListTest {
 
     @Test
     public void testInitManyOne() {

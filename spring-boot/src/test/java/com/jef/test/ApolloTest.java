@@ -13,7 +13,7 @@ import org.junit.Test;
 public class ApolloTest {
 
     @Test
-    public void testApollo() {
+    public void testApolloGetValueByAPI() {
         Config config = ConfigService.getAppConfig();
         String key = "username";
         String defaultValue = "fujie_tu";

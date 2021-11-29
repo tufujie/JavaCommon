@@ -4,6 +4,7 @@ import com.jef.common.utils.BasicJspUtil;
 import com.jef.constant.BasicConstant;
 import com.jef.entity.UserDataVo;
 import com.jef.mongo.UserDataDao;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 测试redis的controller
+ * 测试mongo的controller
+ *
  * @author Jef
  * @date 2018/11/30 10:25
  */

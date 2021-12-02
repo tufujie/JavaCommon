@@ -9,7 +9,14 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
@@ -349,7 +356,7 @@ public abstract class ReflectionUtil {
      * param target the target object from which to get the field
      * return the field's current value
      */
-    public static Object getField(Field field, Object target) {
+    public static Object getFieldValue(Object target, Field field) {
         try {
             return field.get(target);
         } catch (IllegalAccessException ex) {
@@ -885,7 +892,7 @@ public abstract class ReflectionUtil {
         Class aClass = object.getClass();
         Field[] fieldArray = aClass.getDeclaredFields();
         for (Field field : fieldArray) {
-            Object value = getField(field, object);
+            Object value = getFieldValue(object, field);
             System.out.println("key=" + field.getName() + ";value=" + value);
         }
     }

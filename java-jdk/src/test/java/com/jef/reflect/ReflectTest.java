@@ -1,10 +1,15 @@
 package com.jef.reflect;
 
 import com.jef.constant.BasicConstant;
+import com.jef.constant.BasicEntity;
 import com.jef.entity.TestAll;
+import com.jef.entity.User;
 import com.jef.util.ReflectionUtil;
 
 import org.junit.Test;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * 反射测试
@@ -57,5 +62,14 @@ public class ReflectTest {
         TestAll testAll = (TestAll) clazz.newInstance();
         ReflectionUtil.setFieldValue(testAll, "testName", BasicConstant.USER_NAME);
         ReflectionUtil.printFieldAndValue(testAll);
+    }
+
+    @Test
+    public void testReflectEntity() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        User user = BasicEntity.getUser();
+        Class clazz = user.getClass();
+        Method method = clazz.getDeclaredMethod("get" + "Name");
+        Object nameValue = method.invoke(user);
+        System.out.println("nameValue=" + nameValue);
     }
 }

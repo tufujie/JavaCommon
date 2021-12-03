@@ -2,6 +2,7 @@ package com.jef.cache;
 
 import com.jef.constant.BasicConstant;
 import com.jef.redis.RedisJavaUtil;
+import com.jef.util.PrintUtil;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -83,7 +84,7 @@ public class RedisJavaTest {
         jedis.zadd(BasicConstant.PROGRAMMING_LANGUAGE_RANK, 7, "C++");
         long rankSetSize = jedis.zcard(BasicConstant.PROGRAMMING_LANGUAGE_RANK);
         System.out.println("rankSetSize=" + rankSetSize);
-        System.out.println(BasicConstant.LINE_SPLIT);
+        PrintUtil.printLineSplit();
 
         Set<Tuple> rankRevSet = jedis.zrevrangeWithScores(BasicConstant.PROGRAMMING_LANGUAGE_RANK, 0L, 2L);
         System.out.println("正排行=" + rankRevSet);
@@ -93,7 +94,7 @@ public class RedisJavaTest {
         long javaRankIndex = jedis.zrank(BasicConstant.PROGRAMMING_LANGUAGE_RANK, "Java");
         long javaRank = rankSetSize - javaRankIndex;
         System.out.println("一开始的Java排行=" + javaRank);
-        System.out.println(BasicConstant.LINE_SPLIT);
+        PrintUtil.printLineSplit();
 
         System.out.println("Python分数加2");
         jedis.zincrby(BasicConstant.PROGRAMMING_LANGUAGE_RANK, 2, "Python");

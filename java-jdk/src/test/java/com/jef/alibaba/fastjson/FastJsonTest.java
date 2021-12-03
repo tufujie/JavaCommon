@@ -1,14 +1,20 @@
 package com.jef.alibaba.fastjson;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.jef.constant.BasicConstant;
 import com.jef.entity.User;
 import com.jef.util.DateTimeUtil;
+import com.jef.util.PrintUtil;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * FastJson功能测试类
@@ -156,6 +162,11 @@ public class FastJsonTest {
     private static void printJSONArray(JSONArray jsonArray) {
         for (Object aJsonArray : jsonArray) {
             JSONObject obj = (JSONObject) aJsonArray;
+            System.out.println("name=" + obj.get("name"));
+        }
+        PrintUtil.printLineSplit();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
             System.out.println("name=" + obj.get("name"));
         }
     }

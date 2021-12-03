@@ -1,7 +1,7 @@
 package com.jef.designpattern.simpleFactory.withDesign;
 
-import com.jef.constant.BasicConstant;
 import com.jef.designpattern.BasicDesign;
+import com.jef.util.PrintUtil;
 
 /**
  * 接口，输出文本实现，显示器
@@ -15,6 +15,6 @@ public class SamsungScreenImpl implements IScreen {
         System.out.println("开始制造");
         BasicDesign.outPrint(text);
         System.out.println("制造结束");
-        System.out.println(BasicConstant.LINE_SPLIT);
+        PrintUtil.printLineSplit();
     }
 }

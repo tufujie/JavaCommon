@@ -1,6 +1,6 @@
 package com.jef.redis;
 
-import com.jef.constant.BasicConstant;
+import com.jef.util.PrintUtil;
 
 import redis.clients.jedis.Jedis;
 
@@ -24,7 +24,7 @@ public class RedisJavaUtil {
         System.out.println("Redis连接成功");
         // 查看服务是否运行
         System.out.println("服务正在运行: " + jedis.ping());
-        System.out.println(BasicConstant.LINE_SPLIT);
+        PrintUtil.printLineSplit();
         return jedis;
     }
 }

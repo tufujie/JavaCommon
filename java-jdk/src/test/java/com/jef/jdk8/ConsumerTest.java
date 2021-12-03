@@ -70,14 +70,14 @@ public class ConsumerTest {
         c1.accept(BasicConstant.HELLO_WORLD);
         // 不会进行输出
         c1.accept("");
-        System.out.println("------");
+        System.out.println(BasicConstant.LINE_SPLIT);
 
         Consumer<String> c2 = StringUtils::printString;
         // 会进行输出
         c2.accept(BasicConstant.HELLO_WORLD);
         // 会进行输出
         c2.accept("");
-        System.out.println("------");
+        System.out.println(BasicConstant.LINE_SPLIT);
 
         BiConsumer<String, Integer> c3 = (s, i) -> {
             if (s.length() > i) {
@@ -86,7 +86,7 @@ public class ConsumerTest {
         };
         c3.accept(BasicConstant.HELLO_WORLD, 1);
         c3.accept(BasicConstant.HELLO_WORLD, 100);
-        System.out.println("------");
+        System.out.println(BasicConstant.LINE_SPLIT);
 
         BiConsumer<String, String> c4 = (s1, s2) -> StringUtils.printString(s1 + s2);
         c4.accept(BasicConstant.HELLO_WORLD, BasicConstant.USER_NAME);

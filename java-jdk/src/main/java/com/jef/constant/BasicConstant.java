@@ -4,10 +4,16 @@ import java.io.Serializable;
 
 /**
  * 常量类
+ *
  * @author Jef
  */
 public class BasicConstant {
 
+    // 通用测试所用对象名
+    public static final String LOGIN_OBJECT_KEY = "login";
+
+    // 通用测试所用用户名
+    public static final String USER_NAME_KEY = "userName";
     // 通用测试所用用户名
     public static final String USER_NAME = "Jef";
 
@@ -141,4 +147,13 @@ public class BasicConstant {
     public static final String EMPTY_STRING = "";
 
     public static final String HELLO_WORLD = "Hello World";
+
+    /**
+     * 编程语言排行
+     */
+    public static final String PROGRAMMING_LANGUAGE_RANK = "ProgrammingLanguageRank";
+    /**
+     * 分割字符串
+     */
+    public static final String LINE_SPLIT = "----------";
 }

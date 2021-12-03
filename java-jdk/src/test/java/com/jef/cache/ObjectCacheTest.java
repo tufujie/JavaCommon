@@ -58,7 +58,13 @@ public class ObjectCacheTest {
 
     @Test
     public void testSetCache() {
-        ObjectCache.setCache(BasicConstant.STR_ONE, BasicConstant.USER_NAME, 1000);
+        ObjectCache.setCache(BasicConstant.LOGIN_OBJECT_KEY, BasicConstant.USER_NAME_KEY, BasicConstant.USER_NAME, false);
+    }
+
+    @Test
+    public void testGetCache() {
+        String userName = (String) ObjectCache.getCache(BasicConstant.LOGIN_OBJECT_KEY, BasicConstant.USER_NAME_KEY);
+        Assertions.assertTrue(BasicConstant.USER_NAME.equals(userName));
     }
 
     @Test

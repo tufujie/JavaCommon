@@ -1,6 +1,6 @@
-package com.jef.designpattern.simpleFactory.withoutDesign;
+package com.jef.designpattern.factoryMethod.withoutDesign;
 
-import com.jef.designpattern.BasicDesign;
+import com.jef.util.PrintUtil;
 
 /**
  * 接口，输出文本实现
@@ -10,6 +10,6 @@ import com.jef.designpattern.BasicDesign;
 public class Impl implements Api {
     @Override
     public void test(String text) {
-        BasicDesign.outPrint(text);
+        PrintUtil.outPrint(text);
     }
 }

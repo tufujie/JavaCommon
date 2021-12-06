@@ -1,4 +1,4 @@
-package com.jef.designpattern.simpleFactory.withDesign;
+package com.jef.designpattern.factoryMethod.withDesign;
 
 /**
  * 接口，输出文本接口
@@ -8,7 +8,8 @@ package com.jef.designpattern.simpleFactory.withDesign;
 public interface IScreen {
     /**
      * 显示器制造工艺
-     * @param text
+     *
+     * @param n 个数，额外传参
      */
-    void operation(String text);
+    void operation(int n);
 }

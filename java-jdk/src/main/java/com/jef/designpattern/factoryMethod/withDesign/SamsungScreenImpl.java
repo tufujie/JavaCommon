@@ -1,4 +1,4 @@
-package com.jef.designpattern.simpleFactory.withDesign;
+package com.jef.designpattern.factoryMethod.withDesign;
 
 import com.jef.designpattern.BasicDesign;
 import com.jef.util.PrintUtil;
@@ -10,10 +10,9 @@ import com.jef.util.PrintUtil;
  */
 public class SamsungScreenImpl implements IScreen {
     @Override
-    public void operation(String text) {
-        text = BasicDesign.SAMSUNG_SCREEN;
-        System.out.println("开始制造");
-        BasicDesign.outPrint(text);
+    public void operation(int n) {
+        String text = BasicDesign.SAMSUNG_SCREEN;
+        System.out.println("开始制造" + n + "个" + text);
         System.out.println("制造结束");
         PrintUtil.printLineSplit();
     }

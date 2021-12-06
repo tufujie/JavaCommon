@@ -23,4 +23,13 @@ public class PrintUtil {
         System.out.println(BasicConstant.LINE_SPLIT);
     }
 
+    /**
+     * 动态输入内容
+     *
+     * @param text
+     */
+    public static void outPrint(String text) {
+        System.out.println(text);
+    }
+
 }

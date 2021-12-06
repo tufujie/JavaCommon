@@ -1,6 +1,7 @@
 package com.jef.redis;
 
 import com.jef.util.MD5Utils;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.dao.DataAccessException;
@@ -11,6 +12,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicInteger;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.params.SetParams;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -294,34 +296,7 @@ public class RedisServiceImpl implements RedisService {
                     return false;
                 }
                 Jedis jedis = ((Jedis) nativeConnection);
-                String setResult = jedis.set(key, value, "NX", "PX", expireTime);
-                if (setResult != null && "OK".equals(setResult) ) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-        if (result != null && (boolean)result) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean setIfNotExist(String key, String value) {
-        Object result = redisTemplate.execute(new RedisCallback<Object>() {
-            @Override
-            public Object doInRedis(RedisConnection connection) throws DataAccessException {
-                if (key == null ) {
-                    return false;
-                }
-                Object nativeConnection = connection.getNativeConnection();
-                if (!(nativeConnection instanceof Jedis)) {
-                    return false;
-                }
-                Jedis jedis = ((Jedis) nativeConnection);
-                String setResult = jedis.set(key, value, "NX");
+                String setResult = jedis.set(key, value, SetParams.setParams().nx().px(expireTime));
                 if (setResult != null && "OK".equals(setResult) ) {
                     return true;
                 } else {

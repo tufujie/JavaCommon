@@ -23,7 +23,7 @@ import java.util.List;
 public class ConsumerTest {
 
     /**
-     * 启动生产者的方式1
+     * 启动消费者的方式1
      * @throws IOException
      */
     @Test
@@ -39,7 +39,7 @@ public class ConsumerTest {
     }
 
     /**
-     * 启动生产者的方式2
+     * 启动消费者的方式2
      * @throws IOException
      */
     @Test

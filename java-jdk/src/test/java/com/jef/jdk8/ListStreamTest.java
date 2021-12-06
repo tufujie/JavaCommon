@@ -1,7 +1,5 @@
 package com.jef.jdk8;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.jef.constant.BasicConstant;
 import com.jef.constant.BasicEntity;
 import com.jef.constant.BasicList;
@@ -9,8 +7,10 @@ import com.jef.entity.OrderInfo;
 import com.jef.entity.User;
 import com.jef.util.ListUtil;
 import com.jef.util.NumberUtils;
-import org.docx4j.wml.U;
+
+import com.google.common.collect.Maps;
 import org.junit.Test;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,10 +27,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.averagingDouble;
-import static java.util.stream.Collectors.averagingInt;
 import static java.util.stream.Collectors.averagingLong;
-import static java.util.stream.Collectors.maxBy;
 
 /**
  * jdk8集合便捷操作测试
@@ -38,16 +35,18 @@ import static java.util.stream.Collectors.maxBy;
  * 惰性求值与及早求值
  * 惰性求值：只描述Stream，操作的结果也是Stream，这样的操作称为惰性求值。**惰性求值可以像建造者模式一样链式使用，最后再使用及早求值得到最终结果。
  * 及早求值：得到最终的结果而不是Stream，这样的操作称为及早求值。
+ *
  * @author Jef
  * @date 2019/3/13
  */
-public class ListTest {
+public class ListStreamTest {
 
     /**
      * filter（过滤筛选功能）
      * 内部就是Predicate接口。惰性求值。
      * 集合的筛选
      * 对集合进行过滤操作，满足条件的会被添加到过滤后的集合中
+     *
      * @author Jef
      * @date 2020/1/17
      */
@@ -167,6 +166,11 @@ public class ListTest {
         Map<Integer, List<User>> userListMap = users.stream().collect(Collectors.groupingBy(User::getType));
         System.out.println("list进行分类一对多map，=" + userListMap);
 
+        Map<String, List<User>> userListMultiPropertyMap = users.stream().collect(Collectors.groupingBy(this::fetchUserGroupKey));
+        System.out.println("list进行分类一对多属性map，=" + userListMultiPropertyMap);
+        Map<String, List<User>> userListMultiPropertyTwoMap = users.stream().collect(Collectors.groupingBy(item -> item.getName() + item.getPhone()));
+        System.out.println("list进行分类一对多属性two map，=" + userListMultiPropertyTwoMap);
+
         // TreeMap默认为按照key升序
         Map<Integer, List<User>> userListMapSort = users.stream()
                 .collect(Collectors.groupingBy(User::getType, TreeMap::new, Collectors.toList()));
@@ -181,6 +185,17 @@ public class ListTest {
         System.out.println("list进行分类一对多map后汇总，即map转map=" + listMapTotalMap);
     }
 
+    /**
+     * 用户多属性分组
+     *
+     * @param user
+     * @return
+     */
+    private String fetchUserGroupKey(User user) {
+        return user.getName() + user.getPhone();
+    }
+
+
     @Test
     public void testPartitioningBy() {
         List<User> users = BasicList.getUserList();
@@ -188,7 +203,7 @@ public class ListTest {
                 Collectors.partitioningBy(obj -> obj.getName().contains("TEST")));
         System.out.println(listMap);
     }
-    
+
     /** 
      * min(求最小值)
      * max同理，求最大值

@@ -1,17 +1,16 @@
 package com.jef.test;
 
-import com.google.common.collect.Maps;
 import com.jef.dao.OrderInfoDao;
-import com.jef.dao.TestAllDao;
 import com.jef.entity.OrderInfo;
 import com.jef.entity.OrderProduct;
-import com.jef.entity.TestAll;
 import com.jef.entity.User;
 import com.jef.util.ConnectSessionUtil;
+import com.jef.util.PrintUtil;
+
+import com.google.common.collect.Maps;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +60,7 @@ public class OrderInfoTest {
             for (OrderProduct orderProduct : orderProducts) {
                 System.out.println(orderProduct.getProductName() + " " + orderProduct.getNum() + " 件");
             }
-            System.out.println("------");
+            PrintUtil.printLineSplit();
         }
         System.out.println("end");
     }
@@ -80,7 +79,7 @@ public class OrderInfoTest {
             for (OrderProduct orderProduct : orderProducts) {
                 System.out.println(orderProduct.getProductName() + " " + orderProduct.getNum() + " 件");
             }
-            System.out.println("------");
+            PrintUtil.printLineSplit();
         }
         System.out.println("end");
     }
@@ -100,7 +99,7 @@ public class OrderInfoTest {
                 message += user.getName();
             }
             System.out.println(message);
-            System.out.println("------");
+            PrintUtil.printLineSplit();
         }
         System.out.println("end");
     }

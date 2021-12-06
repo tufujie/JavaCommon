@@ -1,11 +1,12 @@
 package com.jef.common.utils;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * Spring属性工具
@@ -33,7 +34,10 @@ public class SpringPropertiesUtil extends PropertyPlaceholderConfigurer {
     }
 
     public static String getProperty(String name) {
-        if(propertiesMap.get(name)==null){
+        if (propertiesMap == null) {
+            return null;
+        }
+        if (propertiesMap.get(name) == null) {
             return null;
         }
 

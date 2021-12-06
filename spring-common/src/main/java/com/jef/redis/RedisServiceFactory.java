@@ -2,6 +2,7 @@ package com.jef.redis;
 
 import com.jef.common.context.SpringContextHolder;
 import com.jef.common.utils.SpringPropertiesUtil;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -40,11 +41,12 @@ public class RedisServiceFactory {
 
     /**
      * 如果fatory未创建，则创建单例
+     *
+     * @return com.jef.redis.RedisServiceFactory
      * @author Jef
      * @date 2020/9/23
-     * @return com.jef.redis.RedisServiceFactory
      */
-    private static RedisServiceFactory getSingleton() {
+    public static RedisServiceFactory getSingleton() {
         if (fatory == null) {
             creatFactory();
         }

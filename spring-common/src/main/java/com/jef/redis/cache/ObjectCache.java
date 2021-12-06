@@ -128,4 +128,32 @@ public class ObjectCache {
         return objectKey + ";" + key;
     }
 
+    public static RedisService getRedisService() {
+        return RedisServiceFactory.getInstance();
+    }
+
+    /**
+     * 查看当前的缓存是否存在且未过期，默认15秒
+     *
+     * @param key
+     * @param value
+     * @return boolean 设置成功true,否则fasle
+     * @author Jef
+     */
+    public static boolean checkCacheExistAndNotExpire(String key, String value) {
+        return !getRedisService().setIfNotExistAndExpire(key, value, 15000);
+    }
+
+    /**
+     * 查看当前的缓存是否存在且未过期
+     *
+     * @param key
+     * @param value
+     * @param expireMillis 超时时间 单位毫秒
+     * @return boolean 设置成功true,否则fasle
+     * @author Jef
+     */
+    public static boolean checkCacheExistAndNotExpire(String key, String value, long expireMillis) {
+        return !getRedisService().setIfNotExistAndExpire(key, value, expireMillis);
+    }
 }

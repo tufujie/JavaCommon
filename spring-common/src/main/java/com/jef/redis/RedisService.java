@@ -154,8 +154,7 @@ public interface RedisService {
      * @throws
      */
     boolean setIfNotExistAndExpire(String key, String value, long expireTime);
-
-    boolean setIfNotExist(String key, String value);
+    
     /**
      * 使用lua脚本 进行删除key操作，且需要value相等的才能够删除--用户分布式锁的解锁操作
      * @date 2018/12/19 16:38

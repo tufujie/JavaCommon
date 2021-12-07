@@ -156,4 +156,38 @@ public class BasicConstant {
      * 分割字符串
      */
     public static final String LINE_SPLIT = "----------";
+
+    public enum BillAdaptorEnum {
+        CREATE_ORDER("OrderAdaptor.createOrder", "创建订单");
+
+        /**
+         * 类型
+         */
+        private String adaptor;
+        /**
+         * 类型描述
+         */
+        private String adaptorDesc;
+
+        BillAdaptorEnum(String adaptor, String adaptorDesc) {
+            this.adaptor = adaptor;
+            this.adaptorDesc = adaptorDesc;
+        }
+
+        public String getAdaptor() {
+            return adaptor;
+        }
+
+        public void setAdaptor(String adaptor) {
+            this.adaptor = adaptor;
+        }
+
+        public String getAdaptorDesc() {
+            return adaptorDesc;
+        }
+
+        public void setAdaptorDesc(String adaptorDesc) {
+            this.adaptorDesc = adaptorDesc;
+        }
+    }
 }

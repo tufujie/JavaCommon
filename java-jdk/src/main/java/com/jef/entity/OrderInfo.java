@@ -2,6 +2,7 @@ package com.jef.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,6 +14,9 @@ import java.util.List;
 public class OrderInfo implements Serializable {
 
     private static final long serialVersionUID = -7738420644752056965L;
+    /**
+     * ID
+     */
     private Long id;
 
     private String extraOrderId;
@@ -38,6 +42,15 @@ public class OrderInfo implements Serializable {
      * 购买的用户信息
      */
     private User user;
+
+    // 订单ID
+    private String orderId;
+    // 用户ID
+    private String uid;
+    // 商品
+    private String sku;
+    // 创建时间
+    private Date createOrderTime;
 
     public Long getId() {
         return id;
@@ -101,5 +114,37 @@ public class OrderInfo implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public Date getCreateOrderTime() {
+        return createOrderTime;
+    }
+
+    public void setCreateOrderTime(Date createOrderTime) {
+        this.createOrderTime = createOrderTime;
     }
 }

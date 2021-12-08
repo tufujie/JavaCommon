@@ -153,6 +153,14 @@ public class BasicConstant {
      */
     public static final String PROGRAMMING_LANGUAGE_RANK = "ProgrammingLanguageRank";
     /**
+     * 成功字符串
+     */
+    public static final String SUCCESS = "success";
+    /**
+     * 失败字符串
+     */
+    public static final String ERROR = "error";
+    /**
      * 分割字符串
      */
     public static final String LINE_SPLIT = "----------";

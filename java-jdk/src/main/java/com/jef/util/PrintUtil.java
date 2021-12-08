@@ -24,6 +24,13 @@ public class PrintUtil {
     }
 
     /**
+     * 换行
+     */
+    public static void changeLine() {
+        System.out.println();
+    }
+
+    /**
      * 动态输入内容
      *
      * @param text

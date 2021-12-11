@@ -34,7 +34,7 @@ public class MqAdaptorTest {
         MQInfo mqInfo = MQAdapter.filter(JSON.toJSONString(orderMq), link);
         System.out.println("mq.orderMq(适配前)" + JSON.toJSONString(orderMq));
         System.out.println("mq.orderMq(适配后)" + JSON.toJSONString(mqInfo));
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
         MQUtil.handlerBill(mqInfo);
 
     }

@@ -29,7 +29,7 @@ public class DutyTest {
         Date billDate = f.parse("2021-12-18 09:00:00");
         authLink.doAuth(BasicConstant.FIRST_USER_NUMBER, orderId, billDate);
         PrintUtil.printf("单号：%s，审批完成，审批时间：%s", orderId, f.format(new Date()));
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
 
         // 模拟三、二级审批人审批
         orderId = BasicConstant.SECOND_ORDER_ID;
@@ -37,7 +37,7 @@ public class DutyTest {
         billDate = f.parse("2021-06-01 09:00:00");
         authLink.doAuth(BasicConstant.FIRST_USER_NUMBER, orderId, billDate);
         PrintUtil.printf("单号：%s，审批完成，审批时间：%s", orderId, f.format(new Date()));
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
 
         // 模拟三、二、一级审批人审批
         // 模拟三、二级审批人审批
@@ -46,7 +46,7 @@ public class DutyTest {
         billDate = f.parse("2021-06-18 09:00:00");
         authLink.doAuth(BasicConstant.FIRST_USER_NUMBER, orderId, billDate);
         PrintUtil.printf("单号：%s，审批完成，审批时间：%s", orderId, f.format(new Date()));
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
     }
 
     /**
@@ -87,7 +87,7 @@ public class DutyTest {
         Date billDate = f.parse("2021-06-18 09:00:00");
         authLink.doAuth(BasicConstant.FIRST_USER_NUMBER, orderId, billDate);
         PrintUtil.printf("单号：%s，审批完成，审批时间：%s", orderId, f.format(new Date()));
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
     }
 
 }

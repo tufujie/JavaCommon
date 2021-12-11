@@ -13,9 +13,9 @@ public class SingletonTest {
     @Test
     public void testSingleton() {
         Singleton singleton = Singleton.getInstance();
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
         singleton = Singleton.getInstance();
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
     }
 
 }

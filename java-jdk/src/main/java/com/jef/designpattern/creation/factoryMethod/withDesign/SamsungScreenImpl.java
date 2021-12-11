@@ -14,6 +14,6 @@ public class SamsungScreenImpl implements IScreen {
         String text = BasicDesign.SAMSUNG_SCREEN;
         System.out.println("开始制造" + n + "个" + text);
         System.out.println("制造结束");
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
     }
 }

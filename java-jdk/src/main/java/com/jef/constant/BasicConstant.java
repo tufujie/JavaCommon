@@ -18,6 +18,8 @@ public class BasicConstant {
     public static final String USER_NAME = "Jef";
     // 第一个用户的用户编码
     public static final String FIRST_USER_NUMBER = "000001";
+    // 第二个用户的用户编码
+    public static final String SECOND_USER_NUMBER = "000002";
 
     // 通用测试所用手机号码
     public static final String USER_PHONE = "18390220001";

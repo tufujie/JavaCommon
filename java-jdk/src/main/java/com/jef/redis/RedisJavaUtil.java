@@ -24,7 +24,7 @@ public class RedisJavaUtil {
         System.out.println("Redis连接成功");
         // 查看服务是否运行
         System.out.println("服务正在运行: " + jedis.ping());
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
         return jedis;
     }
 }

@@ -14,6 +14,6 @@ public class PhilipsScreenImpl implements IScreen {
         String text = BasicDesign.PHILIPS_SCREEN;
         System.out.println("开始制造" + n + "个" + text);
         System.out.println("制造结束");
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
     }
 }

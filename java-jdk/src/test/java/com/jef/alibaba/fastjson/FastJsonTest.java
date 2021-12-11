@@ -164,7 +164,7 @@ public class FastJsonTest {
             JSONObject obj = (JSONObject) aJsonArray;
             System.out.println("name=" + obj.get("name"));
         }
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             System.out.println("name=" + obj.get("name"));

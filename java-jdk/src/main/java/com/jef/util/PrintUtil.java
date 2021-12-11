@@ -19,7 +19,7 @@ public class PrintUtil {
     /**
      * 打印一行分隔符
      */
-    public static void printLineSplit() {
+    public static void printSplitLine() {
         System.out.println(BasicConstant.LINE_SPLIT);
     }
 

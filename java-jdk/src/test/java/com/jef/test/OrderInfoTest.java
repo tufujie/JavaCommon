@@ -60,7 +60,7 @@ public class OrderInfoTest {
             for (OrderProduct orderProduct : orderProducts) {
                 System.out.println(orderProduct.getProductName() + " " + orderProduct.getNum() + " 件");
             }
-            PrintUtil.printLineSplit();
+            PrintUtil.printSplitLine();
         }
         System.out.println("end");
     }
@@ -79,7 +79,7 @@ public class OrderInfoTest {
             for (OrderProduct orderProduct : orderProducts) {
                 System.out.println(orderProduct.getProductName() + " " + orderProduct.getNum() + " 件");
             }
-            PrintUtil.printLineSplit();
+            PrintUtil.printSplitLine();
         }
         System.out.println("end");
     }
@@ -99,7 +99,7 @@ public class OrderInfoTest {
                 message += user.getName();
             }
             System.out.println(message);
-            PrintUtil.printLineSplit();
+            PrintUtil.printSplitLine();
         }
         System.out.println("end");
     }

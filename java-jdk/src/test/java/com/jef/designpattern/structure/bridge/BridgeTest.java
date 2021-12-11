@@ -16,7 +16,7 @@ public class BridgeTest {
     public void testBridge() {
         Pay wxPay = new WxPay(new FacePayMode());
         wxPay.transferAmount("weixin_000001", "000001", new BigDecimal(100));
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
 
         Pay zfbPay = new ZfbPay(new FingerprintPayMode());
         zfbPay.transferAmount("zhifubao_000001", "000002", new BigDecimal(200));

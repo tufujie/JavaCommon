@@ -15,7 +15,7 @@ public class ComputerBuilderTest {
     @Test
     public void testComputerBuilder() {
         System.out.println(ComputerBuilder.getLevelOne().getDetail());
-        PrintUtil.printLineSplit();
+        PrintUtil.printSplitLine();
         System.out.println(ComputerBuilder.getLevelTwo().getDetail());
     }
 

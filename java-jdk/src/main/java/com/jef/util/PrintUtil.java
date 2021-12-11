@@ -39,4 +39,17 @@ public class PrintUtil {
         System.out.println(text);
     }
 
+    /**
+     * 格式化输出并换行
+     *
+     * @param format 代码替换内容的字符串
+     * @param args   替换的内容
+     * @author Jef
+     * @date 2021/12/11
+     */
+    public static void printf(String format, Object... args) {
+        System.out.printf(format, args);
+        System.out.println();
+    }
+
 }

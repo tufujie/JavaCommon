@@ -1,7 +1,5 @@
 package com.jef.algorithm.leetcode;
 
-import com.jef.designpattern.mediator.Sound;
-
 /**
  * 找出所有子集的异或总和再求和
  *

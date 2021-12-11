@@ -16,6 +16,8 @@ public class BasicConstant {
     public static final String USER_NAME_KEY = "userName";
     // 通用测试所用用户名
     public static final String USER_NAME = "Jef";
+    // 第一个用户的用户编码
+    public static final String FIRST_USER_NUMBER = "000001";
 
     // 通用测试所用手机号码
     public static final String USER_PHONE = "18390220001";
@@ -198,4 +200,25 @@ public class BasicConstant {
             this.adaptorDesc = adaptorDesc;
         }
     }
+
+    /**
+     * 人生格言
+     */
+    public static final String LIFE_MEAN = "感受代码魅力，享受美好人生！";
+    /**
+     * Jef人生格言
+     */
+    public static final String JEF_LIFE_MEAN = USER_NAME + "，" + LIFE_MEAN;
+    /**
+     * 第一个订单号
+     */
+    public static final String FIRST_ORDER_ID = "00000000000000001";
+    /**
+     * 第二个订单号
+     */
+    public static final String SECOND_ORDER_ID = "00000000000000002";
+    /**
+     * 第三个订单号
+     */
+    public static final String THIRD_ORDER_ID = "00000000000000003";
 }

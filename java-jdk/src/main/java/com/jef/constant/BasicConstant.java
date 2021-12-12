@@ -16,6 +16,18 @@ public class BasicConstant {
     public static final String USER_NAME_KEY = "userName";
     // 通用测试所用用户名
     public static final String USER_NAME = "Jef";
+    // 张三
+    public static final String USER_NAME_ZHANGSAN = "张三";
+    // 李四
+    public static final String USER_NAME_LISI = "李四";
+    // 王五
+    public static final String USER_NAME_WANGWU = "王五";
+    // 张老师
+    public static final String TEACHER_NAME_ZHANGSAN = "张老师";
+    // 李老师
+    public static final String TEACHER_NAME_LISI = "李老师";
+    // 王老师
+    public static final String TEACHER_NAME_WANGWU = "王老师";
     // 第一个用户的用户编码
     public static final String FIRST_USER_NUMBER = "000001";
     // 第二个用户的用户编码

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SQL格式化-杰克思勒</title>
+<meta name="keywords" content="sql格式化,sql美化,sql语句格式化,sql压缩,在线sql脚本格式化,在线压缩sql脚本">
+<meta name="description" content="可以在线对SQL进行格式化排版，整齐的进行显示方便阅读,可以对SQL脚本进行压缩。">
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=yes">
+<!-- css -->
+<link rel="stylesheet" href="components/bootstrap/css/bootstrap.min.css">
+<link href="css/common/main.css?v=377" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div id="mainContent" class="wrapper">
+<div class="row"><div class="col-lg-9"><h1 class="toolName">SQL格式化</h1>
+<div class="clearfix"></div>
+<div class="mod-panel">
+	<div>
+		<p id="input" style="height:400px;"></p>
+		<p>
+			<button class="btn btn-primary" data-type="beauty">美化</button>
+			<button class="btn btn-warning" data-type="compress">压缩</button>
+			<button class="btn btn-default" data-type="clear">清空</button>
+			<button class="btn btn-info" data-type="copy">复制</button>
+			<button class="btn btn-success" data-type="download">下载</button>
+		</p>
+	</div>
+<div class="ToolAbout">
+<div id="middleImgAd"></div>
+<div class="footer">
+
+</div>
+<!-- js -->
+<script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/common/main11.11.9.js?v=502" charset="utf-8"></script>
+
+	<script src="js/home/sql/ace.js"></script>
+	<script src="js/home/sql/vkbeautify.js"></script>
+	<script src="components/FileSaver.min.js"></script>
+	<script type="text/javascript">
+	(function(){
+		var $mod_panel = $('.mod-panel');
+		var $input = $mod_panel.find('#input');
+
+		var editor = ace.edit("input");
+		editor.setShowPrintMargin(false);
+		editor.setTheme("ace/theme/tomorrow_night");
+		editor.getSession().setMode("ace/mode/sql");
+		var initStr = vkbeautify.sql("DELETE FROM table1 WHERE NOT EXISTS(SELECT * FROM table2 WHERE table1.field1 = table2.field1);");
+		editor.setValue(initStr);
+		$mod_panel.find('.btn').click(function(e){
+			var input = editor.getValue();
+			var	type = $(this).data('type');
+			var	result = '';
+			if(type=='beauty'){
+				result = vkbeautify.sql(input);
+				editor.setValue(result);
+			}else if(type=='compress'){
+				result = vkbeautify.sqlmin(input);
+				editor.setValue(result);
+			}else if(type=='clear'){
+				editor.setValue('');
+			}else if(type=='copy'){
+				copyStr(input);
+				showSuccessBox('复制成功');
+			}else if(type=='download'){
+				var blob = new Blob([input], {type: "application/sql;charset=utf-8"});
+			    var timestamp=new Date().getTime();
+			    saveAs(blob, "format."+timestamp+".sql");
+			}
+		});
+	})();
+
+
+	</script>
+<script type="text/javascript">/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script></body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>window对象</title>
+    <script type="text/javascript">
+        function openNewWindow(){
+            alert("欢迎来到慕课网");
+            window.open("http://www.imooc.com", "_blank", "width = 600px; height = 400px");
+        }
+    </script>
+</head>
+<body>
+<form>
+    <input type="button" value="点击我，打开新窗口" onclick="openNewWindow()" />
+</form>
+</body>
+</html>
+<!--任务
+在右边编辑器script标签内补充代码，弹出对话框"欢迎来到慕课网"。
+定义一个函数，实现打开一个网页，宽为600，高为400。
+当点击"点击我，打开新窗口"按钮时，在打开网页。-->

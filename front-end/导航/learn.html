@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>标题-杰克思勒</title>
+		<link rel="stylesheet" href="static/css/jquery.autoMenu.css">
+		<style>
+			.content { width: 900px; margin-left: 550px; }
+			h3 { line-height: 60px}
+			h4 { padding-left: 26px}
+			h4~p { padding-left: 26px}
+			p:hover {
+			background: #ccc;
+			}
+			div {width: 400px;}
+		</style>
+	</head>
+	<body>
+<div class="content">
+<h3>标题</h3>
+<p>内容
+<p>
+
+
+
+
+ </div>
+<div class="autoMenu" id="autoMenu" data-autoMenu > </div>
+<script type="text/javascript" src="static/js/jquery.min.js"></script> 
+<script type="text/javascript" src="static/js/jquery.autoMenu.js"></script> 
+<script type="text/javascript">
+$(function(){
+	 $( "#autoMenu" ).width(500);
+})
+$(document).on("click", "#autoMenu>ul>li>a", function() {
+	var $this = $( this );
+	$( "#autoMenu>ul>li>a" ).css( "color", "#399c9c");
+	console.log( $this.html() );
+	$this.css( "color", "#ff5370" );
+});
+</script>
+	
+</body>
+</html>

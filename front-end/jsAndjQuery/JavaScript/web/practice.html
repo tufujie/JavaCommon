@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> new document </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript">
+        function openWindow() {
+            var open = confirm("确认新建窗口打开网站吗？");
+            // 新窗口打开时弹出确认框，是否打开
+            if (open == true) {
+                // 通过输入对话框，确定打开的网址，默认为 http：//www.imooc.com/
+                var url = prompt("通过输入对话框，确定打开的网址", "http://www.imooc.com");
+                //打开的窗口要求，宽400像素，高500像素，无菜单栏、无工具栏。
+                if (url != null && url.length != 0) {
+                    window.open(url, "_blank", "width=400px, height=500px, menubar=no, toolbar=no");
+                }
+                else {
+                    alert("再见！");
+                }
+            }
+            else {
+                alert("再见！");
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="新窗口打开网站" onclick="openWindow()" />
+</body>
+</html>
+<!--任务
+1、新窗口打开时弹出确认框，是否打开
+提示: 使用 if 判断确认框是否点击了确定，如点击弹出输入对话框，否则没有任何操作。
+2、通过输入对话框，确定打开的网址，默认为 http：//www.imooc.com/
+3、打开的窗口要求，宽400像素，高500像素，无菜单栏、无工具栏。-->

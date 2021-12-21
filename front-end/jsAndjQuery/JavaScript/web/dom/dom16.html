@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>无标题文档</title>
+</head>
+<body>
+<script type="text/javascript">
+    var main1 = document.body;
+    //创建链接
+    function createa(url, text){
+        var alink = document.createElement("a");
+        alink.setAttribute("href", url);
+        alink.innerHTML = text;
+        return alink;
+    }
+    // 调用函数创建链接
+    main1.appendChild(createa("http://www.imooc.com","慕课网"));
+</script>
+</body>
+</html>
+<!--任务
+试一试，实现在HTML文档中创建一个链接，并设置相应属性。
+1. 在右边编辑器补充代码，完善createa(url,text)创建链接函数，参数1为链接地址，参数2为链接文本。函数中添加链接地址、文本、文字颜色属性。
+2. 调用createa函数，链接地址 http://www.imooc.com，文本为:慕课网-->

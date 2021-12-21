@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>无标题文档</title>
+    <style type="text/css">
+        .message{
+            width:200px;
+            height:100px;
+            background-color:#CCC;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    var newNode = document.createElement("p");
+    newNode.className = "message";
+    var newNodeText = document.createTextNode("I love JavaScript");
+    newNode.appendChild(newNodeText);
+    document.body.appendChild(newNode);
+</script>
+</body>
+</html>
+<!--任务
+在代码编辑器<script>标签中，创建一个P标签，设置className属性，使用createTextNode创建文本节点"I love JavaScript!"。-->

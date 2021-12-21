@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>baseDemo</title>
+    <script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<button onclick="hrefToAnother()">跳转到一个页面，查看请求参数</button>
+<script>
+    console.log("JS已引入");
+    function hrefToAnother() {
+        var searchParams = {
+            "cityID": "test1",
+            "areaID": "test2"
+        };
+        location.href = 'www.baidu.com?searchParams=' + encodeURIComponent(JSON.stringify(searchParams))
+    }
+</script>
+<h1>这是一个基本的页面</h1>
+</body>
+</html>

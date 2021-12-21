@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>无标题文档</title>
+</head>
+<body>
+<div>
+    javascript
+    <p>javascript</p>
+    <div>jQuery</div>
+    <h5>PHP</h5>
+</div>
+<script type="text/javascript">
+    var x = document.getElementsByTagName("div")[0].childNodes;
+    for(var i = 0; i < x.length; i++){
+        document.write("第" + (i + 1) + "个节点：nodeName:" + x[i].nodeName + "; nodeType:" + x[i].nodeType + "; nodeValue:" + x[i].nodeValue + "<br />");
+    }
+</script>
+</body>
+</html>
+<!--任务
+试一试，在script标签内，获取子节点，并输出相应属性。
+1. 获取第一个DIV的子节点。
+2. 使用for遍历每个节点。
+3. 输出相应节点的属性。
+注意: 输出内容可能和想的内容不同，想想为什么。-->

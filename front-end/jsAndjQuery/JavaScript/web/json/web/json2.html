@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+<h2>JavaScript 创建 JSON 对象</h2>
+<p>第一个网站名称: <span id="name1"></span></p>
+<p>第一个网站修改后的名称: <span id="name2"></span></p>
+
+<script>
+    var sites = [
+        { "name":"runoob" , "url":"www.runoob.com" },
+        { "name":"google" , "url":"www.google.com" },
+        { "name":"微博" , "url":"www.weibo.com" }
+    ];
+
+    document.getElementById("name1").innerHTML=sites[0].name;
+    // 修改网站名称
+    sites[0].name="菜鸟教程";
+    document.getElementById("name2").innerHTML=sites[0].name;
+</script>
+
+</body>
+</html>

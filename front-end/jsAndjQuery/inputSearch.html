@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>baseDemo</title>
+    <script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<input id="searchInput" placeholder="搜索" />
+<button class="delete-text" style="display: none">*</button>
+<p>
+    主要是实现input搜索框输入内容的时候,删除文字的按钮出现和在搜索框内搜索内容输入完毕之后按回车直接进行搜索两个功能。输入内容删除按钮出现,内容删除完毕删除按钮隐藏/***[输入内容删除按钮出现,内容删除完毕删除按钮隐藏]*searchInput[搜索内容的input框的id]*delete-text[删除搜索框文字的按钮]*/$("#searchInput").bind("inputpropertychange",function(){if($(this).val()==
+    主要是实现input搜索框输入内容的时候,删除文字的按钮出现和在搜索框内搜索内容输入完毕之后按回车直接进行搜索两个功能。
+
+    输入内容删除按钮出现,内容删除完毕删除按钮隐藏
+    /** * [输入内容删除按钮出现,内容删除完毕删除按钮隐藏] * searchInput[搜索内容的input框的id] * delete-text[删除搜索框文字的按钮] */ $("#searchInput").bind("input propertychange", function () { if ($(this).val() == "") { $(".delete-text").hide(); } else { $(".delete-text").show(); } });
+    搜索框内的内容输入完毕按回车进行搜索
+    /** * [搜索框内的内容输入完毕按回车进行搜索] * searchInput[搜索内容的input框的id] * search();[搜索函数] */ $("#searchInput").keydown(function (event) { event = event || window.event; if (event.keyCode == 13) { search(); } });
+</p>
+<script>
+    console.log("JS已引入");
+    $("#searchInput").bind("input propertychange", function () {
+        console.log($(this).val());
+        if ($(this).val() == "") {
+            $(".delete-text").hide();
+        } else {
+            $(".delete-text").show();
+        }
+    });
+    $("#searchInput").keydown(function (event) {
+        event = event || window.event;
+        if (event.keyCode == 13) {
+            search();
+        }
+    });
+    function search() {
+        var searchName = $.trim($("#searchInput").val());
+        console.log('搜索名称=' + searchName);
+    }
+</script>
+</body>
+</html>

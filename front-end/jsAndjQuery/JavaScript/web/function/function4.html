@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>返回值函数</title>
+    <script type="text/javascript">
+        function app2(x, y) {
+            var sum, x, y;
+            sum = x * y;
+            return sum;
+        }
+        var req1 = app2(5, 6);
+        var req2 = app2(2, 3);
+        var sump = req1 + req2;
+        document.write("req1的值:" + req1 + "<br />");
+        document.write("req2的值:" + req2 + "<br />");
+        document.write(req1 + "与" + req2 + "和:" + sump);
+    </script>
+</head>
+<body>
+</body>
+</html>
+<!--任务
+补充右边编辑器代码，实现如下功能:
+
+1. 定义函数实现两个数的积，函数名为app2,补充右边编辑器第10行代码，返回函数值。
+
+2. 补充右边编辑器第12、13行代码，计算5、6/2、3两组两个数的积。分别保存在req1和req2变量中。
+
+3. 补充右边编辑器第14行代码，计算req1和req2和的值，保存在变量sumq中。-->

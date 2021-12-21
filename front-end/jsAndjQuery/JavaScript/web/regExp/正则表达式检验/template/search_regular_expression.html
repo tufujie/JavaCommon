@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>搜索正则表达式</title>
+    <meta charset=UTF-8>
+    <link rel=stylesheet href="css/select2.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/select2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="Shortcut Icon" href="../static/img/Jacksile.jpg" />
+</head>
+</head>
+
+<body>
+    <div class="ui-po-r ui-mb-20">
+        <h3 class=panel-subtitle>常用正则表达式</h3>
+        <select class="form-control reglist_select" id=regList>
+            <option value="">-- 常用正则表达式 --</option>
+            <optgroup label="数字类">
+                <option value="/^[0-9]*$/">非负整数（0和正整数）（已验证可用）：</option>
+                <option value="/^\d{n}$/">n位的数字（已验证可用）：</option>
+                <option value="/^\d{n,}$/">至少输入n个以上的数字（已验证可用）：</option>
+                <option value="/^\d{n,}$/">至少n位的数字（已验证可用）：</option>
+                <option value="/^\d{m,n}$/">m-n位的数字（已验证可用）</option>
+                <option value="/^(0|[1-9][0-9]*)$/">零和非零开头的数字（已验证可用）：</option>
+                <option value="/^([1-9][0-9]*)+(.[0-9]{1,2})?$/">非零开头的最多带两位小数的数字（已验证可用）：</option>
+                <option value="/^(\-)?\d+(\.\d{1,2})?$/">带1-2位小数的正数或负数（已验证可用）：</option>
+                <option value="/^(\-|\+)?\d+(\.\d+)?$/ 或者 /^(-?\d+)(\.\d+)?$/">正数、负数、和小数（已验证可用）：</option>
+                <option value="/^[0-9]+(.[0-9]{2})?$/">有两位小数的正实数（已验证可用）：</option>
+                <option value="/^[0-9]+(.[0-9]{1,3})?$/">有1~3位小数的正实数（已验证可用）</option>
+                <option value="/^[1-9]\d*$/ 或 /^([1-9][0-9]*){1,3}$/ 或 /^\+?[1-9][0-9]*$/">正整数（已验证可用）：</option>
+                <option value="/^-[1-9]\d*$/">负整数（已验证可用）：</option>
+                <option value="/^\d+$/ 或 /^[1-9]\d*|0$/">非负整数（已验证可用）：</option>
+                <option value="/^-[1-9]\d*|0$/ 或 /^((-\d+)|(0+))$/">非正整数（已验证可用）：</option>
+                <option value="/^\d+(\.\d+)?$/ 或 /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$/">非负浮点数（已验证可用）：</option>
+                <option value="/^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$ 非正数：^((-\d+(\.\d+)?)|(0+(\.0+)?))$/">非正浮点数（已验证可用）：</option>
+                <option value="/^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$ 正数： ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/">正浮点数（已验证可用）：</option>
+                <option value="/^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$ 负数 ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$/">负浮点数（已验证可用）：</option>
+                <option value="/^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$/">浮点数（已验证可用）：</option>
+                <option value="/^[xyz]$/">只能输入某些数字（已验证可用）：</option>
+                <option value="/^(\d{n1,n2})(\.\d{n3,n4})?$/">只能输入n1到n2位整数,n3到n4位小数的数</option>
+                <option value="/^\d{1,8}(\.\d{1,2})?$/或者/^\d{1,8}\.?[0-9]{0,2}$/">商品金额、面积，数字之类的(1到8位整数，1到2位小数，适合一切含小数的数，前面的不能输入0，用于保存时校验，后面的用于输入时校验)</option>
+                <option value=" /^1{0,1}[0-9]{1,2}$/gi">年龄</option>
+            </optgroup>
+            <optgroup label="校验字符的表达式">
+                <option value="/[\u4e00-\u9fa5]/gm">匹配中文字符</option>
+                <option value="/[\u4E00-\u9FA5]+$/">匹配中文字符2</option>
+                <option value="/[\u4e00-\u9fa5]/">匹配中文字符3</option>
+                <option value="/^[\u4e00-\u9fa5]{0,}$/">匹配中文字符4</option>
+                <option value="/[^\x00-\xff]/igm">匹配双字节字符</option>
+                <option value="/[^\x00-\xff]/">双字节字符： (包括汉字在内，可以用来计算字符串的长度(一个双字节字符长度计2，ASCII字符计1))</option>
+                <option value="/(^\s*)|(\s*$)/">匹配行尾行首空白</option>
+                <option value="/^[a-z]+$/i">只能由英文字母组成</option>
+                <option value="/[a-zA-Z]+$/">只能由英文字母组成2</option>
+                <option value="/^[A-Z]+$/">只能由大写英文字母组成</option>
+                <option value="/^[a-z0-9]+$/i">只能由英文和数字组成</option>
+                <option value="/^\w+$/">只能由英文、数字、下划线组成</option>
+                <option value="/^[A-Za-z0-9-]*$/g">只能由英文、数字、下划线组成</option>
+                <option value="/^[A-Za-z0-9]+$/ 或 /^[A-Za-z0-9]{4,40}$/">英文和数字：</option>
+                <option value="/^.{3,20}$/">长度为3-20的所有字符：</option>
+                <option value="/^[A-Za-z]+$/">由26个英文字母组成的字符串：</option>
+                <option value="/^[A-Z]+$/">由26个大写英文字母组成的字符串：</option>
+                <option value="/^[a-z]+$/">由26个小写英文字母组成的字符串：</option>
+                <option value="/^[A-Za-z0-9]+$/">由数字和26个英文字母组成的字符串：</option>
+                <option value="/^\w+$/ 或 /^\w{3,20}$/">由数字、26个英文字母或者下划线组成的字符串：</option>
+                <option value="/^[\u4E00-\u9FA5A-Za-z0-9_]+$/">中文、英文、数字包括下划线：</option>
+                <option value="/^[\u4E00-\u9FA5A-Za-z0-9]+$/ 或 /^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/">中文、英文、数字但不包括下划线等符号：</option>
+                <option value="/[^%&',;=?$\x22]+/">可以输入含有^%&',;=?$\"等字符：</option>
+                <option value="/[^~\x22]+/">禁止输入含有~的字符：</option>
+            </optgroup>
+            <optgroup label="特殊需求表达式">
+                <option value="/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(/.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+/.?/">域名：</option>
+                <option value="/[a-zA-z]+://[^\s]*/ 或 /^http://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$/">InternetURL：</option>
+                <option value="/^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$/">电话号码("XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX)：</option>
+                <option value="/\d{3}-\d{8}|\d{4}-\d{7}/">国内电话号码(0511-4405222、021-87888822)：</option>
+                <option value="/^\d{15}|\d{18}$/">身份证号(15位、18位数字)：</option>
+                <option value="/^([0-9]){7,18}(x|X)?$/ 或 /^\d{8,18}|[0-9x]{8,18}|[0-9X]{8,18}?$/">短身份证号码(数字、字母x结尾)：</option>
+                <option value="/^[a-zA-Z][a-zA-Z0-9_]{4,15}$/">帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：</option>
+                <option value="/^[a-zA-Z]\w{5,17}$/">密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：</option>
+                <option value="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$/">强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间)：</option>
+                <option value="/^\d{4}-\d{1,2}-\d{1,2}/">日期格式：</option>
+                <option value="/^(0?[1-9]|1[0-2])$/">一年的12个月(01～09和1～12)：</option>
+                <option value="/^((0?[1-9])|((1|2)[0-9])|30|31)$/">一个月的31天(01～09和1～31)：</option>
+                <option value="/^[1-9][0-9]*$/">有四种钱的表示形式我们可以接受:"10000.00" 和 "10,000.00", 和没有 "分" 的 "10000" 和 "10,000"：</option>
+                <option value="/^(0|[1-9][0-9]*)$/">这表示任意一个不以0开头的数字,但是,这也意味着一个字符"0"不通过,所以我们采用下面的形式：</option>
+                <option value="/^(0|-?[1-9][0-9]*)$/">一个0或者一个不以0开头的数字.我们还可以允许开头有一个负号：</option>
+                <option value="/^[0-9]+(.[0-9]+)?$/">这表示一个0或者一个可能为负的开头不为0的数字.让用户以0开头好了.把负号的也去掉,因为钱总不能是负的吧.下面我们要加的是说明可能的小数部分：</option>
+                <option value="/^[0-9]+(.[0-9]{2})?$/">必须说明的是,小数点后面至少应该有1位数,所以"10."是不通过的,但是 "10" 和 "10.2" 是通过的：</option>
+                <option value="/^[0-9]+(.[0-9]{1,2})?$/">这样我们规定小数点后面必须有两位,如果你认为太苛刻了,可以这样：</option>
+                <option value="/^[0-9]{1,3}(,[0-9]{3})*(.[0-9]{1,2})?$/">这样就允许用户只写一位小数.下面我们该考虑数字中的逗号了,我们可以这样：</option>
+                <option value="/^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$/">到3个数字,后面跟着任意个 逗号+3个数字,逗号成为可选,而不是必须：</option>
+                <option value="//">备注：这就是最终结果了,别忘了"+"可以用"*"替代如果你觉得空字符串也可以接受的话(奇怪,为什么?)最后,别忘了在用函数时去掉去掉那个反斜杠,一般的错误都在这里</option>
+                <option value="/^([a-zA-Z]+-?)+[a-zA-Z0-9]+\\.[x|X][m|M][l|L]$/"> xml文件：</option>
+                <option value="/\n\s*\r/">空白行的正则表达式： (可以用来删除空白行)</option>
+                <option value="/<(\S*?)[^>]*>.*?</\1>|<.*? /> /">HTML标记的正则表达式：(网上流传的版本太糟糕，上面这个也仅仅能部分，对于复杂的嵌套标记依旧无能为力)</option>
+                <option value="/^\s*|\s*$/ 或 /(^\s*)|(\s*$)/">首尾空白字符的正则表达式：(可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式)</option>
+                <option value="/^[1-9]\d{4,20}$/">腾讯QQ号： (腾讯QQ号从10000开始)</option>
+                <option value="/[1-9]\d{5}(?!\d)/">中国邮政编码： (中国邮政编码为6位数字)</option>
+                <option value="/\d+\.\d+\.\d+\.\d+/"> IP地址：(提取IP地址时有用)</option>
+                <option value="/((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/">IP地址：</option>
+            </optgroup>
+            <optgroup label="常用表单">
+                <option value="/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ 或 /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/">匹配Email地址，邮箱</option>
+                <option value="/^[\da-zA-Z]+([._-]\w+)*@([\da-zA-Z]+\.)+[a-zA-Z]{2,6}$/">兼容国内外常见Email地址，邮箱</option>
+                <option value="/^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i">匹配URL地址</option>
+                <option value="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/">匹配手机号码</option>
+                <option value="/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/">匹配手机号码2</option>
+                <option value="/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/">匹配手机号码3</option>
+                <option value="/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/">匹配手机号码4</option>
+                <option value="/^\d{16}|\d{19}$/">匹配银行卡号</option>
+                <option value="/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/">匹配身份证号</option>
+                <option value="/^[1-9]\d{5}(?!\d)$/">匹配邮编号</option>
+                <option value="/^[1-2][0-9][0-9][0-9]-[0-1]{0,1}[0-9]-[0-3]{0,1}[0-9]$/">匹配日期(yyyy-MM-dd)</option>
+            </optgroup>
+            <optgroup label="浏览器navigator.userAgent">
+                <option value="/msie (\d+\.\d+)/i">从UA判断是否为IE浏览器</option>
+                <option value=/webkit/i>从UA判断是否为webkit内核</option>
+                <option value="/chrome\/(\d+\.\d+)/i">从UA判断是否为chrome浏览器</option>
+                <option value="/firefox\/(\d+\.\d+)/i">从UA判断是否为firefox浏览器</option>
+                <option value="/opera(\/| )(\d+(\.\d+)?)(.+?(version\/(\d+(\.\d+)?)))?/i">从UA判断是否为opera浏览器</option>
+                <option value="/(\d+\.\d)?(?:\.\d)?\s+safari\/?(\d+\.\d+)?/i">从UA判断是否为Safari浏览器</option>
+                <option value=/android/i>从UA中判断是否为Android系统</option>
+                <option value=/ipad/i>从UA中判断是否为iPad</option>
+                <option value=/iphone/i>从UA中判断是否为iPhone</option>
+                <option value=/macintosh/i>从UA判断是否为Mac OS平台</option>
+                <option value=/windows/i>从UA中判断是否为Windows平台</option>
+                <option value="/(nokia|iphone|android|ipad|motorola|^mot\-|softbank|foma|docomo|kddi|up\.browser|up\.link|htc|dopod|blazer|netfront|helio|hosin|huawei|novarra|CoolPad|webos|techfaith|palmsource|blackberry|alcatel|amoi|ktouch|nexian|samsung|^sam\-|s[cg]h|^lge|ericsson|philips|sagem|wellcom|bunjalloo|maui|symbian|smartphone|midp|wap|phone|windows ce|iemobile|^spice|^bird|^zte\-|longcos|pantech|gionee|^sie\-|portalmmm|jig\s browser|hiptop|^ucweb|^benq|haier|^lct|opera\s*mobi|opera\*mini|320x320|240x320|176x220)/i">从UA中判断是否为移动终端</option>
+            </optgroup>
+            <optgroup label="HTML相关">
+                </option>
+                <option value="/\<link\s(.*?)\s*(([^&]>)|(\/\>)|(\<\/link\>))/gi">匹配link标签</option>
+                <option value="/<(\S*?) [^>]*>.*?</\1>|<.*?/>/gm">匹配HTML标签</option>
+                <option value="/^[^<>`~!/@\#}$%:;)(_^{&*=|'+]+$/">匹配非HTML标签</option>
+                <option value="/<script[^>]*>[\s\S]*?<\/[^>]*script>/gi">匹配script标签</option>
+                <option value="/<!--[\s\S]*?--\>/g">匹配HTML注释</option>
+                <option value="/\[\s*if\s+[^\]][\s\w]*\]/i">匹配HTML条件注释</option>
+                <option value="/^\[if\s+(!IE|false)\]>.*<!\[endif\]$/i">匹配非IE的条件注释</option>
+                <option value="/expression[\s\r\n ]?\(/gi">匹配CSS expression</option>
+                <option value="/<\W+>/gi">匹配不合法的HTML标签</option>
+                <option value="/<textarea[^>]*>[\s\S]*?<\/[^>]*textarea>/gi">匹配textarea标签</option>
+            </optgroup>
+        </select>
+        </span>
+    </div>
+    <br>
+    <br>
+    <div>
+        <h3 class=panel-subtitle>对应的正则表达式</h3>
+        <input type="text" name="zhengzebiaodashi" id="zhengzebiaodashi" style="width: 1000px;">
+    </div>
+    <script>
+    $(".reglist_select").select2();
+    $(" .reglist_select ").change(function() {
+        $("#zhengzebiaodashi").val($(this).val().trim());
+        $("#zhengzebiaodashi").focus();
+        $("#zhengzebiaodashi").select();
+    });
+    $(document).ready(function() {
+        var width = window.innerWidth;
+        $("#zhengzebiaodashi").css("width", width);
+    });
+    </script>
+</body>

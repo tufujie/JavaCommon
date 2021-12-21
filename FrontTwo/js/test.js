@@ -1,3 +1,0 @@
-function a() {
-	document.getElementBy
-}

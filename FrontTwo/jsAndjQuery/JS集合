@@ -1,6 +1,0 @@
-var s = new Set();
-var a = 'A', b = 'B',  c = 'B';
-s.add(a);
-s.add(b);
-s.add(c);
-console.log("SetSize = " + s.size);

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>baseDemo</title>
+    <script type="text/javascript" src="../../js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<select id="selectID" name="items" style="width: 200px;" onchange="testChange()">
+    <option value="1">选择1</option>
+    <option value="2">选择2</option>
+    <option value="3">选择3</option>
+    <option value="4">选择4</option>
+</select>
+<button onclick="testGetAllInfo()">获取所有信息</button>
+<script>
+    console.log("JS已引入");
+    var $select = $("#select_id");
+    function testChange() {
+        console.log("修改下拉选择");
+    }
+    function testGetAllInfo() {
+        // jQuery获取Select选择的Text和Value
+        var checkText= $select.find("option:selected").text();  //获取Select选择的Text
+        var checkValue= $select.val();  //获取Select选择的Value
+        var checkIndex= $select.get(0).selectedIndex;  //获取Select选择的索引值
+        var maxIndex = $("#selectID option:last").attr("index");  //获取Select最大的索引值
+        var item = $("select[name=items] option[selected]").text();
+        // jQuery设置Select选择的 Text和Value
+        $select.get(0).selectedIndex = 1;  //设置Select索引值为1的项选中
+        $select[0].selectedIndex = 2; //设置Select索引值为1的项选中
+        $select.val(4);   // 设置Select的Value值为4的项选中
+        $("#selectID option:eq(0)").attr("selected", true);
+        $("#selectID option[value='3']").attr("selected", true);   //设置Select的Text值为jQuery的项选中
+        $("#selectID").attr("value",'2');//设置value=2的项目为当前选中项，测试无效
+        // jQuery添加/删除Select的Option项
+        $("#select_id").append("<option value='Value'>Text</option>");  //为Select追加一个Option(下拉项)
+        $("#select_id").prepend("<option value='0'>请选择</option>");  //为Select插入一个Option(第一个位置)
+        $("#select_id option:last").remove();  //删除Select中索引值最大Option(最后一个)
+        $("#select_id option[index='0']").remove();  //删除Select中索引值为0的Option(第一个)
+        $("#select_id option[value='3']").remove();  //删除Select中Value='3'的Option
+        $("#select_id option[text='4']").remove();  //删除Select中Text='4'的Option
+        //遍历option和添加、移除option
+        function changeShipMethod(shipping){
+            var len = $("select[name=ISHIPTYPE] option").length;
+            if(shipping.value != "CA"){
+                $("select[name=ISHIPTYPE] option").each(function(){
+                    if($(this).val() == 111){
+                        $(this).remove();
+                    }
+                });
+            }else{
+                $("<option value='111'>UPS Ground</option>").appendTo($("select[name=ISHIPTYPE]"));
+            }
+        }
+        $("<option value='1'>1111</option><option value='2'>2222</option>").appendTo("#select_id");//添加下拉框的option
+        $("#select_id").empty();//清空下拉框
+    }
+
+</script>
+</body>
+</html>

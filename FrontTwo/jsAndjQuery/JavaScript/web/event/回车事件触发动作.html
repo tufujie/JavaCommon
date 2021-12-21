@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        按键弹起事件
+    </title>
+    <script type="text/javascript" src="../../../../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<input type="text" id="test" onkeyup="keyupEvent(this)">
+<script type="text/javascript">
+    /*最近做一个输入框只能输入有两位小数点的小数，当时监听的是keyup事件，当输入法改为中文，然后按enter键，这样还是能输入其他的字符（火狐没有这个问题，谷歌里有这个问题）*/
+    var bind_name = 'input';
+    if (navigator.userAgent.indexOf("MSIE") != -1){
+        bind_name = 'propertychange';
+    }
+    $('#test').bind(bind_name, function(){
+        keyupEvent(this);
+        console.log("中文输入回车事件");
+    });
+
+   /* $('#test').bind('keyup', function(event) {
+        if (event.keyCode == "13") {
+            // 回车执行查询
+            alert('执行了回车');
+            keyupEvent(this);
+        }
+    });*/
+
+    function keyupEvent(obj) {
+        console.log("按键弹起事件");
+    }
+
+</script>
+
+</body>
+</html>

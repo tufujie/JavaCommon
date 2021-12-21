@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>计时器</title>
+    <script type="text/javascript">
+        function clock(){
+            var time = new Date();
+            document.getElementById("clock").value = time;
+        }
+        var setIntervalId = setInterval(clock, 1000);
+    </script>
+</head>
+<body>
+<form>
+    <input type="text" id="clock" size="50" />
+    <input type="button" value="Stop" onclick="clearInterval(setIntervalId)" />
+</form>
+</body>
+</html>
+<!--任务
+补充右边编辑器第12行，使用setInterval()计时器，显示动态时间。
+补充右边编辑器第18行，点击Stop按钮后，取消计时器。-->

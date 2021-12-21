@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>在线代码对比/归并 - 码工具</title>
+<meta name="keywords" content="在线代码对比,代码比较,文本对比,找不同,compare">
+<meta name="description" content="在线检测/比较两个文件文本的不同">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=yes">
+<link rel="shortcut icon" href="img/common/favicon.png" type="image/x-icon">
+<link rel="bookmark" href="img/common/favicon.png">
+
+<link rel="stylesheet" href="components/bootstrap/css/bootstrap.min.css">
+<link href="css/common/main.css?v=377" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="components/bootstrap-fileinput/css/fileinput.min.css">
+<link rel="stylesheet" type="text/css" href="components/codemirror-5.17.0/lib/codemirror.css">
+<link type="text/css" rel="stylesheet" href="components/mergely/mergely.css" />
+<style type="text/css">
+.file-preview, .file-upload-indicator, .kv-file-upload, .fileinput-remove-button {
+	display: none;
+}
+.file-input{
+	display: inline-block;
+    width: 240px;
+}
+.kv-fileinput-caption{
+	width:250px !important;
+}
+.CodeMirror {
+	min-height: 596px;
+}
+.mergely-c-rem {
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+<div id="mainContent" class="wrapper">
+<div class="row"><div class="col-lg-9"><h1 class="toolName">代码对比/归并</h1>
+<div class="clearfix"></div>
+<div class="modal fade" id="getCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="transform: translateY(25%);">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<h4 class="modal-title" id="myModalLabel">将下面代码放到您的网页中：</h4>
+</div>
+<div class="modal-body">
+<textarea class="codeTextArea">
+&lt;iframe src="https://www.matools.com/compare?embed"
+        width="100%" height="100%" scrolling="no" style="border:0px;"&gt;
+&lt;/iframe&gt;
+            	</textarea>
+</div>
+</div>
+</div>
+</div>
+<div class="form-inline well" style="margin: 10px 0 10px 0;min-height:65px;">
+<div style="float: left;">
+<input id="file-1" name="file-1" type="file" class="file" onchange="leftFileSelect(this.files)" />
+<select id="l_encode" value="UTF-8" class="span1" onchange="setLeftCode();">
+<option value="UTF-8">UTF-8</option>
+<option value="GBK">GBK</option>
+<option value="GB2312">GB2312</option>
+<option value="GB18030">GB18030</option>
+<option value="ISO-8859-2">ISO-8859-2</option>
+</select>
+</div>
+<div style="float: right;">
+<input id="file-1" name="file-1" type="file" class="file" onchange="rightFileSelect(this.files)" />
+<select id="r_encode" value="UTF-8" class="span1" onchange="setRightCode();">
+<option value="UTF-8">UTF-8</option>
+<option value="GBK">GBK</option>
+<option value="GB2312">GB2312</option>
+<option value="GB18030">GB18030</option>
+<option value="ISO-8859-2">ISO-8859-2</option>
+</select>
+</div>
+</div>
+<div id="compare" style="display: block; width: 900px; height: 603px;">></div>
+<div class="ToolAbout">
+<div id="middleImgAd"></div>
+</div></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/common/main11.11.9.js?v=502" charset="utf-8"></script>
+
+<script src="components/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="components/bootstrap-fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="components/codemirror-5.17.0/lib/codemirror.js"></script>
+<script type="text/javascript" src="components/mergely/mergely.js"></script>
+<script id="render_js" type="text/javascript" src="components/codemirror-5.17.0/model/javascript/javascript.js"></script>
+<script>
+	$(".file").fileinput({
+		language : 'zh', //设置语言
+		uploadUrl : '#', // you must set a valid URL here else you will get an error
+// 		allowedFileExtensions : [ 'jpg', 'png', 'gif', 'ico', 'bmp' ],
+		overwriteInitial : false,
+		maxFileSize : 10000,
+		maxFilesNum : 50,
+		showUpload : false, //是否显示上传按钮
+		showUploadedThumbs : false,
+		//allowedFileTypes: ['image', 'video', 'flash'],
+		slugCallback : function(filename) {
+			return filename.replace('(', '_').replace(']', '_');
+		}
+	});
+		var l_files;
+		var r_files;
+
+		$(document).ready(function() {
+			$('#compare').mergely({
+				cmsettings: { readOnly: false, lineNumbers: true },
+				lhs: function(setValue) {
+					setValue('I am good at java');
+				},
+				rhs: function(setValue) {
+					setValue('I am good at php');
+				}
+			});
+		});
+
+		function leftFileSelect(files) {
+			l_files = files;
+			setLeft(l_files);
+		}
+
+		function rightFileSelect(files) {
+			r_files = files;
+			setRight(r_files);
+		}
+
+		function setRight(files) {
+			f = files[0];
+			var reader = new FileReader();
+			reader.onload = (function(file) {
+				return function(e) {
+					$('#compare').mergely("rhs", this.result);
+				};
+			})(f);
+			reader.readAsText(f, $('#r_encode').val());
+		}
+
+		function setLeft(files) {
+			f = files[0];
+			var f_name = f.name;
+			var f_type = f_name.substring(f_name.lastIndexOf("."));
+			switch (f_type) {
+			case ".js":
+				setRender("javascript/javascript.js");
+				break;
+			case ".css":
+				setRender("css/css.js");
+				break;
+			case ".go":
+				setRender("go/go.js");
+				break;
+			case ".groovy":
+				setRender("groovy/groovy.js");
+				break;
+			case ".c", ".cpp":
+				setRender("clike/clike.js");
+				break;
+			case ".php":
+				setRender("php/php.js");
+				break;
+			case ".xml":
+				setRender("xml/xml.js");
+				break;
+			case ".html":
+				setRender("htmlembedded/htmlembedded.js");
+				break;
+			case ".less":
+				setRender("less/less.js");
+				break;
+			case ".lua":
+				setRender("lua/lua.js");
+				break;
+			case ".md":
+				setRender("markdown/markdown.js");
+				break;
+			case ".vm":
+				setRender("velocity/velocity.js");
+				break;
+			case ".py":
+				setRender("python/python.js");
+				break;
+			case ".properties":
+				setRender("properties/properties.js");
+				break;
+			case ".rb":
+				setRender("ruby/ruby.js");
+				break;
+			case ".sh":
+				setRender("shell/shell.js");
+				break;
+			case ".sql":
+				setRender("sql/sql.js");
+				break;
+			case ".erl":
+				setRender("erlang/erlang.js");
+				break;
+			case ".coffee":
+				setRender("coffeescript/coffeescript.js");
+				break;
+			case ".pl":
+				setRender("perl/perl.js");
+				break;
+			defualt: setRender("clike/clike.js");
+		}
+		var reader = new FileReader();
+		reader.onload = (function(file) {
+			return function(e) {
+				$('#compare').mergely("lhs", this.result);
+			};
+		})(f);
+		reader.readAsText(f, $('#l_encode').val());
+	}
+	function setLeftCode() {
+		if (null != l_files)
+			setLeft(l_files);
+	}
+	function setRightCode() {
+		if (null != r_files)
+			setRight(r_files);
+	}
+	function setRender(type) {
+		var base_src = "components/codemirror-5.17.0/model/";
+		$("#render_js").attr("src", base_src + type);
+	}
+</script>
+</body>
+</html>

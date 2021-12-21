@@ -1,0 +1,5 @@
+table水平居中的样式：
+margin: 0 auto;
+
+h1水平居中：
+align="center"

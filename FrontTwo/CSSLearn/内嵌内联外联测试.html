@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内嵌内联外联测试</title>
+    <link type="text/css" rel="stylesheet" href="../css/wailian.css">
+    <style type="text/css">
+        .test {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<span class="test" style="color: green;">测试内嵌(绿色)、内联(蓝色)、外联(红色)的等级</span><br>
+说明内嵌 > (内联 and 外联)<br>
+<span class="test">测试内联(蓝色)、外联(红色)的等级</span><br>
+说明内联 > 外联<br>
+<span style="color: blue; font-size: 20px;">综上，等级：内嵌 > 内联 > 外联，即内嵌可覆盖内联和外联，内联可覆盖外联</span>
+</body>
+</html>

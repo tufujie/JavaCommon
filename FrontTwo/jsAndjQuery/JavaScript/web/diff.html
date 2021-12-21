@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var temp = [1, 1, 2, 3, 4, 5];
+    function option(temp) {
+        var arr = [];
+        for (var i = 0, ilong = temp.length; i < ilong; i++) {
+            if (arr[temp[i]]) {
+                continue;
+                alert(temp[i] + "hello");
+            }
+            alert(temp[i]);
+            arr[temp[i]] = 1;
+        }
+        var tarr = [];
+        for (var k in arr) {
+            tarr.push(k);
+        }
+        return tarr;
+    }
+    alert(option(temp));
+</script>
+</body>
+</html>

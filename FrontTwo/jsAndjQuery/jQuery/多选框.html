@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>base html</title>
+    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<input type="checkbox" id="checkbox_id" value="1">值为1
+<input type="checkbox" value="1">值为2
+<script type="text/javascript">
+    console.log("here");
+    function getAllInfo() {
+        $("#checkbox_id").attr("value");
+        $("#checkbox_id").attr("checked",'');//不打勾
+        $("#checkbox_id").attr("checked",true);//打勾
+        if($("#checkbox_id").attr('checked')==undefined) {
+            //判断是否已经打勾
+        }
+        $("input[type=checkbox]:checked").each(function() { //由于复选框一般选中的是多个,所以可以循环输出
+            alert($(this).val());
+        });
+    }
+</script>
+
+</body>
+</html>

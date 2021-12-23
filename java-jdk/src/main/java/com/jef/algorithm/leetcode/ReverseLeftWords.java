@@ -8,11 +8,6 @@ package com.jef.algorithm.leetcode;
  */
 public class ReverseLeftWords {
 
-    public static void main(String[] args) {
-        System.out.println(new ReverseLeftWords().reverseLeftWords("abcdefg", 2));
-        System.out.println(new ReverseLeftWords().reverseLeftWords("lrloseumgh", 6));
-    }
-
     /**
      * 个人解法
      * @author Jef

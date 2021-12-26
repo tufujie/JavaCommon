@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 青蛙跳测试
  *
- * @author Administrator
+ * @author Jef
  * @date 2021/12/24
  */
 public class LeapFrogJumpTest {
@@ -29,13 +29,6 @@ public class LeapFrogJumpTest {
     public void testJumpKindV2() {
         for (int i = 0; i < 10; i++) {
             PrintUtil.printf("台阶数：%s，跳法数：%s", i, LeapFrogJump.jumpKindV2(i));
-        }
-    }
-
-    @Test
-    public void testJumpKindOfDp() {
-        for (int i = 0; i < 10; i++) {
-            PrintUtil.printf("台阶数：%s，跳法数：%s", i, LeapFrogJump.jumpKindOfDp(i));
         }
     }
 

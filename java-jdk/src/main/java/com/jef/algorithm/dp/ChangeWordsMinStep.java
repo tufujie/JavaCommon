@@ -49,4 +49,41 @@ public class ChangeWordsMinStep {
         }
         return dp[m][n];
     }
+
+    /**
+     * 优化获取转换单词最小数
+     *
+     * @return int
+     * @author Jef
+     * @date 2021/12/26
+     */
+    public static int getChangeWordsMinStepNumberOptimization(String word1, String word2) {
+        if (word1.equals(word2)) {
+            return 0;
+        }
+        int m = word1.length(), n = word2.length();
+        int[] dp = new int[n + 1];
+        // dp[0...n]的初始值
+        for (int j = 1; j <= n; j++) {
+            dp[j] = j;
+        }
+        // 推导出 dp[n]
+        for (int i = 1; i <= m; i++) {
+            int temp = dp[0];
+            // 相当于初始化
+            dp[0] = i;
+            for (int j = 1; j <= n; j++) {
+                // pre 相当于之前的 dp[i - 1][j - 1]
+                int pre = temp;
+                temp = dp[j];
+                // 如果 word1[i] 与 word2[j] 相等。第 i 个字符对应下标是 i-1
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[j] = pre;
+                } else {
+                    dp[j] = Math.min(Math.min(dp[j - 1], dp[j]), pre) + 1;
+                }
+            }
+        }
+        return dp[n];
+    }
 }

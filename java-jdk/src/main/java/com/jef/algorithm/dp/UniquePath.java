@@ -39,4 +39,32 @@ public class UniquePath {
         return dp[m - 1][n - 1];
     }
 
+    /**
+     * 优化获取路径数
+     *
+     * @param m 行数
+     * @param n 列数
+     * @author Jef
+     * @date 2021/12/26
+     */
+    public static int getUniquePathsOptimization(int m, int n) {
+        if (m <= 0 || n <= 0) {
+            return 0;
+        }
+        int[] dp = new int[n];
+        // 初始化
+        for (int i = 0; i < n; i++) {
+            dp[i] = 1;
+        }
+        for (int i = 1; i < m; i++) {
+            // 第 i 行第 0 列的值
+            dp[0] = 1;
+            for (int j = 1; j < n; j++) {
+                // 公式： dp[i] = dp[i - 1] + dp[i]
+                dp[j] = dp[j - 1] + dp[j];
+            }
+        }
+        return dp[n - 1];
+    }
+
 }

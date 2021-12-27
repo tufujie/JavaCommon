@@ -12,10 +12,22 @@ import org.junit.jupiter.api.Test;
  */
 public class TestDP {
 
+    /**
+     * 输⼊:0 0
+     * 输出: 0
+     * 输⼊:3 7
+     * 输出: 28
+     */
     @Test
     public void testGetUniquePaths() {
         PrintUtil.printf("路径数：%s", UniquePath.getUniquePaths(0, 0));
         PrintUtil.printf("路径数：%s", UniquePath.getUniquePaths(3, 7));
+    }
+
+    @Test
+    public void testGetUniquePathsOptimization() {
+        PrintUtil.printf("路径数：%s", UniquePath.getUniquePathsOptimization(0, 0));
+        PrintUtil.printf("路径数：%s", UniquePath.getUniquePathsOptimization(3, 7));
     }
 
     /**
@@ -43,6 +55,11 @@ public class TestDP {
     @Test
     public void testChangeWordsLeastNumber() {
         PrintUtil.printf("最短变换数：%s", ChangeWordsMinStep.getChangeWordsMinStepNumber("horse", "ros"));
+    }
+
+    @Test
+    public void testChangeWordsLeastNumberOptimization() {
+        PrintUtil.printf("最短变换数：%s", ChangeWordsMinStep.getChangeWordsMinStepNumberOptimization("horse", "ros"));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.jef.algorithm.recursion;
 
 /**
+ * 青蛙跳-递归算法
  * ⼀只⻘蛙⼀次可以跳上1级台阶，也可以跳上2级。求该⻘蛙跳上⼀个n级的台阶总共有多少种跳法。
  *
  * @author Jef

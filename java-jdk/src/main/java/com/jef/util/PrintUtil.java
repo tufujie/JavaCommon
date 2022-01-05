@@ -7,13 +7,25 @@ import com.jef.constant.BasicConstant;
  * @date 2021/4/13
  */
 public class PrintUtil {
+
     /**
      * 循环打印数组
      */
     public static void printArray(Integer[] array) {
-        for (Integer a : array) {
-            System.out.println(a);
+        printArray(array, null);
+    }
+
+    /**
+     * 循环打印数组
+     */
+    public static void printArray(Integer[] array, String message) {
+        if (StringUtils.isNotEmpty(message)) {
+            System.out.println(message);
         }
+        for (Integer a : array) {
+            System.out.print(a + " ");
+        }
+        System.out.println();
     }
 
     /**

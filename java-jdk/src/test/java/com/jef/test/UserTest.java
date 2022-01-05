@@ -1,11 +1,12 @@
 package com.jef.test;
 
-import com.google.common.collect.Maps;
 import com.jef.constant.BasicConstant;
 import com.jef.dao.UserDao;
 import com.jef.entity.User;
 import com.jef.util.BeanMapUtil;
 import com.jef.util.ConnectSessionUtil;
+
+import com.google.common.collect.Maps;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -27,10 +28,10 @@ public class UserTest {
      */
     @Test
     public void testGetUserById() {
-        logger.info("测试通过id获取用户信息开始，待传入id={}", Constant.ID);
+        logger.info("测试通过id获取用户信息开始，待传入id={}", BasicConstant.ID);
         SqlSession session = ConnectSessionUtil.getSqlSession();
         UserDao userDao = session.getMapper(UserDao.class);
-        User user = userDao.selectByPrimaryKey(Constant.ID);
+        User user = userDao.selectByPrimaryKey(BasicConstant.ID);
         System.out.println("用户名=" + user.getName());
     }
 
@@ -41,8 +42,8 @@ public class UserTest {
     public void testGetUserByNameAndPhone() {
         SqlSession session = ConnectSessionUtil.getSqlSession();
         Map<String, Object> requestParams = Maps.newHashMap();
-        requestParams.put("name", Constant.NAME);
-        requestParams.put("phone", Constant.PHONE);
+        requestParams.put("name", BasicConstant.USER_NAME);
+        requestParams.put("phone", BasicConstant.USER_PHONE);
         UserDao userDao = session.getMapper(UserDao.class);
         User user = userDao.getByNameAndPhone(requestParams);
         System.out.println("用户名map=" + user.getName());
@@ -64,8 +65,8 @@ public class UserTest {
     public void testGetUserByUser() {
         SqlSession session = ConnectSessionUtil.getSqlSession();
         User user = new User();
-        user.setName(Constant.NAME);
-        user.setPhone(Constant.PHONE);
+        user.setName(BasicConstant.USER_NAME);
+        user.setPhone(BasicConstant.USER_PHONE);
         UserDao userDao = session.getMapper(UserDao.class);
         User userDb = userDao.getByUser(user);
         System.out.println("用户名=" + userDb.getName());

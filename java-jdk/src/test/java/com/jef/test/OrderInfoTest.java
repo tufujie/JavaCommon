@@ -1,5 +1,6 @@
 package com.jef.test;
 
+import com.jef.constant.BasicConstant;
 import com.jef.dao.OrderInfoDao;
 import com.jef.entity.OrderInfo;
 import com.jef.entity.OrderProduct;
@@ -28,7 +29,7 @@ public class OrderInfoTest {
     public void testGetOrderInfoById() {
         SqlSession session = ConnectSessionUtil.getSqlSession();
         OrderInfoDao orderInfoDao = session.getMapper(OrderInfoDao.class);
-        OrderInfo orderInfo = orderInfoDao.selectByPrimaryKey(Constant.ID);
+        OrderInfo orderInfo = orderInfoDao.selectByPrimaryKey(BasicConstant.ID);
         System.out.println("第三方订单号=" + orderInfo.getExtraOrderId());
     }
 
@@ -41,7 +42,7 @@ public class OrderInfoTest {
         String statement = "getByShopAndExtraOrderId";
         Map<String, Object> requestParams = Maps.newHashMap();
         requestParams.put("shopId", 1L);
-        requestParams.put("extraOrderId", Constant.EXTRA_ORDER_ID);
+        requestParams.put("extraOrderId", BasicConstant.FIRST_ORDER_ID);
         OrderInfo orderInfo = session.selectOne(statement, requestParams);
         System.out.println("第三方订单号=" + orderInfo.getExtraOrderId());
     }

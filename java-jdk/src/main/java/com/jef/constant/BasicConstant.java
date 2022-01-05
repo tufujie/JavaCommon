@@ -235,4 +235,9 @@ public class BasicConstant {
      * 第三个订单号
      */
     public static final String THIRD_ORDER_ID = "00000000000000003";
+
+    public static final Long ID = 1L;
+
+    // Integer数组
+    public static final Integer[] INTEGER_ARRAY = {1, 4, 7, 3, 6, 8, 5, 2, 10, 9};
 }

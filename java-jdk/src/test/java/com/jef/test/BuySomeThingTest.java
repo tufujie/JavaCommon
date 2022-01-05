@@ -1,6 +1,6 @@
 package com.jef.test;
 
-import com.google.common.collect.Maps;
+import com.jef.constant.BasicConstant;
 import com.jef.dao.OrderInfoDao;
 import com.jef.dao.OrderProductDao;
 import com.jef.dao.ShopDao;
@@ -10,6 +10,8 @@ import com.jef.entity.OrderProduct;
 import com.jef.entity.Shop;
 import com.jef.entity.User;
 import com.jef.util.ConnectSessionUtil;
+
+import com.google.common.collect.Maps;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
@@ -34,8 +36,8 @@ public class BuySomeThingTest {
         OrderProductDao orderProductDao = session.getMapper(OrderProductDao.class);
         ShopDao shopDao = session.getMapper(ShopDao.class);
         Map<String, Object> requestParams = Maps.newHashMap();
-        String name = Constant.NAME;
-        String phone = Constant.PHONE;
+        String name = BasicConstant.USER_NAME;
+        String phone = BasicConstant.USER_PHONE;
         requestParams.put("name", name);
         requestParams.put("phone", phone);
         User user = userDao.getByNameAndPhone(requestParams);

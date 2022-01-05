@@ -1,8 +1,9 @@
 package com.jef.sorted;
 
+import com.jef.algorithm.sort.ArraySortUtil;
 import com.jef.test.Constant;
-import com.jef.util.ArraySortUtil;
 import com.jef.util.PrintUtil;
+
 import org.junit.Test;
 
 /**
@@ -20,8 +21,14 @@ public class ArraySortUtilTest {
     }
 
     @Test
-    public void testSimpleChooseSort () {
-        Integer[] array = ArraySortUtil.simpleChooseSort (Constant.INTEGER_ARRAY);
+    public void testSimpleChooseSort() {
+        Integer[] array = ArraySortUtil.simpleChooseSort(Constant.INTEGER_ARRAY);
+        PrintUtil.printArray(array);
+    }
+
+    @Test
+    public void testSelectionSort() {
+        Integer[] array = ArraySortUtil.selectionSort(Constant.INTEGER_ARRAY);
         PrintUtil.printArray(array);
     }
 
@@ -42,6 +49,12 @@ public class ArraySortUtilTest {
     }
 
     @Test
+    public void testInsertSort() {
+        Integer[] array = ArraySortUtil.insertSort(Constant.INTEGER_ARRAY);
+        PrintUtil.printArray(array);
+    }
+
+    @Test
     public void testShellSort() {
         Integer[] array = ArraySortUtil.shellSort(Constant.INTEGER_ARRAY);
         PrintUtil.printArray(array);
@@ -50,6 +63,18 @@ public class ArraySortUtilTest {
     @Test
     public void testBinaryInsertSrot() {
         Integer[] array = ArraySortUtil.binaryInsertSrot(Constant.INTEGER_ARRAY);
+        PrintUtil.printArray(array);
+    }
+
+    @Test
+    public void testQuickSort() {
+        Integer[] array = ArraySortUtil.quickSort(Constant.INTEGER_ARRAY, 0, Constant.INTEGER_ARRAY.length - 1);
+        PrintUtil.printArray(array);
+    }
+
+    @Test
+    public void testCountSort() {
+        Integer[] array = ArraySortUtil.countSort(Constant.INTEGER_ARRAY);
         PrintUtil.printArray(array);
     }
 

@@ -1,7 +1,9 @@
-package com.jef.mq;
+package com.jef.mq.activeMq;
 
 import com.jef.constant.BasicConstant;
 import com.jef.entity.User;
+import com.jef.mq.MQBasicConstant;
+
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 

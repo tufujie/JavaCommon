@@ -1,8 +1,5 @@
 package com.jef.mq.rocketMq;
 
-import lombok.Data;
-import org.springframework.context.annotation.Configuration;
-
 /**
  * RocketMQ配置类
  *

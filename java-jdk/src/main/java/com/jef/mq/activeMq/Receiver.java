@@ -1,4 +1,4 @@
-package com.jef.mq;
+package com.jef.mq.activeMq;
 
 
 /**

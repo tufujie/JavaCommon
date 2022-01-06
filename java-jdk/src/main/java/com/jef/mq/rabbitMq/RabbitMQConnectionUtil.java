@@ -1,14 +1,17 @@
 package com.jef.mq.rabbitMq;
 
 import com.jef.mq.MQBasicConstant;
+
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+
 import java.io.IOException;
 
 /**
  * RabbitMQ连接工具类
+ *
  * @author Jef
  * @date 2020/4/4
  */
@@ -45,7 +48,7 @@ public class RabbitMQConnectionUtil {
         channel.queueDeclare(queueName, true, false, false, null);
     }
 
-    public void close() throws IOException{
+    public void close() throws IOException {
         channel.close();
         connection.close();
     }

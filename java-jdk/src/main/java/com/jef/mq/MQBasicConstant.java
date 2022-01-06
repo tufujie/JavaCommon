@@ -2,6 +2,7 @@ package com.jef.mq;
 
 /**
  * MQ基础常量
+ *
  * @author Jef
  * @date 2019/3/29
  */

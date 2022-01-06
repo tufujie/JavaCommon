@@ -1,11 +1,11 @@
 package com.jef.mq.rocketMq;
 
-import java.util.concurrent.TimeUnit;
-
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.client.producer.DefaultMQProducer;
 import com.alibaba.rocketmq.client.producer.SendResult;
 import com.alibaba.rocketmq.common.message.Message;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Jef
@@ -13,7 +13,7 @@ import com.alibaba.rocketmq.common.message.Message;
  */
 public class Producer {
 
-    public static void main(String[] args) throws MQClientException, InterruptedException{
+    public static void main(String[] args) throws MQClientException, InterruptedException {
         /**
          * 一个应用创建一个Producer，由应用来维护此对象，可以设置为全局对象或者单例<br>
          * 注意：ProducerGroupName需要由应用来保证唯一<br>

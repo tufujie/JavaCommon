@@ -5,6 +5,8 @@ import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.springframework.util.StopWatch;
 
 /**
+ * RocketMQ工厂类
+ *
  * @author Jef
  * @date 2021/9/6
  */

@@ -11,11 +11,14 @@ import org.apache.rocketmq.common.message.MessageExt;
 import java.util.List;
 
 /**
+ * 测试RocketMq消费者消息消息
+ *
  * @author Jef
  * @date 2021/9/6
  */
 public class RocketMqConsumer {
-    public static void main(String[] args) throws InterruptedException, MQClientException {
+
+    public static void main(String[] args) throws MQClientException {
         //声明并初始化一个consumer
         //需要一个consumer group名字作为构造方法的参数
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(RocketMqConfiguration.COMSUMER_GROU_NAME);
@@ -34,7 +37,7 @@ public class RocketMqConsumer {
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
                                                             ConsumeConcurrentlyContext context) {
                 System.out.println("线程 " + Thread.currentThread().getName() + " 接收到新消息，消息详情为: " + msgs);
-                System.out.println("消息内容=" + new String(msgs.get(0).getBody()));
+                System.out.println("消费消息，消息内容=" + new String(msgs.get(0).getBody()));
                 //返回消费状态
                 //CONSUME_SUCCESS 消费成功
                 //RECONSUME_LATER 消费失败，需要稍后重新消费

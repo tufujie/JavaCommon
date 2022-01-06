@@ -1,11 +1,13 @@
 package com.jef.mq.rabbitMq;
 
 import com.jef.mq.MQBasicConstant;
+
 import java.io.IOException;
 import java.util.HashMap;
 
 /**
  * 客户端
+ *
  * @author Jef
  * @date 2020/4/4
  */
@@ -14,7 +16,7 @@ public class RabbitMQClient {
         new RabbitMQClient();
     }
 
-    public RabbitMQClient(){
+    public RabbitMQClient() {
         try {
             // 发消息
             publishMessage();
@@ -34,14 +36,14 @@ public class RabbitMQClient {
         connectionUtil.channel.addReturnListener(new MyReturnListener());
         int i = 1;
         while (i <= 10) {
-            HashMap<String, Object> map=new HashMap<String, Object>();
+            HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("tagId", i);
             producer.sendMessage(map);
             i++;
         }
     }
 
-    public void addConsumer() throws IOException{
+    public void addConsumer() throws IOException {
         RabbitMQConnectionUtil connectionUtil = new RabbitMQConnectionUtil(MQBasicConstant.MQ_QUEUE_NAME);
         OddConsumer odd = new OddConsumer(connectionUtil);
         odd.basicConsume();

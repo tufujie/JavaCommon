@@ -7,16 +7,17 @@ import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageQueue;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
-import org.springframework.util.StopWatch;
 
 import java.util.List;
 
 /**
- * RocketMQ工厂类
+ * 测试RocketMq生产者进行消息生产
+ *
  * @author Jef
  * @date 2021/4/6 14:35
  */
 public class RocketMqProducer {
+
     public static void main(String[] args) throws MQClientException, InterruptedException {
         DefaultMQProducer producer = RocketMqFactory.getInstance();
         //发送10条消息到Topic为topic_name_test，tag为tag_name_test，消息内容为“Hello RocketMQ”拼接上i的值
@@ -27,7 +28,7 @@ public class RocketMqProducer {
                         RocketMqConfiguration.KEY_NMAE,
                         messageContent.getBytes(RemotingHelper.DEFAULT_CHARSET)
                 );
-                System.out.println("消息内容=" + messageContent);
+                System.out.println("生产消息，消息内容=" + messageContent);
                 // 这里设置需要延时的等级即可
                 msg.setDelayTimeLevel(1);
                 //调用producer的send()方法发送消息

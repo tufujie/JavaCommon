@@ -1,14 +1,19 @@
 package com.jef.util;
 
-import com.google.common.collect.Lists;
 import com.jef.constant.BasicConstant;
 import com.jef.entity.User;
+import com.jef.poi.excel.ExcelUtil;
+
+import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Jef
@@ -39,7 +44,18 @@ public class ExcelUtilTest {
         list.add("1");
         list.add("2018-10-27");
         lists.add(list);
-        String[] columnNames = { "姓名", "手机号", "年龄", "创建时间" };
-        util.exportExcel2007("用户导出", columnNames, lists, new FileOutputStream("E:/test.xls"),ExportExcelUtil.EXCEL_FILE_2003);
+        String[] columnNames = {"姓名", "手机号", "年龄", "创建时间"};
+        util.exportExcel2007("用户导出", columnNames, lists, new FileOutputStream("E:/test.xls"), ExportExcelUtil.EXCEL_FILE_2003);
     }
+
+    @Test
+    public void testGetExcelInsertSQL() throws IOException {
+        Map<String, String> mapParams = new HashMap<>();
+        mapParams.put("男", "0");
+        mapParams.put("女", "1");
+        ExcelUtil.getExcelInsertSQL("E:/download/sap_customer/sap_customer.xlsx", "t_sap_pushcustomerdata",
+                "FID, FECID, FNumber, FName, FLinkPhone, FTaxNumxl, FAddress, FSimpleName, FEmail, FSex", "testECID", mapParams);
+    }
+
+
 }

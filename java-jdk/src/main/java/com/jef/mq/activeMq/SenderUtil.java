@@ -38,7 +38,7 @@ public class SenderUtil {
             connection.start();
             // 获取操作连接
             session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
-            // 获取session注意参数值xingbo.xu-queue是一个服务器的queue，须在在ActiveMq的console配置
+            // 获取session注意参数值FirstQueue是一个服务器的queue，须在在ActiveMq的console配置
             destination = session.createQueue(MQBasicConstant.MQ_QUEUE_NAME);
             // 得到消息生成者【发送者】
             producer = session.createProducer(destination);

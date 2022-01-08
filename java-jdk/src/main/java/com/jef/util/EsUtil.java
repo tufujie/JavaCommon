@@ -1,7 +1,7 @@
-package com.jef.service.impl;
+package com.jef.util;
 
 import com.jef.constant.BasicConstant;
-import com.jef.service.IEsService;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,38 +9,43 @@ import org.elasticsearch.action.bulk.BackoffPolicy;
 import org.elasticsearch.action.bulk.BulkProcessor;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.get.MultiGetItemResponse;
 import org.elasticsearch.action.get.MultiGetResponse;
+import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.network.InetAddresses;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.unit.ByteSizeUnit;
 import org.elasticsearch.common.unit.ByteSizeValue;
-import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
-import org.springframework.stereotype.Service;
+import org.elasticsearch.xcontent.XContentFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author Jef
  * @date: 2021/5/10 15:55
  */
-@Service(value = "esService")
-public class EsServiceImpl implements IEsService {
-    private static final Logger logger = LogManager.getLogger(EsServiceImpl.class);
+public class EsUtil {
+    private static final Logger logger = LogManager.getLogger(EsUtil.class);
 
     // 集群地址（多个机器ip的话用,隔开）
     private static String esServerIps = BasicConstant.ES_SERVER_IPS;
@@ -55,7 +60,7 @@ public class EsServiceImpl implements IEsService {
     private static Object lockObj2 = new Object();
 
     //指定该方法在对象被创建后马上调用 相当于配置文件中的init-method属性
-    public void init() {
+    private static void init() {
         logger.info("EsearchTool bean init()...");
         if (client != null) {
             return;
@@ -81,8 +86,7 @@ public class EsServiceImpl implements IEsService {
     /**
      * 获取TransportClient实例
      */
-    @Override
-    public TransportClient getClient() {
+    public static TransportClient getClient() {
         if (client == null) {
             synchronized (lockObj) {
                 init();
@@ -95,8 +99,7 @@ public class EsServiceImpl implements IEsService {
      * 插入数据，指定id的值
      * <br/> 注：如果id已存在，数据被更新
      */
-    public IndexResponse insertData(TransportClient client, String index, String type, String id,
-                                    Map<String, Object> map) {
+    public static IndexResponse insertData(TransportClient client, String index, String type, String id, Map<String, Object> map) {
         IndexResponse response = client.prepareIndex(index, type, id)
                 .setSource(map).execute().actionGet();
         return response;
@@ -105,7 +108,7 @@ public class EsServiceImpl implements IEsService {
     /**
      * 根据id查询
      */
-    public Map<String, Object> getDataById(TransportClient client, String index, String type, String id) {
+    public static Map<String, Object> getDataById(TransportClient client, String index, String type, String id) {
         GetResponse actionGet = client.prepareGet(index, type, id).execute().actionGet();
         Map<String, Object> resultMap = actionGet.getSourceAsMap();
         return resultMap;
@@ -269,5 +272,36 @@ public class EsServiceImpl implements IEsService {
             }
         }
         return bulkProcessor;
+    }
+
+    /**
+     * 删除数据，指定id的值
+     */
+    public static DeleteResponse deleteData(TransportClient client, String index, String type, String id) {
+        DeleteResponse response = client.prepareDelete(index, type, id).get();
+        return response;
+    }
+
+    /**
+     * 更新数据，指定id的值
+     */
+    public static IndexResponse updateData(TransportClient client, String index, String type, String id, Map<String, Object> map) {
+        return insertData(client, index, type, id, map);
+    }
+
+    /**
+     * 更新数据，指定id的值
+     */
+    public static UpdateResponse updateDataV2(TransportClient client, String index, String type, String id) throws ExecutionException, InterruptedException, IOException {
+        IndexRequest request = new IndexRequest(index, type, id).source(
+                XContentFactory.jsonBuilder().startObject()
+                        .field("name", "XuUpdate").endObject()
+        );
+        UpdateRequest updateRequest = new UpdateRequest(index, type, id).doc(
+                XContentFactory.jsonBuilder().startObject()
+                        .field("name", "XuUpdate2").endObject()
+        ).upsert(request);
+        UpdateResponse updateResponse = client.update(updateRequest).get();
+        return updateResponse;
     }
 }

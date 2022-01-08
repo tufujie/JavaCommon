@@ -24,9 +24,5 @@ public class BasicConstant {
      * 15分钟的秒数
      */
     public static final Long FIFTY_MINUTE = 900L;
-
-    // 集群地址（多个机器ip的话用,隔开）
-    public static final String ES_SERVER_IPS = "127.0.0.1:9300";
-    // 集群名称
-    public static final String ES_CLUSTER_NAME = "elasticsearch";
+    
 }

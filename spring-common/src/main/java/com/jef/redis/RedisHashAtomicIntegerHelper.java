@@ -53,7 +53,7 @@ public class RedisHashAtomicIntegerHelper extends Number implements Serializable
 
     /**
      * @Description set expire time
-     * @author Justin Teng
+     * @author Jef
      * @date 2020/4/27
      * @param milliSeconds
      * @return void
@@ -65,7 +65,7 @@ public class RedisHashAtomicIntegerHelper extends Number implements Serializable
 
     /**
      * @Description if redis does't contains the hashKey in the redisKey, this function will set its hashValue as zero
-     * @author Justin Teng
+     * @author Jef
      * @date 2020/4/27
      * @param
      * @return void
@@ -81,7 +81,7 @@ public class RedisHashAtomicIntegerHelper extends Number implements Serializable
 
     /**
      * @Description this function will set the newValue as the hashValue of the hashKey in the redisKey
-     * @author Justin Teng
+     * @author Jef
      * @date 2020/4/27
      * @param newValue
      * @return void
@@ -92,7 +92,7 @@ public class RedisHashAtomicIntegerHelper extends Number implements Serializable
 
     /**
      * @Description get the hashValue of the hashKey in the redisKey
-     * @author Justin Teng
+     * @author Jef
      * @date 2020/4/27
      * @param
      * @return int
@@ -108,7 +108,7 @@ public class RedisHashAtomicIntegerHelper extends Number implements Serializable
 
     /**
      * @Description get and increment
-     * @author Justin Teng
+     * @author Jef
      * @date 2020/4/27
      * @param
      * @return int
@@ -119,7 +119,7 @@ public class RedisHashAtomicIntegerHelper extends Number implements Serializable
 
     /**
      * @Description get and increment
-     * @author Justin Teng
+     * @author Jef
      * @date 2020/4/27
      * @param
      * @return int

@@ -1203,7 +1203,7 @@ public class NumberUtils {
 
     /**
      * @Description 泛型求和
-     * @author Justin Teng
+     * @author Jef
      * @date 2020/4/15
      * @param num1
      * @param num2

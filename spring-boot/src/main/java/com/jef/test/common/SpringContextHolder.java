@@ -1,4 +1,4 @@
-package com.jef.common.context;
+package com.jef.test.common;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

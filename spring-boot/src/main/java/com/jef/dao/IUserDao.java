@@ -1,6 +1,7 @@
 package com.jef.dao;
 
 import com.jef.entity.User;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @create 2018/5/15 19:18
  */
 @Repository
-public interface IUserDao {
+public interface IUserDao extends IBaseDao {
 
     List<User> getAllUser();
 

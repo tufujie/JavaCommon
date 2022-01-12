@@ -2,7 +2,7 @@ package com.jef.test;
 
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.ConfigService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Apollo测试

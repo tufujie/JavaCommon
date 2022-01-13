@@ -1,24 +1,21 @@
 package com.jef.service.impl;
 
-import com.google.common.collect.Maps;
-import com.jef.annotation.NoDynamicDataSource;
+import com.jef.common.interceptor.SplitTablePlugin;
 import com.jef.dao.IOrderInfoBaseDao;
 import com.jef.dao.IOrderInfoDao;
 import com.jef.dao.IOrderProductDao;
 import com.jef.daoOne.IOrderInfoOneDao;
 import com.jef.daoTwo.IOrderInfoTwoDao;
-import com.jef.dbRouting.DbContextHolder;
 import com.jef.dbRouting.annotation.Router;
 import com.jef.entity.OrderInfo;
 import com.jef.service.IOrderInfoService;
-import com.jef.common.interceptor.SplitTablePlugin;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 订单服务，用于N中功能的测试
@@ -58,7 +55,7 @@ public class OrderInfoServiceImpl implements IOrderInfoService {
     @Override
     public List<OrderInfo> getOrderInfoBySplitTable(OrderInfo orderInfo, int startPageNum, int pageCountNum) throws Exception {
         SplitTablePlugin.setSplitRule(orderInfo.getShopId(), new String[]{"order_info"});
-        return orderInfoDao.listOrderInfo(orderInfo);
+        return orderInfoDao.listOrderInfoBySplitTable(orderInfo);
     }
 
     @Override

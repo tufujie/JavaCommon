@@ -4,7 +4,7 @@
 <mapper namespace="com.jef.dao.ISplitTableRuleDao" >
 
     <!-- 使用二级缓存 -->
-    <cache type="com.jef.redis.cache.RedisCache" />
+<!--    <cache type="com.jef.redis.cache.RedisCache" />-->
 
 
     <select id="getSplitTableRuleVoList" resultType="com.jef.entity.SplitTableRuleVo" parameterType="map">
@@ -25,7 +25,7 @@
 
     <select id="getSplitTableRuleVo" resultType="com.jef.entity.SplitTableRuleVo">
 		select FID id,FSName sufSName,FTableName tableName,FIsShopID isShopID,FShopID shopID,FActualTable actualTable
-		from t_bdc_splittablerule where FIsECID = 1
+		from t_bdc_splittablerule where FIsShopID = 1
 	</select>
 
     <select id="getTableByShopID" resultType="com.jef.entity.SplitTableRuleVo">

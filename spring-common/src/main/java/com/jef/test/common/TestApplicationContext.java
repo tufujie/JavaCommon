@@ -36,7 +36,7 @@ import java.util.Set;
 
 public class TestApplicationContext extends DefaultResourceLoader implements ApplicationContext {
 
-    private final TestApplicationContext.StubBeanFactory beanFactory = new TestApplicationContext.StubBeanFactory();
+    private final StubBeanFactory beanFactory = new StubBeanFactory();
     private final String id = ObjectUtils.identityToString(this);
     private final String displayName = ObjectUtils.identityToString(this);
     private final long startupDate = System.currentTimeMillis();

@@ -1,5 +1,10 @@
 package com.jef.common.interceptor;
 
+import com.jef.entity.SplitRule;
+import com.jef.entity.SplitTableRuleVo;
+import com.jef.entity.TableNameModifier;
+import com.jef.util.StringUtils;
+
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
@@ -7,10 +12,6 @@ import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
 import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlSchemaStatVisitor;
 import com.alibaba.druid.stat.TableStat;
 import com.alibaba.druid.util.JdbcConstants;
-import com.jef.entity.SplitRule;
-import com.jef.entity.SplitTableRuleVo;
-import com.jef.entity.TableNameModifier;
-import com.jef.util.StringUtils;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.Interceptor;
@@ -67,10 +68,11 @@ public class SplitTablePlugin implements Interceptor {
 
     /**
      * 分表规则
+     *
      * @param shopID
      * @param tableNameArr
      */
-    public static void setSplitRule(Long shopID,String[] tableNameArr){
+    public static void setSplitRule(Long shopID, String[] tableNameArr) {
         localClass.set(new SplitTableRuleVo(shopID, tableNameArr));
     }
 

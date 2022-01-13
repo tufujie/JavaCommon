@@ -265,3 +265,20 @@ insert into test_group_by values(5, 'A', '乙');
 insert into test_group_by values(6, 'B', '乙');
 insert into test_group_by values(7, 'B', '乙');
 insert into test_group_by values(8, 'B', '丙');
+
+-- 分表SQL
+CREATE TABLE `t_bdc_splittablerule` (
+`FID` varchar(32) NOT NULL COMMENT 'ID',
+`FTableName` varchar(50) DEFAULT NULL COMMENT '需要分表名称（例如：应收：order_info）',
+`FIsShopID` tinyint(1) DEFAULT '1' COMMENT '是否按店铺分表（0否 1是）',
+`FCreateTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+`FShopID` bigint(32) DEFAULT NULL COMMENT '店铺ID',
+`FSName` varchar(32) DEFAULT NULL COMMENT '按店铺分表，表后缀，随机数10位（例如：010）',
+`FShopName` varchar(255) DEFAULT NULL COMMENT '店铺名称',
+`FActualTable` varchar(64) DEFAULT NULL COMMENT '实际表名，例如：order_info_010',
+PRIMARY KEY (`FID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分表规则';
+
+-- shopID为2的使用order_info_1
+INSERT INTO all_test.t_bdc_splittablerule (FID,FTableName,FIsShopID,FCreateTime,FShopID,FSName,FShopName,FActualTable) VALUES
+    ('1','order_info',1,'2021-04-14 11:54:34',2,'1','测试店铺01','order_info_1');

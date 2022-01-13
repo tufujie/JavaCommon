@@ -1,10 +1,8 @@
-package com.jef.test;
+package com.jef.test.common;
 
+import com.jef.common.context.SpringContextHolder;
 import com.jef.entity.User;
 import com.jef.service.impl.UserServiceImpl;
-import com.jef.test.common.BaseTest;
-import com.jef.test.common.SpringContextHolder;
-import com.jef.test.common.TestBeanUtil;
 
 import org.junit.jupiter.api.Test;
 

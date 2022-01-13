@@ -1,8 +1,7 @@
 package com.jef.mongo;
 
 import com.jef.common.context.SpringContextHolder;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,7 +10,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Jef
@@ -179,35 +177,6 @@ public abstract class MongoDao <T> {
 //logger.info("[Mongo Dao ]updateInser:query(" + query + "),update(" + update + ")");
 
         mongoTemplate.upsert(query, update, getEntityClass());
-    }
-
-    /**
-     * 计算某个字段是和
-     * @param collection
-     * @param filedName
-     * @return
-     */
-    public double sumField(String collection,String filedName,Criteria criteria) {
-        double total = 0l;
-        String reduce = "function(doc, aggr){" +
-                " aggr.total += parseFloat((Math.round((doc." + filedName + ")*100)/100).toFixed(2));" +
-                " }";
-        Query query = new Query();
-        if(criteria!=null){
-            query.addCriteria(criteria);
-        }
-        DBObject result = getMongoTemplate().getCollection(collection).group(null,
-                query.getQueryObject(),
-                new BasicDBObject("total", total),
-                reduce);
-
-        Map<String,BasicDBObject> map = result.toMap();
-        if(map.size() > 0){
-            BasicDBObject bdbo = map.get("0");
-            if(bdbo != null && bdbo.get("total") != null)
-                total = bdbo.getDouble("total");
-        }
-        return total;
     }
 
     /**

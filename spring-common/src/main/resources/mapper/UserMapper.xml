@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jef.dao.IUserDao">
-    <cache type="com.jef.redis.cache.RedisCache" />
+<!--    <cache type="com.jef.redis.cache.RedisCache" />-->
 
     <select id="selectByPrimaryKey" resultType="com.jef.entity.User" parameterType="java.lang.Long">
         select * from user

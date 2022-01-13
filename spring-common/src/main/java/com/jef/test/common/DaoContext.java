@@ -1,5 +1,6 @@
 package com.jef.test.common;
 
+import com.jef.common.context.SpringContextHolder;
 import com.jef.dao.IBaseDao;
 
 import org.slf4j.Logger;

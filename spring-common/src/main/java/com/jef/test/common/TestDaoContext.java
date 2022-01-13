@@ -1,7 +1,7 @@
 package com.jef.test.common;
 
+import com.jef.common.interceptor.SplitTablePlugin;
 import com.jef.dao.IBaseDao;
-import com.jef.util.ApolloUtil;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.ImmutableSet;
@@ -19,6 +19,7 @@ import javax.sql.DataSource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
@@ -54,9 +55,14 @@ public class TestDaoContext {
 
     public DataSource getDataSource() throws Exception {
         if (dataSource == null) {
-            Map map = ApolloUtil.getApolloConfig("application", "spring.datasource");
+//            Map map = ApolloUtil.getApolloConfig("application", "spring.datasource");
             // 密码加密后放入"spring.datasource.publicKey"到application中
             //  map.put("password", ConfigTools.decrypt((String) map.get("publicKey"), (String) map.get("password")));
+            log.info("使用静态数据库配置");
+            Map map = new HashMap();
+            map.put("url", "jdbc:mysql://localhost:3306/all_test?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC");
+            map.put("username", "root");
+            map.put("password", "root");
             dataSource = getDataSource("com.alibaba.druid.pool.DruidDataSource", map);
             testTxManager = new TestTxManager(new DataSourceTransactionManager(dataSource));
         }
@@ -77,6 +83,7 @@ public class TestDaoContext {
         bean.setTypeAliasesPackage(properties.getTypeAliasesPackage());
         bean.setTypeHandlersPackage(properties.getTypeHandlersPackage());
         factory = bean.getObject();
+        factory.getConfiguration().addInterceptor(new SplitTablePlugin());
         SqlSession sqlSession = factory.openSession();
         MapperRegistry registry = factory.getConfiguration().getMapperRegistry();
         Field field = MapperRegistry.class.getDeclaredField("knownMappers");

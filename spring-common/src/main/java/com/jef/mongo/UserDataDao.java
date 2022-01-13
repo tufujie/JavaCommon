@@ -1,7 +1,7 @@
 package com.jef.mongo;
 
 import com.jef.entity.UserDataVo;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -31,8 +31,6 @@ public class UserDataDao extends MongoDao <UserDataVo>{
      */
     public List<UserDataVo> queryPage(UserDataVo vo, Integer start, Integer size) {
         Query query = prepareCondition(vo);
-        //排列
-        query.with(new Sort(new Sort.Order(Sort.Direction.ASC,"name")));
 
         return this.getPage(query,(start-1)*size,size);
     }

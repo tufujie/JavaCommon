@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jef.dao.IWorkBusinessDao">
+
+    <select id="getAllUser" resultType="java.util.Map">
+        select id, name, phone from user
+    </select>
+
+    <select id="getContract" resultType="java.util.Map">
+        select a.FID id, a.FNumber number, b.FName projectName from t_rt_rentcontract a
+        join t_bdc_project b on a.FProjectID = b.FID
+    </select>
+    <select id="getContractType" resultType="java.util.Map">
+        select a.FID id, a.FName name, b.FName projectName from t_rt_contracttype a
+        join t_bdc_project b on a.FProjectID = b.FID
+    </select>
+    <select id="getDisbursementType" resultType="java.util.Map">
+        select a.FID id, a.FName name, b.FName projectName from t_rt_disbursement_type a
+        join t_bdc_project b on a.FProjectID = b.FID
+    </select>
+</mapper>

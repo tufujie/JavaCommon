@@ -2,11 +2,8 @@ package com.jef.poi.excel;
 
 import com.jef.io.blog.FileGlobal;
 import com.jef.util.NumberUtils;
-import com.jef.util.REIDIdentifier;
-import com.jef.util.StringUtils;
 
 import com.google.common.collect.Lists;
-import org.apache.commons.io.FileUtils;
 import org.apache.poi.hpsf.DocumentSummaryInformation;
 import org.apache.poi.hpsf.SummaryInformation;
 import org.apache.poi.hssf.record.cf.FontFormatting;
@@ -35,19 +32,15 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellRangeAddressList;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Jef
@@ -804,55 +797,6 @@ public class ExcelUtil {
             }
         }
         return cellStringValue.trim();
-    }
-
-    /**
-     * 获取excel形成的SQL
-     *
-     * @author Jef
-     * @date 2022/1/6
-     */
-    public static void getExcelInsertSQL(String fileUrl, String tableName, String columnNames, String ecID, Map<String, String> mapParams) throws IOException {
-        // 创建Excel，读取文件内容
-        File file = new File(fileUrl);
-        XSSFWorkbook workbook = new XSSFWorkbook(FileUtils.openInputStream(file));
-        // 两种方式读取工作表
-        // Sheet sheet=workbook.getSheet("Sheet0");
-        Sheet sheet = workbook.getSheetAt(0);
-        //获取sheet中最后一行行号
-        int lastRowNum = sheet.getLastRowNum();
-        StringBuilder sb = new StringBuilder();
-        sb.append("insert into ").append(tableName);
-
-        sb.append("(").append(columnNames).append(") values\n");
-        for (int i = 1; i <= lastRowNum; i++) {
-            Row row = sheet.getRow(i);
-            //获取当前行最后单元格列号
-            int lastCellNum = row.getLastCellNum();
-            String tempStr = "('" + REIDIdentifier.randomEOID() + "',";
-            if (StringUtils.isNotEmpty(ecID)) {
-                tempStr += "'" + ecID + "',";
-            }
-            for (int j = 0; j < lastCellNum; j++) {
-                Cell cell = row.getCell(j);
-                String value = ExcelUtil.getValueFromCell(cell);
-                if (mapParams.containsKey(value)) {
-                    value = mapParams.get(value);
-                }
-                tempStr += "'" + value + "'";
-                if (j < lastCellNum - 1) {
-                    tempStr += ",";
-                }
-            }
-            sb.append(tempStr).append(")");
-            if (i < lastRowNum) {
-                sb.append(",");
-            } else {
-                sb.append(";");
-            }
-            sb.append("\n");
-        }
-        System.out.println(sb);
     }
 
 }

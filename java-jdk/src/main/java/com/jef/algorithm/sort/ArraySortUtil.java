@@ -24,7 +24,7 @@ public class ArraySortUtil {
      * @author Jef
      * @date 2022/1/5
      */
-    public static void swap(Integer[] array, int i, int j) {
+    public static void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
@@ -39,7 +39,7 @@ public class ArraySortUtil {
      * @author Jef
      * @date 2021/4/13
      */
-    public static Integer[] bubbleSort(Integer[] array) {
+    public static int[] bubbleSort(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = i + 1; j < array.length; j++) {
                 if (array[i] > array[j]) {
@@ -68,12 +68,13 @@ public class ArraySortUtil {
     /**
      * 选择排序（假定某个位置的值是最小值）
      * 性能一般
+     *
+     * @param array
+     * @return java.lang.int[]
      * @author Jef
      * @date 2021/4/13
-     * @param array
-     * @return java.lang.Integer[]
      */
-    public static Integer[] simpleChooseSort(Integer[] array) {
+    public static int[] simpleChooseSort(int[] array) {
         // 简单的选择排序
         for (int i = 0; i < array.length; i++) {
             int min = array[i];
@@ -97,11 +98,11 @@ public class ArraySortUtil {
      * 选择排序
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2022/1/5
      */
-    public static Integer[] selectionSort(Integer[] array) {
+    public static int[] selectionSort(int[] array) {
         int min;
         int len = array.length;
         for (int i = 0; i < len - 1; i++) {
@@ -122,11 +123,11 @@ public class ArraySortUtil {
      * 选择排序
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2022/1/5
      */
-    public static Integer[] selectionSortV2(Integer[] array) {
+    public static int[] selectionSortV2(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             int min = i;
             for (int j = i + 1; j < array.length; j++) {
@@ -151,20 +152,20 @@ public class ArraySortUtil {
      * 简单, 但是不用,浪费内存
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2021/4/13
      */
-    public static Integer[] bucketSort(Integer[] array) {
+    public static int[] bucketSort(int[] array) {
         Integer maxValue = 0;
         for (Integer arr : array) {
             if (arr > maxValue) {
                 maxValue = arr;
             }
         }
-        Integer[] arrayTwo = new Integer[maxValue + 1];
-        for (Integer i = 0; i < array.length; i++) {
-            Integer key = array[i];
+        int[] arrayTwo = new int[maxValue + 1];
+        for (int i = 0; i < array.length; i++) {
+            int key = array[i];
             arrayTwo[key] = 1;
         }
         return arrayTwo;
@@ -200,7 +201,7 @@ public class ArraySortUtil {
         }
     }
 
-    public static Integer[] bucketsort(Integer[] array, int sum) {
+    public static int[] bucketsort(int[] array, int sum) {
         // 遍历得到数组中的最大值与最小值
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
@@ -225,7 +226,7 @@ public class ArraySortUtil {
         }
         System.out.println();
         // 顺序遍历各个桶,得出我们 已经排序号的序列
-        Integer[] arrayResult = new Integer[array.length];
+        int[] arrayResult = new int[array.length];
         int k = 0;
         for (int i = 0; i < list.length; i++) {
             if (list[i] != null) {
@@ -241,11 +242,11 @@ public class ArraySortUtil {
      * 插入排序
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2021/4/13
      */
-    public static Integer[] directInsertSort(Integer[] array) {
+    public static int[] directInsertSort(int[] array) {
         // 直接插入排序
         for (int i = 1; i < array.length; i++) {
             // 待插入元素
@@ -271,11 +272,11 @@ public class ArraySortUtil {
      * 插入排序
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2021/4/13
      */
-    public static Integer[] insertSort(Integer[] array) {
+    public static int[] insertSort(int[] array) {
         int n = array.length;
         for (int i = 1; i < n; i++) {
             if (array[i] < array[i - 1]) {
@@ -299,11 +300,11 @@ public class ArraySortUtil {
      * 希尔排序（性能最好的排序）
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2021/4/13
      */
-    public static Integer[] shellSort(Integer[] array) {
+    public static int[] shellSort(int[] array) {
         // 分组间隔设置
         int d = array.length;
         while (true) {
@@ -329,11 +330,11 @@ public class ArraySortUtil {
      * 希尔排序（性能最好的排序）
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2021/4/13
      */
-    public static Integer[] shellSortV2(Integer[] array) {
+    public static int[] shellSortV2(int[] array) {
         // 规定步长
         for (int step = array.length / 2; step > 0; step /= 2) {
             System.out.println("步长为" + step + "的分组排序:");
@@ -367,11 +368,11 @@ public class ArraySortUtil {
      * 二分插入排序
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2021/5/30
      */
-    public static Integer[] binaryInsertSrot(Integer[] array) {
+    public static int[] binaryInsertSrot(int[] array) {
         for (int i = 0; i < array.length; i++) {
             int temp = array[i];
             int left = 0;
@@ -401,11 +402,11 @@ public class ArraySortUtil {
      * @param array
      * @param left
      * @param right
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2022/1/5
      */
-    public static Integer[] quickSort(Integer[] array, int left, int right) {
+    public static int[] quickSort(int[] array, int left, int right) {
         if (left < right) {
             int key = array[left];
             int i = left;
@@ -439,11 +440,11 @@ public class ArraySortUtil {
      * 计数排序
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2022/1/5
      */
-    public static Integer[] countSort(Integer[] array) {
+    public static int[] countSort(int[] array) {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
         // 先找出数组中的最大值与最小值
@@ -461,7 +462,7 @@ public class ArraySortUtil {
         }
         int begin = 0;
         // 创建一个新的数组来存储已经排序完成的结果
-        Integer[] arrayTemp = new Integer[array.length];
+        int[] arrayTemp = new int[array.length];
         for (int i = 0; i < figure.length; i++) {
             // 循环将数据pop出来
             if (figure[i] != 0) {
@@ -482,11 +483,11 @@ public class ArraySortUtil {
      * 归并排序
      *
      * @param array
-     * @return java.lang.Integer[]
+     * @return java.lang.int[]
      * @author Jef
      * @date 2022/1/5
      */
-    public static Integer[] mergeSort(Integer[] array) {
+    public static int[] mergeSort(int[] array) {
         //分裂之后的数组如果只有1个元素的话,
         //那么就说明可以开始合并的过程了,所以直接返回.
         if (array.length < 2) {
@@ -494,13 +495,13 @@ public class ArraySortUtil {
         }
         int middle = array.length / 2;
         //截取左右两个序列
-        Integer[] left = Arrays.copyOfRange(array, 0, middle);
-        Integer[] right = Arrays.copyOfRange(array, middle, array.length);
+        int[] left = Arrays.copyOfRange(array, 0, middle);
+        int[] right = Arrays.copyOfRange(array, middle, array.length);
         return mergeSort(mergeSort(left), mergeSort(right));
     }
 
-    public static Integer[] mergeSort(Integer[] left, Integer[] right) {
-        Integer[] array = new Integer[left.length + right.length];
+    public static int[] mergeSort(int[] left, int[] right) {
+        int[] array = new int[left.length + right.length];
         int i = 0, j = 0, k = 0;
         // 注意终止条件是&&,只要有一个不满足,循环就结束
         while (i < left.length && j < right.length) {
@@ -529,7 +530,7 @@ public class ArraySortUtil {
      * @author Jef
      * @date 2022/1/5
      */
-    public static void buildbigheap(Integer[] array, int end) {
+    public static void buildbigheap(int[] array, int end) {
         // 从最后一个非叶子节点开始构建,依照从下往上,从右往左的顺序
         for (int i = end / 2; i >= 0; i--) {
             int left = 2 * i + 1;
@@ -553,7 +554,7 @@ public class ArraySortUtil {
      * @author Jef
      * @date 2022/1/5
      */
-    public static Integer[] buildbigheap(Integer[] array) {
+    public static int[] buildbigheap(int[] array) {
         // 第一次构建大根堆
         ArraySortUtil.buildbigheap(array, array.length);
         for (int j = array.length - 1; j > 0; j--) {
@@ -568,7 +569,7 @@ public class ArraySortUtil {
     }
 
     //将待排序的数组构建成大根堆
-    public static void buildbigheapV2(Integer[] array, int end) {
+    public static void buildbigheapV2(int[] array, int end) {
         // 从最后一个非叶子节点开始构建,依照从下往上,从右往左的顺序
         for (int i = end / 2; i >= 0; i--) {
             adjustnode(i, end, array);
@@ -585,7 +586,7 @@ public class ArraySortUtil {
      * @author Jef
      * @date 2022/1/5
      */
-    public static void adjustnode(int i, int end, Integer[] array) {
+    public static void adjustnode(int i, int end, int[] array) {
         int left = 2 * i + 1;
         int right = 2 * i + 2;
         int big = i;
@@ -609,7 +610,7 @@ public class ArraySortUtil {
      * @author Jef
      * @date 2022/1/5
      */
-    public static Integer[] buildbigheapV2(Integer[] array) {
+    public static int[] buildbigheapV2(int[] array) {
         //第一次构建大根堆
         buildbigheapV2(array, array.length);
         for (int j = array.length - 1; j > 0; j--) {
@@ -634,7 +635,7 @@ public class ArraySortUtil {
      * @author Jef
      * @date 2022/1/5
      */
-    public static void merge(ArrayList<Integer> list[], Integer[] array) {
+    public static void merge(ArrayList<Integer> list[], int[] array) {
         int k = 0;
         for (int i = 0; i < list.length; i++) {
             if (list[i] != null) {
@@ -650,7 +651,7 @@ public class ArraySortUtil {
     }
 
     //将所有的元素分散到各个链表之中
-    public static void split(ArrayList<Integer> list[], Integer[] array, int k) {
+    public static void split(ArrayList<Integer> list[], int[] array, int k) {
         for (int j = 0; j < array.length; j++) {
             list[array[j] / k % 10].add(array[j]);
         }
@@ -669,7 +670,7 @@ public class ArraySortUtil {
      * @author Jef
      * @date 2022/1/5
      */
-    public static Integer[] radixSort(Integer[] array) {
+    public static int[] radixSort(int[] array) {
         ArrayList<Integer> list[] = new ArrayList[10];
         for (int i = 0; i < 10; i++) {
             list[i] = new ArrayList<Integer>();

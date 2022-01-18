@@ -7,7 +7,6 @@ import com.google.common.collect.Lists;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -92,18 +91,23 @@ public class ListSortUtil<E> {
 
     /**
      * 添加并排序
-     * @author Jef
-     * @date 2021/4/13
+     *
      * @param
      * @return void
+     * @author Jef
+     * @date 2021/4/13
      */
-    public static List<Integer> addAndSortV2(List<Integer> listOne, List<Integer> listTwo) {
+    public static int[] addAndSortV2(List<Integer> listOne, List<Integer> listTwo) {
         List<Integer> resultListTemp = Lists.newArrayList();
         resultListTemp.addAll(listOne);
         resultListTemp.addAll(listTwo);
-        Integer[] array = resultListTemp.toArray(new Integer[resultListTemp.size()]);
+        int[] array = new int[resultListTemp.size()];
+        int i = 0;
+        for (Integer temp : resultListTemp) {
+            array[i++] = temp;
+        }
         ArraySortUtil.bubbleSort(array);
-        return new ArrayList<>(Arrays.asList(array));
+        return array;
     }
 
     /**

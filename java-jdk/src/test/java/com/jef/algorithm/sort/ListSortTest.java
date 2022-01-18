@@ -1,7 +1,9 @@
-package com.jef.sorted;
+package com.jef.algorithm.sort;
 
 import com.jef.util.ListSortUtil;
+
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,12 +26,11 @@ public class ListSortTest {
         listTwo.add(3);
         List<Integer> resultList = ListSortUtil.addAndSort(listOne, listTwo);
         System.out.println(resultList);
-        List<Integer> resultListV2 = ListSortUtil.addAndSortV2(listOne, listTwo);
+        int[] resultListV2 = ListSortUtil.addAndSortV2(listOne, listTwo);
         System.out.println(resultListV2);
         Set<Integer> resultSetV3 = ListSortUtil.addAndSortV3(listOne, listTwo);
         System.out.println(resultSetV3);
     }
-
 
 
 }

@@ -11,18 +11,18 @@ public class PrintUtil {
     /**
      * 循环打印数组
      */
-    public static void printArray(Integer[] array) {
+    public static void printArray(int[] array) {
         printArray(array, null);
     }
 
     /**
      * 循环打印数组
      */
-    public static void printArray(Integer[] array, String message) {
+    public static void printArray(int[] array, String message) {
         if (StringUtils.isNotEmpty(message)) {
             System.out.println(message);
         }
-        for (Integer a : array) {
+        for (int a : array) {
             System.out.print(a + " ");
         }
         System.out.println();

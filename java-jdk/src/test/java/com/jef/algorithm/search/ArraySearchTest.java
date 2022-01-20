@@ -43,4 +43,14 @@ public class ArraySearchTest {
         PrintUtil.printf("搜索结果=%s", index);
     }
 
+    /**
+     * 输出：4
+     */
+    @Test
+    public void testFibonacciSearch() {
+        int[] sortedArray = ArraySortUtil.bubbleSort(BasicConstant.INT_ARRAY);
+        int index = ArraySearchUtil.fibonacciSearch(sortedArray, 5);
+        PrintUtil.printf("搜索结果=%s", index);
+    }
+
 }

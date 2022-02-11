@@ -69,16 +69,16 @@ public class ObjectCacheTest {
 
     @Test
     public void testCheckCacheExistAndNotExpire() throws InterruptedException {
-        boolean cacheExistAndNotExpire = ObjectCache.checkCacheExistAndNotExpire(BasicConstant.STR_ONE, BasicConstant.USER_NAME, 10000);
-        // 没有
-        Assertions.assertTrue(!cacheExistAndNotExpire);
-        // 有
-        cacheExistAndNotExpire = ObjectCache.checkCacheExistAndNotExpire(BasicConstant.STR_ONE, BasicConstant.USER_NAME, 10000);
+        String id = "test", key = BasicConstant.USER_NAME_KEY + id;
+        boolean cacheExistAndNotExpire = ObjectCache.checkCacheExistAndNotExpire(key, id, 2000);
+        Assertions.assertFalse(cacheExistAndNotExpire);
+        // 二次进入，有缓存，为true，此时可以用来防止二次进入
+        cacheExistAndNotExpire = ObjectCache.checkCacheExistAndNotExpire(key, id, 2000);
         Assertions.assertTrue(cacheExistAndNotExpire);
-        Thread.sleep(10000);
-        // 没有
-        cacheExistAndNotExpire = ObjectCache.checkCacheExistAndNotExpire(BasicConstant.STR_ONE, BasicConstant.USER_NAME, 10000);
-        Assertions.assertTrue(!cacheExistAndNotExpire);
+        Thread.sleep(3000);
+        // 缓存过期
+        cacheExistAndNotExpire = ObjectCache.checkCacheExistAndNotExpire(key, id, 2000);
+        Assertions.assertFalse(cacheExistAndNotExpire);
     }
 
 }

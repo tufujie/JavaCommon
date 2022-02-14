@@ -11,6 +11,8 @@ import org.springframework.util.StopWatch;
  * @date 20181228
  */
 public class ThreadUtilTest {
+    private final int count = 1000;
+
     @Test
     public void testPrintThread() {
         ThreadUtil.print(ThreadUtil.getThreads());
@@ -22,7 +24,6 @@ public class ThreadUtilTest {
      */
     @Test
     public void testNotUseThread()  {
-        Integer count = 100;
         StopWatch stopWatchTwo = new StopWatch();
         stopWatchTwo.start();
         for (int num = count; num > 0; num--) {
@@ -38,7 +39,6 @@ public class ThreadUtilTest {
      */
     @Test
     public void testUseThread() {
-        Integer count = 100;
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         for (int num = count; num > 0; num--) {
@@ -57,7 +57,6 @@ public class ThreadUtilTest {
      */
     @Test
     public void testUseThreadTwo() {
-        Integer count = 100;
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         for (int num = count; num > 0; num--) {
@@ -82,7 +81,6 @@ public class ThreadUtilTest {
      */
     @Test
     public void testUseThreadThree() {
-        Integer count = 100;
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         for (int num = count; num > 0; num--) {
@@ -94,7 +92,7 @@ public class ThreadUtilTest {
 
                 }
             };
-            ThreadUtil.getInstance().submit(runnable, "测试");
+            ThreadUtil.getInstance("测试").submit(runnable, "测试");
         }
         stopWatch.stop();
         System.out.println("使用线程执行时间" + stopWatch.getTotalTimeSeconds() + "s");

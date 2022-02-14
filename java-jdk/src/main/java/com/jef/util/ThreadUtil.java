@@ -23,17 +23,26 @@ import java.util.concurrent.TimeUnit;
 public class ThreadUtil {
     private static ThreadUtil threadUtil = null;
 
-    static LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue<Runnable>(1024);
+    static LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue<Runnable>(50);
+    private ThreadPoolExecutor threadPoolExecutor;
+    private ThreadPoolTaskExecutor asyncServiceExecutor;
+    private static ThreadPoolExecutor threadPoolExecutorV2;
+
+    ThreadUtil(String targetName) {
+        asyncServiceExecutor = createExecutor(50, 200, 50, targetName);
+        threadPoolExecutor = asyncServiceExecutor.getThreadPoolExecutor();
+    }
 
     /**
      * 获取系统线程组
+     *
      * @return
      */
     public static ThreadGroup getSystemThreadGroup() {
         ThreadGroup systemThreadGroup;
         ThreadGroup parentThreadGroup;
         systemThreadGroup = Thread.currentThread().getThreadGroup();
-        while((parentThreadGroup = systemThreadGroup.getParent()) != null) {
+        while ((parentThreadGroup = systemThreadGroup.getParent()) != null) {
             systemThreadGroup = parentThreadGroup;
         }
         return systemThreadGroup;
@@ -128,15 +137,15 @@ public class ThreadUtil {
 
     /**
      * 初始化线程
+     *
      * @param targetName
      * @return
      */
     private static ThreadPoolExecutor initThreadPool(String targetName) {
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
                 .setNameFormat(targetName + "-pool-%d").build();
-        return new ThreadPoolExecutor(5, 200,
-                0L, TimeUnit.MILLISECONDS,
-                linkedBlockingQueue, namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+        return new ThreadPoolExecutor(10, 50,
+                20L, TimeUnit.MILLISECONDS, linkedBlockingQueue, namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
     }
 
     /**
@@ -152,6 +161,7 @@ public class ThreadUtil {
 
     /**
      * 初始化线程方式2
+     *
      * @param targetName
      * @return
      */
@@ -159,38 +169,33 @@ public class ThreadUtil {
         return new ScheduledThreadPoolExecutor(1, new BasicThreadFactory.Builder().namingPattern(targetName + "-pool-%d").daemon(true).build());
     }
 
-    private ThreadPoolTaskExecutor asyncServiceExecutor;
-    private ThreadPoolExecutor threadPoolExecutor;
-
-    ThreadUtil() {
-        asyncServiceExecutor = createExecutor(50, 5, 300);
-        threadPoolExecutor = asyncServiceExecutor.getThreadPoolExecutor();
-    }
-
-    public static ThreadUtil getInstance() {
-        if (threadUtil == null ) {
-            threadUtil = new ThreadUtil();
+    public static ThreadUtil getInstance(String targetName) {
+        if (threadUtil == null) {
+            threadUtil = new ThreadUtil(targetName);
         }
         return threadUtil;
     }
 
-    public static ThreadPoolTaskExecutor createExecutor(int maxPoolSize, int keepAliveSeconds, int queueCapacity) {
+    public static ThreadPoolTaskExecutor createExecutor(int maxPoolSize, int keepAliveSeconds, int queueCapacity, String targetName) {
         System.out.println("create threadPoolExecutor......");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        //配置核心线程数
+        // 配置核心线程数
         executor.setCorePoolSize(Runtime.getRuntime().availableProcessors() * 2 + 1);
         // executor.setCorePoolSize(10);
-        //配置最大线程数
+        // 配置最大线程数，一定要大于等于自己创建的队列数量
         executor.setMaxPoolSize(maxPoolSize);
-        //线程池维护线程所允许的空闲时间
+        // 线程池维护线程所允许的空闲时间
         executor.setKeepAliveSeconds(keepAliveSeconds);
-        //配置队列大小
+        // 配置队列大小，>=mainExecutor.maxSize
         executor.setQueueCapacity(queueCapacity);
         // rejection-policy：当pool已经达到max size的时候，如何处理新任务
         // CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
         // AbortPolicy: 直接拒绝执行任务
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
-        executor.setThreadNamePrefix("aysnc_thread_");
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat(targetName + "-pool-%d").build();
+        executor.setThreadFactory(namedThreadFactory);
+        // 线程名字前缀
+        executor.setThreadNamePrefix(targetName);
         //执行初始化
         executor.initialize();
         return executor;

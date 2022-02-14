@@ -3,6 +3,7 @@ package com.jef.business;
 import com.jef.util.ThreadUtil;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * 模拟实际业务
@@ -46,10 +47,22 @@ public class BusinessDemo {
     public static void taskOfDemo(int num, String useType) {
         // 具体的业务任务开始
         int sum = 0;
-        for(int i = num; i > 0; i--) {
+        for (int i = num; i > 0; i--) {
             sum += i;
         }
         System.out.println(useType + " end, num=" + num + ", sum=" + sum);
         // 具体的业务任务结束
+    }
+
+    /**
+     * 业务处理
+     *
+     * @param param 请求参数
+     * @author Jef
+     * @date 2022/2/14
+     */
+    public void handlerBusiness(Map param) throws Exception {
+        String id = (String) param.get("id");
+        System.out.println("业务处理id=" + id);
     }
 }

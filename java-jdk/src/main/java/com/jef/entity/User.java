@@ -1,7 +1,8 @@
 package com.jef.entity;
 
-import com.google.common.collect.Lists;
 import com.jef.util.DateTimeUtil;
+
+import com.google.common.collect.Lists;
 import org.apache.solr.client.solrj.beans.Field;
 
 import java.io.Serializable;
@@ -59,6 +60,11 @@ public class User implements Serializable {
     private boolean admin;
 
     List<OrderInfo> orderInfos = Lists.newArrayList();
+
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
 
     public User(String name, String phone, Integer age, Date createTime) {
         this.name = name;

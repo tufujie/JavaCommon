@@ -24,7 +24,6 @@ public class MyBusinessCallable implements Callable<Object> {
      */
     @Override
     public Object call() throws Exception {
-        BusinessDemo.taskNoReturn(taskNum);
-        return taskNum + "end";
+        return BusinessDemo.taskHasReturn(taskNum, "Callable");
     }
 }

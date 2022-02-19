@@ -59,8 +59,8 @@ public class BusinessDemo {
      *
      * @param useType 使用方式
      */
-    public static void taskHasReturn(String useType) {
-        taskHasReturn(5, useType);
+    public static int taskHasReturn(String useType) {
+        return taskHasReturn(5, useType);
     }
 
     /**

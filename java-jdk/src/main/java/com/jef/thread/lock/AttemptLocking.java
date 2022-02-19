@@ -10,12 +10,13 @@ public class AttemptLocking {
      * 尝试去获取琐，无设置时间
      */
     public void untimed() {
-        boolean captured = lock.tryLock();
+        boolean locked = lock.tryLock();
         try {
-            System.out.println("tryLock(): " + captured);
+            System.out.println("tryLock(): " + locked);
         } finally {
-            if(captured)
+            if (locked) {
                 lock.unlock();
+            }
         }
     }
 
@@ -23,17 +24,18 @@ public class AttemptLocking {
      * 尝试去获取琐，设置时间
      */
     public void timed() {
-        boolean captured = false;
+        boolean locked = false;
         try {
-            captured = lock.tryLock(2, TimeUnit.SECONDS);
+            locked = lock.tryLock(2, TimeUnit.SECONDS);
         } catch(InterruptedException e) {
             throw new RuntimeException(e);
         }
         try {
-            System.out.println("tryLock(2, TimeUnit.SECONDS): " + captured);
+            System.out.println("tryLock(2, TimeUnit.SECONDS): " + locked);
         } finally {
-            if(captured)
+            if (locked) {
                 lock.unlock();
+            }
         }
     }
     public static void main(String[] args) {
@@ -42,7 +44,11 @@ public class AttemptLocking {
         al.timed();   // true
         // 创建一个分开的任务去获取lock
         new Thread() {
-            { setDaemon(true); }
+            {
+                setDaemon(true);
+            }
+
+            @Override
             public void run() {
                 al.lock.lock();
                 System.out.println("acquired");

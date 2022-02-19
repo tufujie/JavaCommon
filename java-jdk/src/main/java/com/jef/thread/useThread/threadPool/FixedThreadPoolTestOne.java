@@ -29,11 +29,11 @@ public class FixedThreadPoolTestOne {
         ExecutorService pool = Executors.newFixedThreadPool(taskSize);
         // 创建多个有返回值的任务
         for (int i = 1; i <= taskSize; i++) {
-            Callable c = new MyBusinessCallable(i);
+            Callable callable = new MyBusinessCallable(i);
             // 执行任务并获取Future对象
             // 从Future对象上获取任务的返回值，并输出到控制台
-            Future f = pool.submit(c);
-            System.out.println(">>>" + f.get().toString());
+            Future f = pool.submit(callable);
+            System.out.println("Future.get()=" + f.get().toString());
         }
         // 关闭线程池
         pool.shutdown();

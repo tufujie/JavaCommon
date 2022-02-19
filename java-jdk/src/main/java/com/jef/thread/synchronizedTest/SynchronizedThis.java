@@ -12,6 +12,14 @@ public class SynchronizedThis implements Runnable {
 
     private String name;
 
+    @Override
+    public void run() {
+        this.name = "test";
+        synchronized (this) {
+            BusinessDemo.taskHasReturn("SynchronizedClass");
+        }
+    }
+
     public static void main(String[] args) {
         Thread t1 = new Thread(st);
         Thread t2 = new Thread(st);
@@ -22,13 +30,5 @@ public class SynchronizedThis implements Runnable {
         }
         System.out.println("运行完成");
 
-    }
-
-    @Override
-    public void run() {
-        this.name = "test";
-        synchronized (this) {
-            BusinessDemo.taskHasReturn("SynchronizedClass");
-        }
     }
 }

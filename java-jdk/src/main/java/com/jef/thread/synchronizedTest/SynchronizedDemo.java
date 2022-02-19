@@ -8,10 +8,10 @@ import java.util.ArrayList;
  * @author Jef
  * @date 2019/1/31
  */
-public class InsertDemo {
+public class SynchronizedDemo {
 
     public static void main(String[] args) {
-        final InsertData insertData = new InsertData();
+        final SynchronizedInsertData insertData = new SynchronizedInsertData();
 
         new Thread() {
             @Override
@@ -74,7 +74,7 @@ public class InsertDemo {
     }
 }
 
-class InsertData {
+class SynchronizedInsertData {
     private static Integer insertNum = 20;
     private ArrayList<Integer> arrayList = new ArrayList<Integer>();
     private static Object object = new Object();
@@ -102,6 +102,7 @@ class InsertData {
             }
         }
     }
+
     public void insertSynchronizedThis(Thread thread) {
         synchronized (this) {
             for (int i = 0; i < insertNum; i++) {

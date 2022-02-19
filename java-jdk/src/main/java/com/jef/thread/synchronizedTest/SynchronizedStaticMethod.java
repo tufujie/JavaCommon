@@ -1,4 +1,7 @@
 package com.jef.thread.synchronizedTest;
+
+import com.jef.business.BusinessDemo;
+
 /**
  * 类锁：synchronized加在static方法上
  *
@@ -16,7 +19,7 @@ public class SynchronizedStaticMethod implements Runnable {
         t2.start();
         t1.join();
         t2.join();
-        System.out.println("run over");
+        System.out.println("运行完成");
     }
 
     @Override
@@ -25,13 +28,6 @@ public class SynchronizedStaticMethod implements Runnable {
     }
 
     public static synchronized void method() {
-        System.out.println("开始执行:" + Thread.currentThread().getName());
-        try {
-            // 模拟执行内容
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("执行结束:" + Thread.currentThread().getName());
+        BusinessDemo.taskHasReturn("SynchronizedMethod");
     }
 }

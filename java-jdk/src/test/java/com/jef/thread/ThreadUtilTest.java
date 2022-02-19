@@ -1,6 +1,7 @@
 package com.jef.thread;
 
 import com.jef.business.BusinessDemo;
+import com.jef.thread.useThread.ImplRunnableTest;
 import com.jef.util.ThreadUtil;
 
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class ThreadUtilTest {
 
     @Test
     public void testPrintThread() {
-        ThreadUtil.print(ThreadUtil.getThreads());
+        ThreadUtil.printThreadName(ThreadUtil.getThreads());
     }
 
     /**
@@ -27,7 +28,7 @@ public class ThreadUtilTest {
         StopWatch stopWatchTwo = new StopWatch();
         stopWatchTwo.start();
         for (int num = count; num > 0; num--) {
-            BusinessDemo.taskOfDemo(num, "直接for循环调用");
+            BusinessDemo.taskHasReturn(num, "直接for循环调用");
         }
         stopWatchTwo.stop();
         System.out.println("直接for循环调用" + stopWatchTwo.getTotalTimeSeconds() + "s");
@@ -43,7 +44,7 @@ public class ThreadUtilTest {
         stopWatch.start();
         for (int num = count; num > 0; num--) {
             // for循环里执行线程
-            Runnable runnable = new RunableImpl(num);
+            Runnable runnable = new ImplRunnableTest(num);
             ThreadUtil.executeThread("测试", runnable);
         }
         stopWatch.stop();
@@ -63,7 +64,7 @@ public class ThreadUtilTest {
             int finalNum = num;
             Runnable runnable = () -> {
                 try {
-                    BusinessDemo.taskOfDemo(finalNum, "使用线程");
+                    BusinessDemo.taskHasReturn(finalNum, "使用线程");
                 } catch (Exception e) {
 
                 }
@@ -87,7 +88,7 @@ public class ThreadUtilTest {
             int finalNum = num;
             Runnable runnable = () -> {
                 try {
-                    BusinessDemo.taskOfDemo(finalNum, "使用线程");
+                    BusinessDemo.taskHasReturn(finalNum, "使用线程");
                 } catch (Exception e) {
 
                 }

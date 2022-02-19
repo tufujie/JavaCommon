@@ -15,7 +15,7 @@ public class SynchronizedSceneSeven implements Runnable {
         t2.start();
         t1.join();
         t2.join();
-        System.out.println("run over");
+        System.out.println("运行完成");
     }
 
     @Override

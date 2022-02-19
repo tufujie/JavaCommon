@@ -10,21 +10,30 @@ import java.util.concurrent.FutureTask;
 /**
  * 实现Callable接口通过FutureTask包装器来创建Thread线程
  * Callable接口（也只有一个方法）定义如下：
+ *
  * @author Jef
  * @date 20181228
  */
-public class CallableTestTwo<V> implements Callable<V> {
+public class CallableTestTwo<V> implements Callable {
+
     private Integer taskNum;
+
     public CallableTestTwo(Integer taskNum) {
         this.taskNum = taskNum;
     }
+
+    @Override
+    public Integer call() throws Exception {
+        return BusinessDemo.taskHasReturn(taskNum, "Callable FutureTask");
+    }
+
     public static void main(String[] args) {
         Date dateStart = new Date();
         int taskNum = 3;
         for (int i = 1; i <= taskNum; i++) {
-            Callable<String> oneCallable = new CallableTestTwo<String>(i);
+            Callable<Integer> oneCallable = new CallableTestTwo<Integer>(i);
             // 由Callable<Integer>创建一个FutureTask<Integer>对象：
-            FutureTask<String> oneTask = new FutureTask<String>(oneCallable);
+            FutureTask<Integer> oneTask = new FutureTask<Integer>(oneCallable);
             // 注释：FutureTask<Integer>是一个包装器，它通过接受Callable<Integer>来创建，它同时实现了Future和Runnable接口。
             // 由FutureTask<Integer>创建一个Thread对象：
             Thread oneThread = new Thread(oneTask);
@@ -33,12 +42,5 @@ public class CallableTestTwo<V> implements Callable<V> {
         }
         Date dateEnd = new Date();
         TimeUtil.printAllUseTime(dateStart, dateEnd);
-    }
-
-
-    @Override
-    public V call() throws Exception {
-        new BusinessDemo().test(taskNum);
-        return null;
     }
 }

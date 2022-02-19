@@ -14,12 +14,15 @@ public class EvenChecker implements Runnable {
     /**
      * 把非偶数（奇数）输出来
      */
+    @Override
     public void run() {
         while (!generator.isCanceled()) {
             int val = generator.next();
-            if(val % 2 != 0) {
-                System.out.println(val + " not even" );
+            if (val % 2 != 0) {
+                System.out.println(val + " 不是偶数");
                 generator.cancel();
+            } else {
+                System.out.println(val + " 是偶数");
             }
         }
     }
@@ -30,10 +33,11 @@ public class EvenChecker implements Runnable {
      * @param count
      */
     public static void test(IntGenerator generator, int count) {
-        System.out.println("Press Control-C to existy");
+        System.out.println("Press Control-C to exit");
         ExecutorService exec = Executors.newCachedThreadPool();
-        for(int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++) {
             exec.execute(new EvenChecker(generator, count));
+        }
         exec.shutdown();
     }
 

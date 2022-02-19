@@ -1,7 +1,10 @@
 package com.jef.thread.synchronizedTest;
 
+import com.jef.business.BusinessDemo;
+
 /**
  * 两个线程同时访问两个对象的相同的static的synchronized方法
+ *
  * @author Jef
  * @date 2020/7/23
  */
@@ -16,7 +19,7 @@ public class SynchronizedSceneThree implements Runnable {
         t2.start();
         t1.join();
         t2.join();
-        System.out.println("run over");
+        System.out.println("运行结束");
     }
 
     @Override
@@ -25,13 +28,6 @@ public class SynchronizedSceneThree implements Runnable {
     }
 
     public synchronized static void method() {
-        System.out.println("开始执行:" + Thread.currentThread().getName());
-        try {
-            // 模拟执行内容
-            Thread.sleep(1000);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        System.out.println("执行结束:" + Thread.currentThread().getName());
+        BusinessDemo.taskHasReturn("SynchronizedMethod");
     }
 }

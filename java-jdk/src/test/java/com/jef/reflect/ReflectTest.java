@@ -100,7 +100,7 @@ public class ReflectTest {
         map.put("id", BasicConstant.FIRST_ORDER_ID);
         methodMap.invoke(businessDemo, map);
         // 方法参数是各种类型
-        Method methodManyKindType = clazz.getDeclaredMethod("taskOfDemo", int.class, String.class);
+        Method methodManyKindType = clazz.getDeclaredMethod("taskHasReturn", int.class, String.class);
         methodManyKindType.invoke(businessDemo, 10, "利用反射执行方法测试");
     }
 }

@@ -1,20 +1,12 @@
 package com.jef.thread.synchronizedTest;
 
 /**
- * 目前进入到被synchronized修饰的方法，这个方法里边调用了非synchronized方法，是线程安全的吗？
+ * 进入到被synchronized修饰的方法，这个方法里边调用了非synchronized方法，是线程安全的吗？
+ *
  * @author Jef
  * @date 2020/7/23
  */
 public class SynchronizedSceneEight {
-    public static void main(String[] args) {
-        new Thread(() -> {
-            method1();
-        }).start();
-
-        new Thread(() -> {
-            method1();
-        }).start();
-    }
 
     public static synchronized void method1() {
         method2();
@@ -28,5 +20,15 @@ public class SynchronizedSceneEight {
             e.printStackTrace();
         }
         System.out.println(Thread.currentThread().getName() + "结束非Synchronized方法");
+    }
+
+    public static void main(String[] args) {
+        new Thread(() -> {
+            method1();
+        }).start();
+
+        new Thread(() -> {
+            method1();
+        }).start();
     }
 }

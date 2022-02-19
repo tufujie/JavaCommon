@@ -1,6 +1,7 @@
 package com.jef.thread;
 
 import com.jef.business.BusinessDemo;
+
 import java.util.concurrent.Callable;
 
 /**
@@ -23,7 +24,7 @@ public class MyBusinessCallable implements Callable<Object> {
      */
     @Override
     public Object call() throws Exception {
-        new BusinessDemo().test(taskNum);
+        BusinessDemo.taskNoReturn(taskNum);
         return taskNum + "end";
     }
 }

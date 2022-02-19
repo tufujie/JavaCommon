@@ -64,4 +64,13 @@ public class PrintUtil {
         System.out.println();
     }
 
+    /**
+     * 打印
+     *
+     * @date 2021/12/11
+     */
+    public static void print(String str) {
+        System.out.println(str);
+    }
+
 }

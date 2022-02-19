@@ -1,4 +1,7 @@
 package com.jef.thread.synchronizedTest;
+
+import com.jef.business.BusinessDemo;
+
 /**
  * 对象锁实例: 代码块形式
  *
@@ -17,7 +20,7 @@ public class SynchronizedThis implements Runnable {
         while (t1.isAlive() || t2.isAlive()) {
 
         }
-        System.out.println("run over");
+        System.out.println("运行完成");
 
     }
 
@@ -25,14 +28,7 @@ public class SynchronizedThis implements Runnable {
     public void run() {
         this.name = "test";
         synchronized (this) {
-            System.out.println("开始执行:" + Thread.currentThread().getName());
-            try {
-                // 模拟执行内容
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            System.out.println("执行结束:" + Thread.currentThread().getName());
+            BusinessDemo.taskHasReturn("SynchronizedClass");
         }
     }
 }

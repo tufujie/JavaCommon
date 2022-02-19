@@ -1,8 +1,6 @@
-package com.jef.thread.useThread;
+package com.jef.thread.useThread.threadPool;
 
-import com.jef.business.BusinessDemo;
 import com.jef.thread.MyBusinessCallable;
-import com.jef.util.TaskUtil;
 import com.jef.util.TimeUtil;
 
 import java.util.Date;

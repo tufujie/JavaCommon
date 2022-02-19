@@ -1,7 +1,5 @@
 package com.jef.util;
 
-import com.jef.thread.RunableImpl;
-
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -52,20 +50,6 @@ public class ThreadUtil {
         System.out.println(getSystemThreadGroup());
     }
 
-    public static Thread getThread() {
-        return new Thread(new RunableImpl(2));
-    }
-
-    public static Thread[] getThreads(int n) {
-        Thread[] ta = new Thread[n];
-        for(int i=0; i<ta.length; i++)
-        {
-            ta[i] = getThread();
-            ta[i].start();
-        }
-        return ta;
-    }
-
     public static ThreadGroup[] getThreadGroup() {
         ThreadGroup stg = getSystemThreadGroup();
         int nog = stg.activeGroupCount()+1;
@@ -78,9 +62,10 @@ public class ThreadUtil {
 
     /**
      * 打印线程数据
+     *
      * @param o
      */
-    public static void print(Thread[] o) {
+    public static void printThreadName(Thread[] o) {
         System.out.println("------开始输出当前的所有线程------");
         for (Thread x : o) {
             System.out.println(x + " isAlive=" + x.isAlive() + " 线程名称=" + x.getName() + " isDaemon=" + x.isDaemon());
@@ -89,15 +74,59 @@ public class ThreadUtil {
     }
 
     /**
-     * 打印线程数据
-     * @param x
+     * 打印当前线程名称
      */
-    public static void print() {
+    public static void printThreadName() {
         System.out.println("当前线程名称=【" + Thread.currentThread().getName() + "】");
     }
 
     /**
+     * 打印当前线程优先级
+     */
+    public static void printCurrentThreadPriorty() {
+        System.out.println("当前线程名称=【" + Thread.currentThread().getName() + "】线程优先级=【" + Thread.currentThread().getPriority() + "】");
+    }
+
+    /**
+     * 打印当前线程是否后台进程
+     */
+    public static void printCurrentThreadIsDaemon() {
+        System.out.println("当前线程名称=【" + Thread.currentThread().getName() + "】是否后台进程=【" + (Thread.currentThread().isDaemon() ? "是" : "否") + "】");
+    }
+
+    /**
+     * 打印当前线程是否中断
+     */
+    public static void printCurrentThreadIsInterrupted() {
+        System.out.println("当前线程名称=【" + Thread.currentThread().getName() + "】是否中断=【" + (Thread.currentThread().isInterrupted() ? "是" : "否") + "】");
+    }
+
+    /**
+     * 打印当前线程是否中断
+     */
+    public static void printCurrentThreadIsAlive() {
+        System.out.println("当前线程名称=【" + Thread.currentThread().getName() + "】是否存活=【" + (Thread.currentThread().isAlive() ? "是" : "否") + "】");
+    }
+
+    /**
+     * 打印当前线程是否中断
+     */
+    public static void printThreadInfo(Thread thread) {
+        System.out.println("当前线程名称=【" + thread.getName() + "】是否存活=【" + (thread.isAlive() ? "是" : "否") + "】是否后台进程=【"
+                + (thread.isDaemon() ? "是" : "否") + "】是否中断=【" + (thread.isInterrupted() ? "是" : "否") + "】");
+    }
+
+
+    /**
+     * 获取当前线程名称
+     */
+    public static String getThreadName() {
+        return Thread.currentThread().getName();
+    }
+
+    /**
      * 获取所有的线程
+     *
      * @return
      */
     public static Thread[] getThreads() {

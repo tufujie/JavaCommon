@@ -65,12 +65,22 @@ public class PrintUtil {
     }
 
     /**
-     * 打印
+     * 打印输出然后换行
      *
      * @date 2021/12/11
      */
-    public static void print(String str) {
-        System.out.println(str);
+    public static void print(Object obj) {
+        System.out.println(obj);
+    }
+
+    // 换行
+    public static void print() {
+        System.out.println();
+    }
+
+    // 打印不换行
+    public static void printnb(Object obj) {
+        System.out.print(obj);
     }
 
 }

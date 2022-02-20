@@ -102,6 +102,13 @@ public class ThreadUtil {
     }
 
     /**
+     * 打印当前线程的interrupted()方法是否被调用过，用来检查中断状态。而且可以清除中断状态
+     */
+    public static void printCurrentThreadInterrupted() {
+        System.out.println("当前线程名称=【" + Thread.currentThread().getName() + "】interrupted()方法是否被调用过=【" + (Thread.interrupted() ? "是" : "否") + "】");
+    }
+
+    /**
      * 打印当前线程是否中断
      */
     public static void printCurrentThreadIsAlive() {

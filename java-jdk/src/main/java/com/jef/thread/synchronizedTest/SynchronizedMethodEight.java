@@ -6,7 +6,7 @@ package com.jef.thread.synchronizedTest;
  * @author Jef
  * @date 2020/7/23
  */
-public class SynchronizedSceneEight {
+public class SynchronizedMethodEight {
 
     public static synchronized void method1() {
         method2();

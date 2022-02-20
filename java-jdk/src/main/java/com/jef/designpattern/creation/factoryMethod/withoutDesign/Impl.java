@@ -10,6 +10,6 @@ import com.jef.util.PrintUtil;
 public class Impl implements Api {
     @Override
     public void test(String text) {
-        PrintUtil.outPrint(text);
+        PrintUtil.print(text);
     }
 }

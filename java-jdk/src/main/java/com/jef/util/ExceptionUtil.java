@@ -10,6 +10,18 @@ public class ExceptionUtil {
     /**
      * 获取异常信息
      *
+     * @param e
+     * @return void
+     * @author Jef
+     * @date 2019/8/20
+     */
+    public static String getExceptionStackTraceMessage(Exception e) {
+        return getExceptionStackTraceMessage("发生异常", e);
+    }
+
+    /**
+     * 获取异常信息
+     *
      * @param msg
      * @param e
      * @return void
@@ -45,7 +57,7 @@ public class ExceptionUtil {
         }
         sb.append("\n");
         sb.append("异常信息为：");
-        sb.append(e.getCause());
+        sb.append(e.toString());
         System.out.println(sb);
         return sb.toString();
     }

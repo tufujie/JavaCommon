@@ -26,7 +26,7 @@ public class SynchronizedThis implements Runnable {
         t1.start();
         t2.start();
         while (t1.isAlive() || t2.isAlive()) {
-
+            System.out.println("do something");
         }
         System.out.println("运行完成");
 

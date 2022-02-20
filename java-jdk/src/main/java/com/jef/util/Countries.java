@@ -1,18 +1,34 @@
 //: net/mindview/util/Countries.java
 // "Flyweight" Maps and Lists of sample data.
 package com.jef.util;
-import java.util.*;
-import static com.jef.util.Print.*;
+
+import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import static com.jef.util.PrintUtil.print;
 
 public class Countries {
   public static final String[][] DATA = {
-    // Africa
-    {"ALGERIA","Algiers"}, {"ANGOLA","Luanda"},
-    {"BENIN","Porto-Novo"}, {"BOTSWANA","Gaberone"},
-    {"BURKINA FASO","Ouagadougou"},
-    {"BURUNDI","Bujumbura"},
-    {"CAMEROON","Yaounde"}, {"CAPE VERDE","Praia"},
-    {"CENTRAL AFRICAN REPUBLIC","Bangui"},
+          // Africa
+          {"ALGERIA", "Algiers"}, {"ANGOLA", "Luanda"},
+          {"BENIN", "Porto-Novo"}, {"BOTSWANA", "Gaberone"},
+          {"BURKINA FASO", "Ouagadougou"},
+          {"BURUNDI", "Bujumbura"},
+          {"CAMEROON", "Yaounde"}, {"CAPE VERDE", "Praia"},
+          {"CENTRAL AFRICAN REPUBLIC", "Bangui"},
     {"CHAD","N'djamena"},  {"COMOROS","Moroni"},
     {"CONGO","Brazzaville"}, {"DJIBOUTI","Dijibouti"},
     {"EGYPT","Cairo"}, {"EQUATORIAL GUINEA","Malabo"},

@@ -12,6 +12,18 @@ public class SynchronizedStaticMethod implements Runnable {
     static SynchronizedStaticMethod st1 = new SynchronizedStaticMethod();
     static SynchronizedStaticMethod st2 = new SynchronizedStaticMethod();
 
+    @Override
+    public void run() {
+        method();
+    }
+
+    public static synchronized void method() {
+        BusinessDemo.taskHasReturn("SynchronizedMethod");
+    }
+
+    /**
+     * 两个线程同时访问两个对象的相同的static的synchronized方法
+     */
     public static void main(String[] args) throws Exception {
         Thread t1 = new Thread(st1);
         Thread t2 = new Thread(st2);
@@ -19,15 +31,5 @@ public class SynchronizedStaticMethod implements Runnable {
         t2.start();
         t1.join();
         t2.join();
-        System.out.println("运行完成");
-    }
-
-    @Override
-    public void run(){
-        method();
-    }
-
-    public static synchronized void method() {
-        BusinessDemo.taskHasReturn("SynchronizedMethod");
     }
 }

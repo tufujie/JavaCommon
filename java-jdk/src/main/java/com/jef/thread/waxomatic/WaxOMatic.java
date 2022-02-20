@@ -1,4 +1,4 @@
-package com.jef.thread;
+package com.jef.thread.waxomatic;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

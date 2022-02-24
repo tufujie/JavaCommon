@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="springcloud-provider8001" />
+        <module name="springcloud-consumer8000" />
+        <module name="test-springcloud-order8000" />
+        <module name="test-springcloud-provider-payment8001" />
+        <module name="test-springcloud-eureka-server8761" />
+        <module name="springcloud-eureka-server8761" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

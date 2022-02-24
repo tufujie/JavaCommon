@@ -3,12 +3,12 @@
 
 <mapper namespace="com.jef.springcloud.dao.PaymentDao">
 
-    <resultMap id="BaseResultMap" type="com.jef.springcloud.entities.Payment" >
+    <resultMap id="BaseResultMap" type="com.jef.springcloud.entity.Payment" >
         <id property="id" jdbcType="BIGINT" column="id" />
         <result property="serial" jdbcType="VARCHAR" column="serial" />
     </resultMap>
 
-    <insert id="insert" parameterType="com.jef.springcloud.entities.Payment" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.jef.springcloud.entity.Payment" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO payment(serial) values(#{serial})
     </insert>
 

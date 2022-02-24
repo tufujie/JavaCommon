@@ -1,7 +1,7 @@
 package com.jef.springcloud.controller;
 
-import com.jef.springcloud.entities.CommonResult;
-import com.jef.springcloud.entities.Payment;
+import com.jef.springcloud.entity.CommonResult;
+import com.jef.springcloud.entity.Payment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

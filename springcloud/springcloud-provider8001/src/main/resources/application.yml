@@ -25,4 +25,4 @@ eureka:
 mybatis:
   mapperLocations: classpath:mapper/*Mapper.xml
   # 所有entity别名类所在的包
-  type-aliases-pachage: com.test.springcloud.entities
+  type-aliases-pachage: com.jef.springcloud.entity

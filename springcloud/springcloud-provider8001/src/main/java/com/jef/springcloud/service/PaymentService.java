@@ -1,6 +1,6 @@
 package com.jef.springcloud.service;
 
-import com.jef.springcloud.entities.Payment;
+import com.jef.springcloud.entity.Payment;
 
 public interface PaymentService {
  // 插入

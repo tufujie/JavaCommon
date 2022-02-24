@@ -1,6 +1,6 @@
 package com.jef.springcloud.dao;
 
-import com.jef.springcloud.entities.Payment;
+import com.jef.springcloud.entity.Payment;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

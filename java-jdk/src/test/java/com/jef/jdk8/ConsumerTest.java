@@ -81,15 +81,16 @@ public class ConsumerTest {
         PrintUtil.printSplitLine();
 
         BiConsumer<String, Integer> c3 = (s, i) -> {
+            // 对两个传参进行处理
             if (s.length() > i) {
-                StringUtils.printString(s);
+                StringUtils.printString("BiConsumer=" + s);
             }
         };
         c3.accept(BasicConstant.HELLO_WORLD, 1);
         c3.accept(BasicConstant.HELLO_WORLD, 100);
         PrintUtil.printSplitLine();
 
-        BiConsumer<String, String> c4 = (s1, s2) -> StringUtils.printString(s1 + s2);
+        BiConsumer<String, String> c4 = (s1, s2) -> StringUtils.printString("BiConsumer拼接=" + s1 + s2);
         c4.accept(BasicConstant.HELLO_WORLD, BasicConstant.USER_NAME);
 
     }

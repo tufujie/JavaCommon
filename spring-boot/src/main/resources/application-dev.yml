@@ -1,28 +1,53 @@
 # 配置文件
 eureka:
   client:
+    # 表示将自己注册进Eureka Server默认为true
+    register-with-eureka: true
+    # 是否从Eureka Server抓去已有的注册信息，默认是true
+    fetch-registry: true
+    # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址
     service-url:
       defaultZone: http://localhost:8080/eureka
 
 # 阿波罗配置
-app:
-  id: spring-mvc-jef
-apollo:
-  # 注册路径，阿波罗默认注册配置 Eureka
-  meta: http://localhost:8080
-  bootstrap:
-    enabled: true
-    # 指定阿波罗中配置项名称，多个用逗号隔开
-    namespaces: application
+#app:
+#  id: spring-mvc-jef
+#apollo:
+#  # 注册路径，阿波罗默认注册配置 Eureka
+#  meta: http://localhost:8080
+#  bootstrap:
+#    enabled: true
+#    # 指定阿波罗中配置项名称，多个用逗号隔开
+#    namespaces: application
 
 spring:
   thymeleaf:
     # controller 返回 String 后跳转到指定界面时的路径前缀，下面路径的两个 / 都不能省略
     prefix: classpath:/static/
-
   mvc:
     static-path-pattern: /**
-
   resources:
     # 静态资源的默认访问路径前缀
     static-locations: classpath:/static
+  application:
+    name: cloud-payment-service
+  # 数据源基本配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/all_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+
+# 端口
+server:
+  port: 8001
+
+mybatis:
+  mapperLocations: classpath:mapper/*Mapper.xml
+  # 所有entity别名类所在的包
+  type-aliases-pachage: com.jef.entity
+
+# 打印sql
+logging:
+  level:
+    com.jef.dao : debug

@@ -1,0 +1,17 @@
+# 端口
+server:
+  port: 8000
+
+spring:
+  application:
+    name: cloud-order
+
+eureka:
+  client:
+    # 表示将自己注册进Eureka Server默认为true
+    register-with-eureka: true
+    # 是否从Eureka Server抓去已有的注册信息，默认是true
+    fetch-registry: true
+    # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址
+    service-url:
+      defaultZone: http://localhost:8761/eureka

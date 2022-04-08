@@ -61,5 +61,6 @@ public class FileGlobal {
     public static final String DOC_LOCAL = "D:\\test.doc";
     public static final String DOCX_LOCAL = "D:\\test.docx";
     public static final String PDF_LOCAL = "D:\\test.pdf";
+    public static final String XLSX_LOCAL = "D:\\test.xlsx";
 
 }

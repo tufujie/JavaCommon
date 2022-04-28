@@ -30,6 +30,7 @@ public class ImageTransferUtil {
         File imgDir = new File(imageUrl);
         long startTime = System.currentTimeMillis();
         String ocrResult = instance.doOCR(imgDir);
+        System.out.println(ocrResult);
         // 输出识别结果
 //        System.out.println("OCR Result: \n" + ocrResult + "\n 耗时：" + (System.currentTimeMillis() - startTime) + "ms");
     }

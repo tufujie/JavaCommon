@@ -8,6 +8,7 @@ import com.microsoft.schemas.vml.CTTextPath;
 import com.microsoft.schemas.vml.STExt;
 import com.microsoft.schemas.vml.STTrueFalse;
 import org.apache.poi.wp.usermodel.HeaderFooterType;
+import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFHeader;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
@@ -15,6 +16,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPicture;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRPr;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STHdrFtr.Enum;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,6 +45,7 @@ public class WordAddWaterMarkUtil {
 
     public static void main(String[] args) throws IOException {
         InputStream in = FileUtil.getInputStreamByUrl("文档地址");
+//        InputStream in = new FileInputStream("E:\\Desktop\\新建打印测试文档001.docx");
         XWPFDocument doc = new XWPFDocument(in);
         makeWaterMarkByWord(doc, "天天向上");
         // 文件的后缀名
@@ -93,8 +96,15 @@ public class WordAddWaterMarkUtil {
      * @param type       类型：1.平铺；2.单个
      */
     private static void waterMarkDocXDocument(XWPFDocument doc, String customText, String styleTop, int type) {
-//        XWPFHeader header = doc.getHeaderArray(0); // 如果之前已经创建过 DEFAULT 的Header，将会复用之
+        // poi 1.6写法
         XWPFHeader header = doc.createHeader(HeaderFooterType.DEFAULT);
+       /* XWPFHeader header;
+        try {
+            header = createHeader(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }*/
         int size = header.getParagraphs().size();
         if (size == 0) {
             header.createParagraph();
@@ -180,5 +190,19 @@ public class WordAddWaterMarkUtil {
         sb.append(";rotation: ").append("-2949120f");
         return sb.toString();
     }
+
+    /**
+     * 模拟poi 1.6写法
+     *
+     * @param doc
+     * @return org.apache.poi.xwpf.usermodel.XWPFHeader
+     * @author Jef
+     * @date 2022/5/19
+     */
+    public static XWPFHeader createHeader(XWPFDocument doc) throws IOException {
+        XWPFHeaderFooterPolicy hfPolicy = doc.createHeaderFooterPolicy();
+        return hfPolicy.createHeader(Enum.forInt(2));
+    }
+
 
 }

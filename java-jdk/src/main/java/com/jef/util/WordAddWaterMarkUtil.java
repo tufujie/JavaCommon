@@ -7,6 +7,7 @@ import com.microsoft.schemas.vml.CTShapetype;
 import com.microsoft.schemas.vml.CTTextPath;
 import com.microsoft.schemas.vml.STExt;
 import com.microsoft.schemas.vml.STTrueFalse;
+import org.apache.poi.wp.usermodel.HeaderFooterType;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFHeader;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
@@ -92,7 +93,8 @@ public class WordAddWaterMarkUtil {
      * @param type       类型：1.平铺；2.单个
      */
     private static void waterMarkDocXDocument(XWPFDocument doc, String customText, String styleTop, int type) {
-        XWPFHeader header = doc.getHeaderArray(0); // 如果之前已经创建过 DEFAULT 的Header，将会复用之
+//        XWPFHeader header = doc.getHeaderArray(0); // 如果之前已经创建过 DEFAULT 的Header，将会复用之
+        XWPFHeader header = doc.createHeader(HeaderFooterType.DEFAULT);
         int size = header.getParagraphs().size();
         if (size == 0) {
             header.createParagraph();

@@ -74,4 +74,11 @@ public class BusinessDemo {
         String id = (String) param.get("id");
         System.out.println("业务处理id=" + id);
     }
+
+    /**
+     * 业务上做一些事情
+     */
+    public static void doSomeThing() {
+        System.out.println("业务处理一些事情");
+    }
 }

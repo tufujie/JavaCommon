@@ -4,6 +4,7 @@ import com.jef.util.PrintUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * 数组排序工具类
@@ -115,6 +116,8 @@ public class ArraySortUtil {
             int temp = array[i];
             array[i] = array[min];
             array[min] = temp;
+            System.out.print("第" + (i + 1) + "次排序结果:");
+            PrintUtil.printArray(array);
         }
         return array;
     }
@@ -169,6 +172,38 @@ public class ArraySortUtil {
             arrayTwo[key] = 1;
         }
         return arrayTwo;
+    }
+
+    public static int[] bucketSortV2(int[] arr) {
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            min = Math.min(min, arr[i]);
+        }
+        // 创建桶
+        int bucketNum = (max - min) / arr.length + 1;
+        ArrayList<ArrayList<Integer>> bucketArr = new ArrayList<>(bucketNum);
+        for (int i = 0; i < bucketNum; i++) {
+            bucketArr.add(new ArrayList<Integer>());
+        }
+        // 将每个元素放入桶
+        for (int i = 0; i < arr.length; i++) {
+            int num = (arr[i] - min) / (arr.length);
+            bucketArr.get(num).add(arr[i]);
+        }
+        // 对每个桶进行排序
+        for (int i = 0; i < bucketArr.size(); i++) {
+            Collections.sort(bucketArr.get(i));
+        }
+        int[] resultArray = new int[arr.length];
+        for (int i = 0; i < bucketArr.size(); i++) {
+            ArrayList<Integer> list = bucketArr.get(i);
+            for (int j = 0; j < list.size(); j++) {
+                resultArray[j] = list.get(j);
+            }
+        }
+        return resultArray;
     }
 
     /**
@@ -277,6 +312,35 @@ public class ArraySortUtil {
      * @date 2021/4/13
      */
     public static int[] insertSort(int[] array) {
+        for (int i = 1; i < array.length; i++) {
+            // 插入的数
+            int insertVal = array[i];
+            // 被插入的位置(即插入的数准备和前一个数比较)
+            int index = i - 1;
+            // 如果插入的数比被插入位置的数小
+            while (index >= 0 && insertVal < array[index]) {
+                // 将把array[index]向后移动
+                array[index + 1] = array[index];
+                // 让index向前移动
+                index--;
+            }
+            // 把插入的数放入合适位置
+            array[index + 1] = insertVal;
+            System.out.print("第" + i + "次排序结果:");
+            PrintUtil.printArray(array);
+        }
+        return array;
+    }
+
+    /**
+     * 插入排序
+     *
+     * @param array
+     * @return java.lang.int[]
+     * @author Jef
+     * @date 2021/4/13
+     */
+    public static int[] insertSortV2(int[] array) {
         int n = array.length;
         for (int i = 1; i < n; i++) {
             if (array[i] < array[i - 1]) {
@@ -290,7 +354,7 @@ public class ArraySortUtil {
                     array[j] = val;
                 }
             }
-            System.out.print("第" + (i + 1) + "次排序结果:");
+            System.out.print("第" + i + "次排序结果:");
             PrintUtil.printArray(array);
         }
         return array;
@@ -309,13 +373,17 @@ public class ArraySortUtil {
         int d = array.length;
         while (true) {
             d = d / 2;
+            // 类似插入排序，只是插入排序增量是1，这里增量是d,把1换成d就可以了
             for (int x = 0; x < d; x++) {
                 for (int i = x + d; i < array.length; i = i + d) {
+                    // temp为待插入元素
                     int temp = array[i];
                     int j;
                     for (j = i - d; j >= 0 && array[j] > temp; j = j - d) {
+                        // 通过循环，逐个后移一位找到要插入的位置。
                         array[j + d] = array[j];
                     }
+                    // 插入
                     array[j + d] = temp;
                 }
             }
@@ -409,29 +477,29 @@ public class ArraySortUtil {
     public static int[] quickSort(int[] array, int left, int right) {
         if (left < right) {
             int key = array[left];
-            int i = left;
-            int j = right;
+            int start = left;
+            int end = right;
             // 这部分便是算法的核心思想
-            while (i < j) {
+            while (start < end) {
                 // 从右向左找到第一个不大于基准值的元素
-                while (i < j && array[j] >= key) {
-                    j--;
+                while (start < end && array[end] >= key) {
+                    end--;
                 }
-                if (i < j) {
-                    array[i] = array[j];
+                if (start < end) {
+                    array[start] = array[end];
                 }
                 //从左往右找到第一个不小于基准值的元素
-                while (i < j && array[i] <= key) {
-                    i++;
+                while (start < end && array[start] <= key) {
+                    start++;
                 }
-                if (i < j) {
-                    array[j] = array[i];
+                if (start < end) {
+                    array[end] = array[start];
                 }
             }
-            array[i] = key;
+            array[start] = key;
             // 递归继续对剩余的序列排序
-            quickSort(array, left, i - 1);
-            quickSort(array, i + 1, right);
+            quickSort(array, left, start - 1);
+            quickSort(array, start + 1, right);
         }
         return array;
     }
@@ -537,12 +605,12 @@ public class ArraySortUtil {
             int right = 2 * i + 2;
             int big = i;
             // 判断小分支那个是大元素
-            if (left < end && array[i] < array[left])
-//				swap(array, i, left);
+            if (left < end && array[i] < array[left]) {
                 i = left;
-            if (right < end && array[i] < array[right])
-//				swap(array, i, right);
+            }
+            if (right < end && array[i] < array[right]) {
                 i = right;
+            }
             swap(array, i, big);
         }
     }

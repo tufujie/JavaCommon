@@ -47,6 +47,12 @@ public class ArraySortUtilTest {
     }
 
     @Test
+    public void testBucketSortV3() {
+        int[] array = ArraySortUtil.bucketSortV2(BasicConstant.INT_ARRAY);
+        PrintUtil.printArray(array, "排序结果");
+    }
+
+    @Test
     public void testDirectInsertSort() {
         int[] array = ArraySortUtil.directInsertSort(BasicConstant.INT_ARRAY);
         PrintUtil.printArray(array, "排序结果");

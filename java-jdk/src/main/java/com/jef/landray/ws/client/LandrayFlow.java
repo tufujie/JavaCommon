@@ -5,10 +5,10 @@ import com.jef.entity.WorkFlowVo;
 import com.jef.landray.flow.AttachmentForm;
 import com.jef.landray.flow.IKmReviewWebserviceService;
 import com.jef.landray.flow.IKmReviewWebserviceServiceProxy;
-import com.jef.landray.flow.IKmReviewWebserviceServiceServiceLocator;
 import com.jef.landray.flow.KmReviewParamterForm;
-import com.jef.util.DateTimeUtil;
+import com.jef.util.ExceptionUtil;
 import com.jef.util.LogicUtils;
+import com.jef.util.REIDIdentifier;
 import com.jef.util.StringUtils;
 
 import net.sf.json.JSONObject;
@@ -19,10 +19,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Administrator
@@ -35,7 +36,7 @@ public class LandrayFlow {
     private static final String APP_NAME = "kdWojiacloud";
     private static final String APP_FILE_KEY = "wjy_rentfile_key";
 
-    public static void main(String[] args) throws Exception {
+/*    public static void main(String[] args) throws Exception {
 
         IKmReviewWebserviceServiceServiceLocator krLocator = new IKmReviewWebserviceServiceServiceLocator();
         KmReviewParamterForm form = new KmReviewParamterForm();
@@ -66,6 +67,83 @@ public class LandrayFlow {
                 + "&token=" + token;
         System.out.println("landrayUrl=" + JSONObject.fromObject(landrayUrl));
 
+    }*/
+
+    public static void main(String[] args) throws Exception {
+        approveProcessAdaptor();
+    }
+
+    public static WorkFlowVo getWorkFlow() {
+        String id = REIDIdentifier.randomEOID();
+        String fileType = "RentContract";
+        String group = "租赁合同";
+        String detailURL = "https://wy.wojiayun.cn/app/rent/contract/detail/037d687a50494cf3aa4894efd360c70d?_from=rent";
+        // 具体的表单信息
+        // 表单map填充开始
+        Map<String, Object> result = new HashMap<>();
+//        result.put("notExistKey", "notExistKeyValue");
+
+        // 表单map填充完毕
+        //充填表单数据
+        JSONObject reObj = new JSONObject();
+        for (Map.Entry<String, Object> entry : result.entrySet()) {
+            reObj.put(entry.getKey(), entry.getValue());
+        }
+        //表单数据之外需要传输额外参数，供第三方接口识别调用
+        reObj.put("billID", id);
+        //这里上传附件类型，供回调修改附件
+        reObj.put("fileType", fileType);
+        reObj.put("detailURL", detailURL);
+        logger.info("WorkflowAdaptor syWorkflow reObj:" + reObj.toString() + "; group:" + group);
+
+        WorkFlowVo vo = new WorkFlowVo();
+        vo.setFormCodeId("16cadc62c0b5b03c914590d48afb923b");
+        vo.setTitle("租赁合同");
+        vo.setApprover("testuser");
+        vo.setTabloid(reObj.toString());
+        return vo;
+    }
+
+    public static void addReviewAdaptor() throws Exception {
+        WorkFlowVo vo = getWorkFlow();
+        Map<String, Object> map = new HashMap<>();
+        map.put("appUrl", "http://oatest.cqtianjiao.com:505");
+        String wfID = "";
+        try {
+            wfID = addReviewAdaptor(vo, map);
+        } catch (Exception e) {
+            ExceptionUtil.getExceptionStackTraceMessage("流程发起, 第三方工作流响应失败: ", e);
+            throw new Exception("流程发起, 第三方工作流响应失败: " + getLandrayExceptionMessage(e));
+        }
+        System.out.println("wfID=" + wfID);
+    }
+
+    public static void approveProcessAdaptor() throws Exception {
+        WorkFlowVo vo = getWorkFlow();
+        Map<String, Object> map = new HashMap<>();
+        map.put("appUrl", "http://oatest.cqtianjiao.com:505");
+        String wfID = "181602e0a5dac669a62d42f47dbb9a1b";
+        try {
+            vo.setWfID(wfID);
+            wfID = approveProcessAdaptor(vo, map);
+        } catch (Exception e) {
+            ExceptionUtil.getExceptionStackTraceMessage("流程发起, 第三方工作流响应失败: ", e);
+            throw new Exception("流程发起, 第三方工作流响应失败: " + getLandrayExceptionMessage(e));
+        }
+        if (isContainChinese(wfID)) {
+            throw new Exception("流程发起, 第三方工作流响应失败: " + wfID);
+        }
+        System.out.println("wfID=" + wfID);
+    }
+
+    public static String addReviewAdaptor(WorkFlowVo vo, Map<String, Object> map) throws Exception {
+        LandrayFlow flow = new LandrayFlow();
+        return flow.addReview(vo, map);
+    }
+
+    public static String approveProcessAdaptor(WorkFlowVo vo, Map<String, Object> map) throws Exception {
+        LandrayFlow flow = new LandrayFlow();
+        return flow.approveProcess(vo, map);
     }
 
     public String addReview(WorkFlowVo vo, Map<String, Object> map) throws Exception {
@@ -177,6 +255,43 @@ public class LandrayFlow {
         String responseID = kmSer.approveProcess(form);
         logger.info("LandrayFlow approveProcess responseID={}", responseID);
         return responseID;
+    }
+
+    /**
+     * 获取蓝凌错误提示
+     *
+     * @param e
+     * @return java.lang.String
+     * @author Jef
+     * @date 2022/6/14
+     */
+    public static String getLandrayExceptionMessage(Exception e) {
+        String errorMessage = e.getMessage();
+        if (StringUtils.isNotEmpty(errorMessage) && isContainChinese(errorMessage)) {
+            return errorMessage;
+        }
+        errorMessage = e.toString();
+        if (StringUtils.isNotEmpty(errorMessage) && isContainChinese(errorMessage)) {
+            return errorMessage;
+        }
+        return e.getMessage();
+    }
+
+    /**
+     * 是否包含中文
+     *
+     * @param str
+     * @return boolean
+     * @author Jef
+     * @date 2022/6/14
+     */
+    public static boolean isContainChinese(String str) {
+        Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -53,6 +53,8 @@
     <springdatamongodb.version>3.3.0</springdatamongodb.version>
     <spring-security.version>5.6.2</spring-security.version>
     <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
+    <axis.version>1.4</axis.version>
+
 
   </properties>
 
@@ -750,8 +752,44 @@
       <artifactId>tess4j</artifactId>
       <version>5.2.0</version>
     </dependency>
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis-jaxrpc</artifactId>
+      <version>${axis.version}</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.apache.axis</groupId>
+      <artifactId>axis</artifactId>
+      <version>${axis.version}</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.apache.axis</groupId>
+      <artifactId>axis-ant</artifactId>
+      <version>${axis.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-pool</groupId>
+      <artifactId>commons-pool</artifactId>
+      <version>1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-math3</artifactId>
+      <version>3.6.1</version>
+    </dependency>
+    <!--axis需要使用-->
+    <dependency>
+      <groupId>commons-discovery</groupId>
+      <artifactId>commons-discovery</artifactId>
+      <version>0.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.birt.runtime.3_7_1</groupId>
+      <artifactId>javax.wsdl</artifactId>
+      <version>1.5.1</version>
+    </dependency>
 
 
 

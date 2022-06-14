@@ -12,7 +12,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
+import java.util.Vector;
 
 /**
  * 时间转化工具全，对原始工具类进行拓展
@@ -47,6 +56,8 @@ public class DateTimeUtil extends DateUtils {
     public static final String MONTH_FORMAT = "MM";
     public static final String DAY_FORMAT = "dd";
     public static final String DATE_FORMAT_SSS = "yyyy-MM-dd HH:mm:ss.SSS"; // 精确到毫秒
+    public static final String DATETIME_FORMAT3 = "yyyyMMddHHmmss";
+
     // 偏移方向
     public static final int TO_BEFORE = 0; // 偏移方向，向前
     public static final int TO_AFTER = 1; // 偏移方向，向后

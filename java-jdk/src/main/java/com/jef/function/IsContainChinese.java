@@ -10,6 +10,7 @@ public class IsContainChinese {
     private static String regEx = "[\u4e00-\u9fa5]+";
     public static void main(String[] args) {
         System.out.println(isContainChinese1("中国China"));
+        System.out.println(isContainChinese1("China"));
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.jef.jdk8;
 
+import com.jef.business.BusinessDemo;
 import com.jef.constant.BasicConstant;
 import com.jef.constant.BasicEntity;
 import com.jef.constant.BasicList;
@@ -59,4 +60,19 @@ public class FunctionTest {
         consumer.accept(user, name);
         System.out.println("通过Consumer设置了属性：name=" + user.getName());
     }
+
+    @Test
+    public void testFunctionApply() {
+        handle(tradeNo -> BusinessDemo.taskHasReturn(tradeNo), "testNo");
+    }
+
+    /**
+     * @param function 这里String为功能方法传入参数，形参，apply方法对应的参数为实参；Integer为功能方法的返回结果类型，也就是apply方法返回的类型
+     * @param tradeNo
+     */
+    public void handle(Function<String, Integer> function, String tradeNo) {
+        Integer funtionResult = function.apply(tradeNo);
+        System.out.println("Function返回结果=" + funtionResult);
+    }
+
 }

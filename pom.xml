@@ -515,11 +515,11 @@
       <artifactId>curator-framework</artifactId>
       <version>${curator.version}</version>
     </dependency>
-<!--    <dependency>
+    <dependency>
       <groupId>org.apache.curator</groupId>
       <artifactId>curator-recipes</artifactId>
       <version>${curator.version}</version>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>org.apache.curator</groupId>
       <artifactId>curator-client</artifactId>

@@ -172,4 +172,61 @@ public class WorkBusinessServiceImpl implements IWorkBusinessService {
         System.out.println(sb);
     }
 
+    @Override
+    public void testGetUpdateRoomBuildingTypeSQL() throws Exception {
+        List<Map<String, Object>> roomList = workBusinessDao.getRoom();
+        List<Map<String, Object>> buidlingList = workBusinessDao.getBuidling();
+        List<Map<String, Object>> buildingUnitList = workBusinessDao.getBuildingUnit();
+        List<Map<String, Object>> floorList = workBusinessDao.getFloor();
+        // 创建Excel，读取文件内容
+        File file = new File("D:/download/roomBuildingUpdate.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(FileUtils.openInputStream(file));
+        // 两种方式读取工作表
+        // Sheet sheet=workbook.getSheet("Sheet0");
+        Sheet sheet = workbook.getSheetAt(0);
+        //获取sheet中最后一行行号
+        int lastRowNum = sheet.getLastRowNum();
+        // 合并过单元格的字段
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= lastRowNum; i++) {
+            String roomID = "", buidlingName = "", buldUnitName = "", floorName = "", number = "";
+            Row row = sheet.getRow(i);
+            //获取当前行最后单元格列号
+            int lastCellNum = row.getLastCellNum();
+            for (int j = 0; j < lastCellNum; j++) {
+                Cell cell = row.getCell(j);
+                String value = ExcelUtil.getValueFromCell(cell);
+                if (j == 0) {
+                    roomID = value;
+                } else if (j == 1) {
+                    buidlingName = value;
+                } else if (j == 2) {
+                    buldUnitName = value;
+                } else if (j == 3) {
+                    floorName = value;
+                } else if (j == 4) {
+                    number = value;
+                }
+            }
+            String finalRoomID = roomID;
+            Map<String, Object> room = roomList.stream().filter(obj -> obj.get("id").equals(finalRoomID)).collect(Collectors.toList()).get(0);
+            String finalBuidlingName = buidlingName;
+            Map<String, Object> buidling = buidlingList.stream().filter(obj -> obj.get("name").equals(finalBuidlingName)).collect(Collectors.toList()).get(0);
+            String buildingID = (String) buidling.get("id");
+            String finalBuldUnitName = buldUnitName;
+            Map<String, Object> buidUnit = buildingUnitList.stream().filter(obj -> obj.get("name").equals(finalBuldUnitName) && buildingID.equals(obj.get("buildingID"))).collect(Collectors.toList()).get(0);
+            String buildUnitID = (String) buidUnit.get("id");
+            String finalFloorName = floorName;
+            List<Map<String, Object>> floorListTemp = floorList.stream().filter(obj -> obj.get("name").equals(finalFloorName) && buildingID.equals(obj.get("buildingID"))).collect(Collectors.toList());
+            String floorID = "";
+            if (floorListTemp.size() > 0) {
+                floorID = (String) floorListTemp.get(0).get("id");
+            } else {
+                System.out.println(roomID + "楼层异常");
+            }
+            sb.append("update t_pc_room set FNumber = '" + number + "', FBuildingID = '" + buildingID + "', FBuildingName = '" + buidlingName + "', FBuildUnitID = '" + buildUnitID + "', FBuildUnitName = '" + buldUnitName + "', FFloorID ='" + floorID + "', FFloor = '" + floorName + "' where FID = '" + roomID + "' and FIsDelete = 0;\n");
+        }
+        System.out.println(sb);
+    }
+
 }

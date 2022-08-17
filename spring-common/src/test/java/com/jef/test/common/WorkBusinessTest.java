@@ -65,5 +65,21 @@ public class WorkBusinessTest extends BaseTest {
 
     }
 
+    /**
+     * 工作业务获取用户信息
+     * 模拟service调用
+     *
+     * @date 2022/01/15
+     */
+    @Test
+    public void testGetUpdateRoomBuildingTypeSQL() throws Exception {
+        initMybatis("mapper/*Mapper.xml");
+        TestBeanUtil.addBean(WorkBusinessServiceImpl.class.getSimpleName(), WorkBusinessServiceImpl.class);
+        WorkBusinessServiceImpl workBusinessService = SpringContextHolder.getBean(WorkBusinessServiceImpl.class.getSimpleName());
+
+        workBusinessService.testGetUpdateRoomBuildingTypeSQL();
+
+    }
+
 
 }

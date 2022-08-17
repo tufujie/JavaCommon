@@ -19,4 +19,12 @@ public interface IWorkBusinessDao extends IBaseDao {
 
     List<Map<String, Object>> getDisbursementType();
 
+    List<Map<String, Object>> getRoom();
+
+    List<Map<String, Object>> getBuidling();
+
+    List<Map<String, Object>> getBuildingUnit();
+
+    List<Map<String, Object>> getFloor();
+
 }

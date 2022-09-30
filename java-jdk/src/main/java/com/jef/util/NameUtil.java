@@ -70,15 +70,24 @@ public class NameUtil {
      * @param randNum 名字字数
      * @return
      */
-    public String getNameV2(String sex, String lastName) {
+    public String getNameV2(String sex, String lastName, String secondName, String thirdName) {
         int strLen = sex.equals("男") ? boyNameV2.length() : girlName.length();
         String name = lastName;
-        int index = new Random().nextInt(strLen - 1);
-        name += sex.equals("男") ? boyNameV2.substring(index, index + 1) :
-                girlName.substring(index, index + 1);
-        index = new Random().nextInt(strLen - 1);
-        name += sex.equals("男") ? boyNameV2.substring(index, index + 1) :
-                girlName.substring(index, index + 1);
+        int index = 0;
+        if (secondName == null || secondName == "") {
+            index = new Random().nextInt(strLen - 1);
+            name += sex.equals("男") ? boyNameV2.substring(index, index + 1) :
+                    girlName.substring(index, index + 1);
+        } else {
+            name += secondName;
+        }
+        if (thirdName == null || thirdName == "") {
+            index = new Random().nextInt(strLen - 1);
+            name += sex.equals("男") ? boyNameV2.substring(index, index + 1) :
+                    girlName.substring(index, index + 1);
+        } else {
+            name += thirdName;
+        }
         return name;
     }
 
@@ -94,7 +103,7 @@ public class NameUtil {
 
     public static void main(String[] args) {
         for (int i = 0; i < 1000; i++) {
-            System.out.println(new NameUtil().getNameV2("男", "涂"));
+            System.out.println(new NameUtil().getNameV2("男", "涂", "", "泽"));
         }
     }
 }

@@ -18,4 +18,16 @@
         select a.FID id, a.FName name, b.FName projectName from t_rt_disbursement_type a
         join t_bdc_project b on a.FProjectID = b.FID
     </select>
+    <select id="getRoom" resultType="java.util.Map">
+        select a.FID id, a.FName name from t_pc_room a where a.FIsDelete = 0
+    </select>
+    <select id="getBuidling" resultType="java.util.Map">
+        select a.FID id, a.FName name from t_pc_building a where a.FIsDelete = 0
+    </select>
+    <select id="getBuildingUnit" resultType="java.util.Map">
+        select a.FID id, a.FName name, FBuildingID buildingID from t_pc_buildingunit a where a.FIsDelete = 0
+    </select>
+    <select id="getFloor" resultType="java.util.Map">
+        select a.FID id, a.FName name, FBuildingID buildingID from t_pc_floor a where a.FIsDelete = 0
+    </select>
 </mapper>

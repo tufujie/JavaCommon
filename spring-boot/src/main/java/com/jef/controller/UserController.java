@@ -3,6 +3,7 @@ package com.jef.controller;
 import com.jef.entity.User;
 import com.jef.service.IUserService;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class UserController {
     public String getAllUser() {
         List<User> userList = userService.getAllUser();
         logger.info("用户数量={}", userList.size());
-        return "用户数量=" + userList.size();
+        return "用户数量=" + userList.size() + "，用户信息=" + JSONObject.toJSONString(userList);
     }
 
 }

@@ -1,8 +1,9 @@
 package com.jef.constant;
 
-import com.google.common.collect.Lists;
 import com.jef.entity.OrderInfo;
 import com.jef.entity.User;
+
+import com.google.common.collect.Lists;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -74,14 +75,17 @@ public class BasicList {
         OrderInfo orderInfo1 = new OrderInfo();
         orderInfo1.setId(1L);
         orderInfo1.setTotalPrice(null);
+        orderInfo1.setCreatorID(1L);
         orderInfoList.add(orderInfo1);
         OrderInfo orderInfo2 = new OrderInfo();
         orderInfo2.setId(2L);
         orderInfo2.setTotalPrice(new BigDecimal(4));
+        orderInfo2.setCreatorID(1L);
         orderInfoList.add(orderInfo2);
         OrderInfo orderInfo3 = new OrderInfo();
         orderInfo3.setId(3L);
         orderInfo3.setTotalPrice(new BigDecimal(6));
+        orderInfo3.setCreatorID(2L);
         orderInfoList.add(orderInfo3);
         return orderInfoList;
     }

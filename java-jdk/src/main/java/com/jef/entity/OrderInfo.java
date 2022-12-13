@@ -51,6 +51,10 @@ public class OrderInfo implements Serializable {
     private String sku;
     // 创建时间
     private Date createOrderTime;
+    // 创建人ID
+    private Long creatorID;
+    // 创建人名称
+    private String creatorName;
 
     public Long getId() {
         return id;
@@ -146,5 +150,21 @@ public class OrderInfo implements Serializable {
 
     public void setCreateOrderTime(Date createOrderTime) {
         this.createOrderTime = createOrderTime;
+    }
+
+    public Long getCreatorID() {
+        return creatorID;
+    }
+
+    public void setCreatorID(Long creatorID) {
+        this.creatorID = creatorID;
+    }
+
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
     }
 }

@@ -61,6 +61,10 @@ public class User implements Serializable {
 
     List<OrderInfo> orderInfos = Lists.newArrayList();
 
+    public User(Long id) {
+        this.id = id;
+    }
+
     public User(String name, Integer age) {
         this.name = name;
         this.age = age;

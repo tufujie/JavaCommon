@@ -1,15 +1,9 @@
 package com.jef.util;
 
-import com.jef.dao.UserDao;
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.transaction.TransactionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
-import javax.sql.DataSource;
 import java.io.InputStream;
 
 /**
@@ -53,21 +47,5 @@ public class ConnectSessionUtil {
     public static void commitAndClose(SqlSession sqlSession) {
         sqlSession.commit();
         sqlSession.close();
-    }
-
-    /**
-     * 不使用xml获取数据源
-     * @return
-     */
-    public static SqlSession getSqlSessionTwo() {
-        DataSource dataSource = MyDatasourceUtil.getDataSource();
-        TransactionFactory transactionFactory = new JdbcTransactionFactory();
-        Environment environment = new Environment("development", transactionFactory, dataSource);
-        Configuration configuration = new Configuration(environment);
-        configuration.getTypeAliasRegistry().registerAlias(UserDao.class);
-        configuration.addMapper(UserDao.class);
-        configuration.setLazyLoadingEnabled(true);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
-        return sqlSessionFactory.openSession();
     }
 }

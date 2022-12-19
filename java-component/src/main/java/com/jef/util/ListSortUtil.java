@@ -1,6 +1,6 @@
 package com.jef.util;
 
-import com.jef.algorithm.sort.ArraySortUtil;
+import com.jef.util.algorithm.sort.ArraySortUtil;
 
 import com.google.common.collect.Lists;
 

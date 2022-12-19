@@ -1,5 +1,6 @@
 package com.jef;
 
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,6 +33,7 @@ import org.springframework.context.annotation.Configuration;
 //@EnableApolloConfig
 @Configuration
 @MapperScan("com.jef.dao") //扫描的mapper
+@EnableDubbo(scanBasePackages = {"com.jef.service.impl*"})
 @SpringBootApplication(exclude = {
         DataSourceAutoConfiguration.class,
         ActiveMQAutoConfiguration.class,

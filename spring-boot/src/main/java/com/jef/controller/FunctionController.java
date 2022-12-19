@@ -1,12 +1,13 @@
 package com.jef.controller;
 
-import com.jef.entity.User;
 import com.jef.service.IUserService;
+import com.jef.util.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,4 +61,9 @@ public class FunctionController {
         return resultMap;
     }
 
+    @ResponseBody
+    @RequestMapping("/useUtil")
+    public String useUtil() {
+        return "字符串判断,空字符串不为空判断=" + StringUtils.isNotEmpty("") + ",字符串Jef不为空判断=" + StringUtils.isNotEmpty("Jef");
+    }
 }

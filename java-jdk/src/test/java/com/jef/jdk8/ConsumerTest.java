@@ -1,5 +1,6 @@
 package com.jef.jdk8;
 
+import com.jef.business.BusinessDemo;
 import com.jef.constant.BasicConstant;
 import com.jef.entity.OrderInfo;
 import com.jef.util.NumberUtils;
@@ -16,6 +17,8 @@ import java.util.function.Consumer;
 
 /**
  * 消费消息
+ * 有参无返回值，用于消费数据
+ *
  * @author Jef
  * @date 2019/3/14
  */
@@ -92,6 +95,20 @@ public class ConsumerTest {
 
         BiConsumer<String, String> c4 = (s1, s2) -> StringUtils.printString("BiConsumer拼接=" + s1 + s2);
         c4.accept(BasicConstant.HELLO_WORLD, BasicConstant.USER_NAME);
+
+        PrintUtil.printSplitLine();
+        Consumer<Integer> consumer = BusinessDemo::taskNoReturn;
+        consumer.accept(5);
+
+        PrintUtil.printSplitLine();
+        Consumer<String> andThan1 = obj -> {
+            System.out.println(obj + "转换为大写" + obj.toUpperCase());
+        };
+        Consumer<String> andThan2 = obj -> {
+            System.out.println(obj + "转换为小写" + obj.toLowerCase());
+        };
+        // andThan1先执行，执行完毕再执行andThan2
+        andThan1.andThen(andThan2).accept(BasicConstant.USER_NAME);
 
     }
 }

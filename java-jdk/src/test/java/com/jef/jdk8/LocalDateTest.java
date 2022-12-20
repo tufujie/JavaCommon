@@ -1,9 +1,13 @@
-package com.jef.date;
+package com.jef.jdk8;
 
 import com.jef.util.LocalDateUtil;
+import com.jef.util.PrintUtil;
+
 import org.junit.Test;
+
 import java.time.Clock;
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -59,7 +63,7 @@ public class LocalDateTest {
         int day1 = today.get(ChronoField.DAY_OF_MONTH);
         DayOfWeek dayOfWeek = today.getDayOfWeek();
         int dayOfWeek1 = today.get(ChronoField.DAY_OF_WEEK);
-        System.out.printf("Year : %d  Month : %d  day : %d %n", year, month, day);
+        System.out.printf("Year : %d  Month : %d  day : %d dayOfWeek : %d %n", year, month, day, dayOfWeek.getValue());
     }
 
     // 处理特定日期
@@ -170,41 +174,53 @@ public class LocalDateTest {
 
     // 如何计算一天后的日期
     @Test
-    public void nextDay(){
+    public void nextDay() {
         LocalDate today = LocalDate.now();
         LocalDate nextDay = today.plus(1, ChronoUnit.DAYS);
+        // 等效
+        LocalDate nextDay2 = today.plusDays(1);
         System.out.println("Today is : " + today);
         System.out.println("Date after 1 day : " + nextDay);
+        System.out.println("Date after 1 day : " + nextDay2);
     }
 
     // 如何计算一周后的日期
     @Test
-    public void nextWeek(){
+    public void nextWeek() {
         LocalDate today = LocalDate.now();
         LocalDate nextWeek = today.plus(1, ChronoUnit.WEEKS);
+        // 等效
+        LocalDate nextWeek2 = today.plusWeeks(1);
         System.out.println("Today is : " + today);
         System.out.println("Date after 1 week : " + nextWeek);
+        System.out.println("Date after 1 week : " + nextWeek2);
     }
 
     // 如何计算一周后的日期
     @Test
-    public void nextMonth(){
+    public void nextMonth() {
         LocalDate today = LocalDate.now();
         LocalDate nextMonth = today.plus(1, ChronoUnit.MONTHS);
+        // 等效
+        LocalDate nextMonth2 = today.plusMonths(1);
         System.out.println("Today is : " + today);
         System.out.println("Date after 1 month : " + nextMonth);
+        System.out.println("Date after 1 month : " + nextMonth2);
     }
 
     // 计算一年前或一年后的日期
     @Test
-    public void minusYear(){
+    public void minusYear() {
         LocalDate today = LocalDate.now();
         // 减少一年
         LocalDate previousYear = today.minus(1, ChronoUnit.YEARS);
         System.out.println("Date before 1 year : " + previousYear);
         // 增加一年
         LocalDate nextYear = today.plus(1, ChronoUnit.YEARS);
+        // 等效
+        LocalDate nextYear2 = today.plusYears(1);
         System.out.println("Date after 1 year : " + nextYear);
+        System.out.println("Date after 1 year : " + nextYear2);
     }
 
     @Test
@@ -288,16 +304,46 @@ public class LocalDateTest {
 
     // 使用预定义的格式化工具去解析或格式化日期
     @Test
-    public void parseDate(){
+    public void parseDate() {
         String dayFormat = "20200723";
         LocalDate formatted = LocalDate.parse(dayFormat, DateTimeFormatter.BASIC_ISO_DATE);
         System.out.printf("Date generated from String %s is %s %n", dayFormat, formatted);
         String s1 = formatted.format(DateTimeFormatter.BASIC_ISO_DATE);
         String s2 = formatted.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        System.out.println(s1);
+        PrintUtil.printSplitLine();
+        System.out.println(s2);
+        PrintUtil.printSplitLine();
         // 自定义格式化，和SimpleDateFormat相比，DateTimeFormatter是线程安全的
-        DateTimeFormatter dateTimeFormatter =   DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String s3 = formatted.format(dateTimeFormatter);
         // DateTimeFormatter默认提供了多种格式化方式，如果默认提供的不能满足要求，可以通过DateTimeFormatter的ofPattern方法创建自定义格式化方式
+        System.out.println(s3);
+    }
+
+    @Test
+    public void testDiff() {
+        //日期时间差
+        LocalDate today = LocalDate.now();
+        LocalDate birthDate = LocalDate.of(2022, Month.OCTOBER, 1);
+        Period p = Period.between(birthDate, today);   //  birthDate - today
+        System.out.printf("年龄 : %d 年 %d 月 %d 日", p.getYears(), p.getMonths(), p.getDays());
+        System.out.println();
+        PrintUtil.printSplitLine();
+
+        // 时分秒时间差
+        Instant inst1 = Instant.now();
+        Instant inst2 = inst1.plus(Duration.ofSeconds(10));
+        System.out.println("毫秒差:" + Duration.between(inst1, inst2).toMillis());
+        System.out.println("秒差:" + Duration.between(inst1, inst2).getSeconds());
+
+        // ChronoUnit类可用于在单个时间单位内测量一段时间，例如天数或秒
+        LocalDate startDate = LocalDate.of(2022, Month.OCTOBER, 1);
+        System.out.println("开始时间:" + startDate);
+        LocalDate endDate = LocalDate.of(2022, Month.OCTOBER, 16);
+        System.out.println("结束时间:" + endDate);
+        long daysDiff = ChronoUnit.DAYS.between(startDate, endDate);
+        System.out.println("两天之间的差在天数   : " + daysDiff);//两天之间的差在天数   : 8641
     }
 
 }

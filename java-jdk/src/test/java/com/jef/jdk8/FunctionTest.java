@@ -17,6 +17,7 @@ import java.util.function.Function;
 
 /**
  * 将T映射为R（转换功能）
+ * 有参有返回值，根据一个类型的数据得到另一个类型的数据，前者称为前置条件，后者称为后置条件
  * @author Jef
  * @date 2021/2/20
  */

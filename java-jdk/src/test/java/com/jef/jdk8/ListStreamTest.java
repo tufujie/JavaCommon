@@ -54,15 +54,16 @@ public class ListStreamTest {
     public void testFilter() {
         List<User> users = BasicList.getUserList();
         ListUtil.systemPrintUserList(users, "未筛选之前user集合=");
-        List<User> userFilterList = users.stream().filter(obj ->BasicConstant.USER_NAME.equals(obj.getName()) ).collect(Collectors.toList());
+        List<User> userFilterList = users.stream().filter(obj -> BasicConstant.USER_NAME.equals(obj.getName())).collect(Collectors.toList());
         ListUtil.systemPrintUserList(userFilterList, "筛选之后user集合=");
     }
-    
-    /** 
-     * map(转换功能)
+
+    /**
+     * map(转换功能，映射)
      * 内部就是Function接口。惰性求值
      * 集合转换
      * map就是将对应的元素按照给定的方法进行转换。
+     *
      * @author Jef
      * @date 2020/1/17
      */
@@ -128,11 +129,14 @@ public class ListStreamTest {
         // 集合排序（指定排序规则）
         List<User> userList = users.stream().sorted(comparing(User::getId)).sorted(comparing(User::getAge)).collect(Collectors.toList());
         ListUtil.systemPrintUserList(userList, "按id和age排序后");
+        // 集合排序（指定排序规则），直接影响原来的集合
+        users.sort((obj1, obj2) -> obj1.getType() - obj2.getType());
+        ListUtil.systemPrintUserList(users, "按type排序后");
     }
 
     /**
      * limit（限制返回个数）
-     * 集合limit，返回前几个元素
+     * 集合limit，返回前n个元素
      */
     @Test
     public void testLimit() {
@@ -142,7 +146,8 @@ public class ListStreamTest {
     }
 
     /**
-     * skip(删除元素)
+     * skip(跳过几个，删除n个元素)
+     *
      * @author Jef
      * @date 2020/1/17
      */
@@ -164,25 +169,30 @@ public class ListStreamTest {
     public void testGroupBy() {
         List<User> users = BasicList.getUserList();
         Map<Integer, List<User>> userListMap = users.stream().collect(Collectors.groupingBy(User::getType));
-        System.out.println("list进行分类一对多map，=" + userListMap);
+        System.out.println("list进行分类一对多Map，=" + userListMap);
 
         Map<String, List<User>> userListMultiPropertyMap = users.stream().collect(Collectors.groupingBy(this::fetchUserGroupKey));
         System.out.println("list进行分类一对多属性map，=" + userListMultiPropertyMap);
         Map<String, List<User>> userListMultiPropertyTwoMap = users.stream().collect(Collectors.groupingBy(item -> item.getName() + item.getPhone()));
-        System.out.println("list进行分类一对多属性two map，=" + userListMultiPropertyTwoMap);
+        System.out.println("list进行分类一对多属性two Map，=" + userListMultiPropertyTwoMap);
+        Map<Integer, List<Long>> userListMultiPropertyThreeMap = users.stream().collect(Collectors.groupingBy(User::getType, Collectors.mapping(User::getId, Collectors.toList())));
+        System.out.println("list进行分类一对多属性three Map，=" + userListMultiPropertyThreeMap);
 
         // TreeMap默认为按照key升序
         Map<Integer, List<User>> userListMapSort = users.stream()
                 .collect(Collectors.groupingBy(User::getType, TreeMap::new, Collectors.toList()));
-        System.out.println("list进行分类一对多map排序升序，=" + userListMapSort);
+        System.out.println("list进行分类一对多Map排序升序，=" + userListMapSort);
 
         // LinkedHashMap默认为按照key添加的顺序排序
         Map<Integer, List<User>> userListMapSort2 = users.stream()
                 .collect(Collectors.groupingBy(User::getType, LinkedHashMap::new, Collectors.toList()));
-        System.out.println("list进行分类一对多map排序按添加，=" + userListMapSort2);
+        System.out.println("list进行分类一对多Map排序按添加，=" + userListMapSort2);
         Map<Integer, BigDecimal> listMapTotalMap = Maps.newHashMap();
         userListMapSort2.forEach((key, value) -> listMapTotalMap.put(key, value.stream().map(User::getValue).reduce(BigDecimal.ZERO, NumberUtils::add)));
-        System.out.println("list进行分类一对多map后汇总，即map转map=" + listMapTotalMap);
+        System.out.println("list进行分类一对多map后汇总，即Map转Map=" + listMapTotalMap);
+        Map<Integer, BigDecimal> listMapTotalMap2 = users.stream()
+                .collect(Collectors.groupingBy(User::getType, Collectors.mapping(User::getValue, Collectors.reducing(BigDecimal.ZERO, (obj1, obj2) -> NumberUtils.add(obj1, obj2)))));
+        System.out.println("list进行分类一对多map后汇总，即List转Map=" + listMapTotalMap2);
     }
 
     /**
@@ -376,6 +386,34 @@ public class ListStreamTest {
         return orderInfos.stream().collect(averagingLong(OrderInfo::getId));
     }
 
+    @Test
+    public void testRemoveIf() {
+        List<User> userList = BasicList.getUserList();
+        System.out.println("before=" + userList);
+        // 移除不需要的，直接影响原来的集合
+        userList.removeIf(obj -> obj.getType() == 2);
+        System.out.println("after" + userList);
+    }
 
+    @Test
+    public void testStreamOf() {
+        List<String> strings = Stream.of("1", "2").collect(Collectors.toList());
+        System.out.println(strings);
+        strings = Stream.of(new String[]{"1", "2"}).collect(Collectors.toList());
+        System.out.println(strings);
+    }
+
+    @Test
+    public void testConcat() {
+        List<String> strings = Stream.of("1", "2").collect(Collectors.toList());
+        List<String> strings2 = Stream.of("3", "4").collect(Collectors.toList());
+        List<String> stringsResult = Stream.concat(strings.stream(), strings2.stream()).collect(Collectors.toList());
+        System.out.println(stringsResult);
+        // 简化写法
+        Stream<String> stringsStream = Stream.of("1", "2");
+        Stream<String> strings2Stream = Stream.of("3", "4");
+        List<String> stringsStreamResult = Stream.concat(stringsStream, strings2Stream).collect(Collectors.toList());
+        System.out.println(stringsStreamResult);
+    }
 
 }

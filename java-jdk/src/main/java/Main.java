@@ -1,3 +1,5 @@
+import com.jef.util.StringUtils;
+
 import java.util.Scanner;
 
 /**
@@ -9,17 +11,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
-        System.out.println(getLastStrLength(str));
-    }
-
-    public static int getLastStrLength(String str) {
-        if (str == null || "".equals(str)) {
-            return 0;
-        }
-        String[] strArray = str.split(" ");
-        return strArray[strArray.length - 1].length();
+        System.out.println(StringUtils.isEmpty(""));
     }
 
 }

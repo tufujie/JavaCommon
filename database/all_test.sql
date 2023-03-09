@@ -57,6 +57,7 @@ CREATE TABLE `shop` (
 
 -- 添加订单、子订单、店铺数据
 INSERT INTO `order_info` (`extra_order_id`, `shop_id`, `user_id`) VALUES ('123456789', '1', '1');
+INSERT INTO `order_info_1` (`extra_order_id`, `shop_id`, `user_id`) VALUES ('123456789', '2', '1');
 
 INSERT INTO `order_product` (`order_id`, `product_name`, `num`) VALUES ('1', '袜子', '3');
 INSERT INTO `order_product` (`order_id`, `product_name`, `num`) VALUES ('1', '鞋子', '2');
@@ -267,7 +268,7 @@ insert into test_group_by values(7, 'B', '乙');
 insert into test_group_by values(8, 'B', '丙');
 
 -- 分表SQL
-CREATE TABLE `t_bdc_splittablerule` (
+CREATE TABLE `splittablerule` (
 `FID` varchar(32) NOT NULL COMMENT 'ID',
 `FTableName` varchar(50) DEFAULT NULL COMMENT '需要分表名称（例如：应收：order_info）',
 `FIsShopID` tinyint(1) DEFAULT '1' COMMENT '是否按店铺分表（0否 1是）',
@@ -280,7 +281,7 @@ PRIMARY KEY (`FID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分表规则';
 
 -- shopID为2的使用order_info_1
-INSERT INTO all_test.t_bdc_splittablerule (FID,FTableName,FIsShopID,FCreateTime,FShopID,FSName,FShopName,FActualTable) VALUES
+INSERT INTO splittablerule (FID,FTableName,FIsShopID,FCreateTime,FShopID,FSName,FShopName,FActualTable) VALUES
     ('1','order_info',1,'2021-04-14 11:54:34',2,'1','测试店铺01','order_info_1');
 
 SET NAMES utf8mb4;

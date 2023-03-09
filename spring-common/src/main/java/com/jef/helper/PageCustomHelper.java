@@ -393,7 +393,7 @@ public class PageCustomHelper implements Interceptor {
                 if (splitTableRule == null || splitTableRule.getIsShopID() == 0) {
                     continue;
                 }
-                tableNameMap.put(tableName, (StringUtils.isEmpty(splitTableRule.getDataBaseName()) ? "" : splitTableRule.getDataBaseName()) + tableName + "_" + splitTableRule.getSufSName());
+                tableNameMap.put(tableName, (StringUtils.isEmpty(splitTableRule.getDataBaseName()) ? "" : splitTableRule.getDataBaseName()) + tableName + "_" + splitTableRule.getSName());
             }
             if (tableNameMap.size() > 0) {
                 sql = repalceTableName(sql, tableNameMap);

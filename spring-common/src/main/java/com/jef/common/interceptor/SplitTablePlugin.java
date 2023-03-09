@@ -1,10 +1,5 @@
 package com.jef.common.interceptor;
 
-import com.jef.entity.SplitRule;
-import com.jef.entity.SplitTableRuleVo;
-import com.jef.entity.TableNameModifier;
-import com.jef.util.StringUtils;
-
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
@@ -12,6 +7,10 @@ import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
 import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlSchemaStatVisitor;
 import com.alibaba.druid.stat.TableStat;
 import com.alibaba.druid.util.JdbcConstants;
+import com.jef.entity.SplitRule;
+import com.jef.entity.SplitTableRuleVo;
+import com.jef.entity.TableNameModifier;
+import com.jef.util.StringUtils;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.Interceptor;
@@ -100,7 +99,7 @@ public class SplitTablePlugin implements Interceptor {
         SplitTableRuleVo splitTableRuleVo = localClass.get();
         // 移除本地变量
         localClass.remove();
-        //没有传企业ID 需要分表的表名称，不需要解析sql
+        //没有传店铺ID 需要分表的表名称，不需要解析sql
         if(StringUtils.isEmpty(splitTableRuleVo.getShopID())){
             return;
         }
@@ -117,7 +116,7 @@ public class SplitTablePlugin implements Interceptor {
             List<SplitTableRuleVo> splitTableRuleVoList = SplitRule.getSplitSql(splitTableRuleVo.getShopID(),tableNameList);
             for(SplitTableRuleVo splitTableRule : splitTableRuleVoList){
                 tableNameMap.put(splitTableRule.getTableName(),(StringUtils.isEmpty(splitTableRule.getDataBaseName()) ? "" : splitTableRule.getDataBaseName()) + splitTableRule.getTableName()
-                        + "_" + splitTableRule.getSufSName());
+                        + "_" + splitTableRule.getSName());
             }
         } else {
             for(String tableName : tableNameArr){
@@ -128,7 +127,7 @@ public class SplitTablePlugin implements Interceptor {
                 if(splitTableRule == null || splitTableRule.getIsShopID() == 0){
                     continue;
                 }
-                tableNameMap.put(tableName, (StringUtils.isEmpty(splitTableRule.getDataBaseName()) ? "" : splitTableRule.getDataBaseName()) + tableName + "_" + splitTableRule.getSufSName());
+                tableNameMap.put(tableName, (StringUtils.isEmpty(splitTableRule.getDataBaseName()) ? "" : splitTableRule.getDataBaseName()) + tableName + "_" + splitTableRule.getSName());
             }
         }
         if (tableNameMap.size() > 0) {
@@ -200,7 +199,9 @@ public class SplitTablePlugin implements Interceptor {
                 out.append(";");
             }
         }
-        return output.getAppender().toString();
+        String resultSql = output.getAppender().toString();
+        System.out.println("After SplitTable SQL=\n" + resultSql);
+        return resultSql;
     }
 
 }

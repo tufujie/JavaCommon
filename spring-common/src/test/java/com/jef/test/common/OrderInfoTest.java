@@ -3,7 +3,6 @@ package com.jef.test.common;
 import com.jef.common.context.SpringContextHolder;
 import com.jef.entity.OrderInfo;
 import com.jef.service.impl.OrderInfoServiceImpl;
-
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -33,6 +32,9 @@ public class OrderInfoTest extends BaseTest {
         OrderInfo orderInfo = new OrderInfo();
         orderInfo.setShopId(2L);
         List<OrderInfo> orderInfos = orderInfoService.getOrderInfoBySplitTable(orderInfo, 1, 10);
+        System.out.println("店铺号=" + +orderInfo.getShopId() + "，订单数量=" + orderInfos.size());
+        orderInfo.setShopId(1L);
+        orderInfos = orderInfoService.getOrderInfoBySplitTable(orderInfo, 1, 10);
         System.out.println("店铺号=" + +orderInfo.getShopId() + "，订单数量=" + orderInfos.size());
 
     }

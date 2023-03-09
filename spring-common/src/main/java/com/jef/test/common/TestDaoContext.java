@@ -1,10 +1,9 @@
 package com.jef.test.common;
 
-import com.jef.common.interceptor.SplitTablePlugin;
-import com.jef.dao.IBaseDao;
-
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.ImmutableSet;
+import com.jef.common.interceptor.SplitTablePlugin;
+import com.jef.dao.IBaseDao;
 import org.apache.ibatis.binding.MapperProxyFactory;
 import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.session.SqlSession;

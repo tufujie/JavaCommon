@@ -28,7 +28,7 @@ public class SplitTableRuleVo implements Serializable {
     private String dataBaseName;
 
     //分表后缀
-    private String sufSName;
+    private String sName;
 
     //多张分表
     private String[] tableNameArr;
@@ -39,12 +39,12 @@ public class SplitTableRuleVo implements Serializable {
 
     public SplitTableRuleVo(){}
 
-    public SplitTableRuleVo(String tableName,int isShopID,Long shopID,String sufSName,String dataBaseName){
+    public SplitTableRuleVo(String tableName, int isShopID, Long shopID, String sName, String dataBaseName) {
         this.tableName = tableName;
         this.isShopID = isShopID;
         this.shopID = shopID;
         this.dataBaseName = dataBaseName;
-        this.sufSName = sufSName;
+        this.sName = sName;
     }
 
 
@@ -94,12 +94,12 @@ public class SplitTableRuleVo implements Serializable {
         this.shopID = shopID;
     }
 
-    public String getSufSName() {
-        return sufSName;
+    public String getSName() {
+        return sName;
     }
 
-    public void setSufSName(String sufSName) {
-        this.sufSName = sufSName;
+    public void setSName(String sName) {
+        this.sName = sName;
     }
 
     public String[] getTableNameArr() {

@@ -8,8 +8,8 @@
 
 
     <select id="getSplitTableRuleVoList" resultType="com.jef.entity.SplitTableRuleVo" parameterType="map">
-        select FID id,FSName sufSName,FTableName tableName,FIsShopID isShopID,FShopID shopID,FActualTable actualTable
-        from t_bdc_splittablerule
+        select FID id,FSName sName,FTableName tableName,FIsShopID isShopID,FShopID shopID,FActualTable actualTable
+        from splittablerule
         <where>
             <if test="isShopID != null and isShopID != ''">
                 and FIsShopID = #{isShopID}
@@ -24,13 +24,13 @@
     </select>
 
     <select id="getSplitTableRuleVo" resultType="com.jef.entity.SplitTableRuleVo">
-		select FID id,FSName sufSName,FTableName tableName,FIsShopID isShopID,FShopID shopID,FActualTable actualTable
-		from t_bdc_splittablerule where FIsShopID = 1
+		select FID id,FSName sName,FTableName tableName,FIsShopID isShopID,FShopID shopID,FActualTable actualTable
+		from splittablerule where FIsShopID = 1
 	</select>
 
     <select id="getTableByShopID" resultType="com.jef.entity.SplitTableRuleVo">
         select FID id,FSName sufSName,FTableName tableName,FIsShopID isShopID,FShopID shopID,FActualTable actualTable
-        from t_bdc_splittablerule
+        from splittablerule
         where FShopID = #{shopID} and FIsShopID = 1 and FTableName in
         <foreach collection="tableNameList" item="item" open="(" separator="," close=")"  >
             #{item}

@@ -1,8 +1,7 @@
 package com.jef.test.common;
 
-import com.jef.dao.IBaseDao;
-
 import cn.hutool.core.bean.BeanException;
+import com.jef.dao.IBaseDao;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
@@ -74,7 +73,7 @@ public class TestBeanUtil {
                         if (annotation instanceof Autowired
                                 || annotation instanceof Resource
                                 || annotation instanceof Qualifier) {
-                            System.out.println(field.getAnnotatedType().getType().getTypeName());
+                            System.out.println("get bean, beanName is" + field.getAnnotatedType().getType().getTypeName());
                             if (IBaseDao.class.isAssignableFrom(fieldClass)
                                     || field.getGenericType().getTypeName().endsWith("Dao")
                                     || field.getGenericType().getTypeName().endsWith("Mapper")) {
@@ -111,7 +110,7 @@ public class TestBeanUtil {
 
                 } catch (Exception e) {
                     // service实现中存在int double时经常报错,service有些dao无需注入，便于快速测试
-                    System.out.println("注入" + field.getGenericType().getTypeName() + "失败:" + e.getCause());
+                    System.out.println("get beanName error, beanName is" + field.getGenericType().getTypeName() + ", errorMessage is " + e.getMessage());
                     continue;
                 }
             }

@@ -33,7 +33,7 @@ public class TestDaoContext {
     private TestDaoContext() {
     }
 
-    public static TestDaoContext getInstance() {
+    public static synchronized TestDaoContext getInstance() {
         if (context == null) {
             context = new TestDaoContext();
         }

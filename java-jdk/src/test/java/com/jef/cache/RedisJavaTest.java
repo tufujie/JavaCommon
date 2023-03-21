@@ -3,7 +3,6 @@ package com.jef.cache;
 import com.jef.constant.BasicConstant;
 import com.jef.redis.RedisJavaUtil;
 import com.jef.util.PrintUtil;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import redis.clients.jedis.Jedis;
@@ -119,5 +118,32 @@ public class RedisJavaTest {
             String key = it.next();
             System.out.println(key);
         }
+    }
+
+    /**
+     * Redis递增
+     */
+    @Test
+    public void testIncr() {
+        String key = "incrKey";
+        Jedis jedis = RedisJavaUtil.getAuthJedis();
+        long num = jedis.incr(key);
+        System.out.println("incrKey=" + num);
+        num = jedis.incr(key);
+        System.out.println("incrKey=" + num);
+    }
+
+    /**
+     * Redis递减
+     */
+    @Test
+    public void testDecr() {
+        String key = "decrKey";
+        Jedis jedis = RedisJavaUtil.getAuthJedis();
+        jedis.set(key, "10");
+        long num = jedis.decr(key);
+        System.out.println("decrKey=" + num);
+        num = jedis.decr(key);
+        System.out.println("decrKey=" + num);
     }
 }

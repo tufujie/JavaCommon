@@ -44,4 +44,11 @@ public class SpringPropertiesUtil extends PropertyPlaceholderConfigurer {
         return propertiesMap.get(name).toString();
     }
 
+    public static void setProperty(String keyStr, String valueStr) {
+        if (propertiesMap == null) {
+            propertiesMap = new HashMap<String, String>();
+        }
+        propertiesMap.put(keyStr, valueStr);
+    }
+
 }

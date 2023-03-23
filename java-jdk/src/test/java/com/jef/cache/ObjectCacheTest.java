@@ -1,9 +1,10 @@
 package com.jef.cache;
 
 import com.jef.constant.BasicConstant;
+import com.jef.constant.BasicEntity;
+import com.jef.entity.User;
 import com.jef.redis.RedisServiceFactory;
 import com.jef.redis.cache.ObjectCache;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,13 +59,14 @@ public class ObjectCacheTest {
 
     @Test
     public void testSetCache() {
-        ObjectCache.setCache(BasicConstant.LOGIN_OBJECT_KEY, BasicConstant.USER_NAME_KEY, BasicConstant.USER_NAME, false);
+        User user = BasicEntity.getUser();
+        ObjectCache.setCache(BasicConstant.LOGIN_OBJECT_KEY, user.getPhone(), user, false);
     }
 
     @Test
     public void testGetCache() {
-        String userName = (String) ObjectCache.getCache(BasicConstant.LOGIN_OBJECT_KEY, BasicConstant.USER_NAME_KEY);
-        Assertions.assertTrue(BasicConstant.USER_NAME.equals(userName));
+        User user = (User) ObjectCache.getCache(BasicConstant.LOGIN_OBJECT_KEY, BasicConstant.USER_PHONE);
+        Assertions.assertTrue(BasicConstant.USER_NAME.equals(user.getName()));
     }
 
     @Test

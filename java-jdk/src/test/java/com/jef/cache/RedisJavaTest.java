@@ -146,4 +146,19 @@ public class RedisJavaTest {
         num = jedis.decr(key);
         System.out.println("decrKey=" + num);
     }
+
+    /**
+     * Redis删除
+     */
+    @Test
+    public void testDel() {
+        Jedis jedis = RedisJavaUtil.getAuthJedis();
+        jedis.hset(BasicConstant.LOGIN_OBJECT_KEY, BasicConstant.USER_NAME_KEY, BasicConstant.USER_NAME);
+        String userName = jedis.hget(BasicConstant.LOGIN_OBJECT_KEY, BasicConstant.USER_NAME_KEY);
+        System.out.println("userName=" + userName);
+        jedis.del(BasicConstant.LOGIN_OBJECT_KEY);
+        userName = jedis.hget(BasicConstant.LOGIN_OBJECT_KEY, BasicConstant.USER_NAME_KEY);
+        System.out.println("userName=" + userName);
+    }
+
 }

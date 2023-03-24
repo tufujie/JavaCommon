@@ -20,7 +20,7 @@ public class FileGlobal {
     public static final String NORMALFILENAME = "src\\main\\java\\com\\jef\\io\\blog\\zip\\normal.txt";
     public static final String ZIPDIR = "src\\main\\java\\com\\jef\\io\\blog\\zip";
     public static final String XMLDIR = "src\\main\\java\\com\\jef\\xmlfunction\\test.xml";
-    public static final String INTERPRETER_TEST_XMl_DIR = "src\\main\\java\\com\\jef\\designpattern\\interpreter\\InterpreterTest.xml";
+    public static final String INTERPRETER_TEST_XMl_DIR = "java-jdk\\src\\main\\java\\com\\jef\\designpattern\\action\\interpreter\\InterpreterTest.xml";
     public static final String JSONDIR = "src\\main\\java\\com\\jef\\jsondata\\jef.json";
     public static final String JSONDIR2 = "src\\main\\java\\com\\jef\\jsondata\\ret.json";
 

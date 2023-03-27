@@ -20,8 +20,8 @@
     <dubbo:monitor protocol="registry" />
     <!-- 服务提供者缺省值配置 -->
     <dubbo:provider protocol="registry" />
-    <!-- 服务提供者协议配置。用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20880" dispatcher="all" threadpool="fixed" threads="100" />
+    <!-- 服务提供者协议配置。用dubbo协议在20881端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20881" dispatcher="all" threadpool="fixed" threads="100" />
     <!-- 多协议配置 -->
     <dubbo:protocol name="rmi" port="20890" />
     <dubbo:protocol name="hessian" port="20900" />
@@ -40,4 +40,8 @@
     <bean id="demoServiceImpl" class="com.jef.dubbo.provider.impl.DemoServiceImpl" />
 <!--    <dubbo:service interface="com.jef.dubbo.api.DemoNoProviderService" ref="demoNoProviderServiceImpl" protocol="dubbo" />
     <bean id="demoNoProviderServiceImpl" class="com.jef.dubbo.provider.impl.DemoNoProviderServiceImpl" />-->
+    <!--
+    dubbo-admin使用
+    // https://github.com/apache/dubbo-admin/tree/master
+    -->
 </beans>

@@ -4,7 +4,6 @@ import com.jef.dubbo.api.DemoNoProviderService;
 import com.jef.dubbo.api.DemoService;
 import com.jef.dubbo.entity.User;
 import com.jef.dubbo.util.DubooUtil;
-
 import org.apache.dubbo.config.ConfigCenterConfig;
 import org.apache.dubbo.config.MethodConfig;
 import org.apache.dubbo.config.ReferenceConfig;
@@ -31,11 +30,8 @@ public class ConsumerTest {
         // 测试常规服务
         ClassPathXmlApplicationContext context = DubooUtil.getConsumerContext();
         DemoService demoService = context.getBean(DemoService.class);
-        System.out.println("消费者1号 获取权限" + demoService.getPermissions(1L));
-        User user = demoService.getByID("1");
-        System.out.println("消费者2号 获取用户名称=" + user.getName());
-        User userNameAndPhone = demoService.getByNameAndPhone("Jef", "13266860001");
-        System.out.println("消费者3号 获取用户名称=" + userNameAndPhone.getName());
+        System.out.println("开始doSomeThing()");
+        demoService.doSomeThing(1L);
     }
 
     /**
@@ -60,9 +56,8 @@ public class ConsumerTest {
         ClassPathXmlApplicationContext context = DubooUtil.getConsumerContext();
         FunctionAction functionAction = context.getBean(FunctionAction.class);
         DemoService demoService = functionAction.getDemoService();
-        System.out.println("消费者1号 获取权限" + demoService.getPermissions(1L));
-        User user = demoService.getByID("1");
-        System.out.println("消费者1号 获取用户名称=" + user.getName());
+        System.out.println("开始doSomeThing()");
+        demoService.doSomeThing(1L);
     }
 
     @Test
@@ -98,7 +93,10 @@ public class ConsumerTest {
         // 如果点对点直连，可以用reference.setUrl()指定目标地址，设置url后将绕过注册中心，
         // 其中，协议对应provider.setProtocol()的值，端口对应provider.setPort()的值，
         // 路径对应service.setPath()的值，如果未设置path，缺省path为接口名
-        reference.setUrl("dubbo://127.0.0.1:20880/com.jef.dubbo.api.DemoService");
+        reference.setUrl("dubbo://127.0.0.1:20881/com.jef.dubbo.api.DemoService");
+        DemoService demoService = reference.get();
+        System.out.println("开始doSomeThing()");
+        demoService.doSomeThing(1L);
     }
 
     /**

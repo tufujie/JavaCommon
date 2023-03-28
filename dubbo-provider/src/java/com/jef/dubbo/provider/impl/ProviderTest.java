@@ -2,7 +2,6 @@ package com.jef.dubbo.provider.impl;
 
 import com.jef.dubbo.api.DemoService;
 import com.jef.dubbo.util.DubooUtil;
-
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.ExtensionLoader;
 import org.apache.dubbo.config.ApplicationConfig;
@@ -58,7 +57,7 @@ public class ProviderTest {
         // 服务提供者协议配置
         ProtocolConfig protocol = new ProtocolConfig();
         protocol.setName("dubbo");
-        protocol.setPort(20880);
+        protocol.setPort(20881);
         protocol.setThreads(200);
 
         // 注意：ServiceConfig为重对象，内部封装了与注册中心的连接，以及开启服务端口

@@ -2,7 +2,6 @@ package com.jef.dubbo.provider.impl;
 
 import com.jef.dubbo.api.DemoService;
 import com.jef.dubbo.entity.User;
-
 import org.apache.dubbo.config.annotation.DubboService;
 
 import java.util.ArrayList;
@@ -39,5 +38,14 @@ public class DemoServiceImpl implements DemoService {
         user.setPhone(phone);
         System.out.println("消费者" + name + "，" + phone + " 结束消费根据姓名和手机号获取用户信息...");
         return user;
+    }
+
+    @Override
+    public void doSomeThing(Long id) {
+        System.out.println("消费者1号 获取权限" + getPermissions(id));
+        User user = getByID(String.valueOf(id));
+        System.out.println("消费者2号 获取用户名称=" + user.getName());
+        User userNameAndPhone = getByNameAndPhone("Jef", "13266860001");
+        System.out.println("消费者3号 获取用户名称=" + userNameAndPhone.getName());
     }
 }

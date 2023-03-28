@@ -39,4 +39,9 @@ public interface DemoService {
      * @date 2021/9/13
      */
     User getByNameAndPhone(String name, String phone);
+
+    /**
+     * 做一些事项
+     */
+    void doSomeThing(Long id);
 }

@@ -1289,4 +1289,15 @@ public class NumberUtils {
    public static String stripTrailingZeros(BigDecimal bd) {
        return NumberUtils.toBigDecimal(bd).stripTrailingZeros().toPlainString();
    }
+
+    /**
+     * 除法向上取整
+     *
+     * @param num    除数
+     * @param numTwo 被除数
+     * @return
+     */
+    public static int divideUp(int num, int numTwo) {
+        return num / numTwo + (num % numTwo == 0 ? 0 : 1);
+    }
 }

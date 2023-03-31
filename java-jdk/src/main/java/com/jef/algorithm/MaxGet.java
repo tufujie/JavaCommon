@@ -13,4 +13,17 @@ public class MaxGet {
     {
         return a > b ? (a > c ? a : c) : (b > c ? b : c);
     }
+
+    /**
+     * 获取数组中的最大值
+     */
+    public static int getMax(int[] arr) {
+        int max = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        return max;
+    }
 }

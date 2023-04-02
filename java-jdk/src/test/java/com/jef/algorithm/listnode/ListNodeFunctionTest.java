@@ -63,4 +63,12 @@ public class ListNodeFunctionTest {
         ListNode listNode = new NodeListFunction().merge(a, b);
         ListNode.listEachNode(listNode);
     }
+
+    @Test
+    public void testMerge2() {
+        ListNode a = ListNode.getBasicTestListNode();
+        ListNode b = ListNode.getBasicTestListNode();
+        ListNode listNode = new NodeListFunction().merge2(a, b);
+        ListNode.listEachNode(listNode);
+    }
 }

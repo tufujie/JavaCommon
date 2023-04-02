@@ -154,6 +154,7 @@ public class NodeListFunction {
     /**
      * 合并两个排序的链表
      * 输⼊两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满⾜单调不减规则。
+     * 递归版本
      */
     public static ListNode merge(ListNode list1, ListNode list2) {
         if (list1 == null) {
@@ -169,5 +170,52 @@ public class NodeListFunction {
             list2.next = merge(list1, list2.next);
             return list2;
         }
+    }
+
+    /**
+     * 非递归版本
+     */
+    public static ListNode merge2(ListNode list1, ListNode list2) {
+        // list1为空，直接返回list2
+        if (list1 == null) {
+            return list2;
+        }
+        // list2为空，直接返回list1
+        if (list2 == null) {
+            return list1;
+        }
+        ListNode mergeHead = null;
+        ListNode current = null;
+        // 当list1和list2不为空时
+        while (list1 != null && list2 != null) {
+            // 取最⼩值作头结点
+            if (list1.val <= list2.val) {
+                if (mergeHead == null) {
+                    mergeHead = current = list1;
+                } else {
+                    current.next = list1;
+                    // current节点保存list1节点的值因为下⼀次还要⽤
+                    current = list1;
+                }
+                // list1指向下⼀个节点
+                list1 = list1.next;
+            } else {
+                if (mergeHead == null) {
+                    mergeHead = current = list2;
+                } else {
+                    current.next = list2;
+                    // current节点保存list2节点的值因为下⼀次还要⽤
+                    current = list2;
+                }
+                // list2指向下⼀个节点
+                list2 = list2.next;
+            }
+        }
+        if (list1 == null) {
+            current.next = list2;
+        } else {
+            current.next = list1;
+        }
+        return mergeHead;
     }
 }

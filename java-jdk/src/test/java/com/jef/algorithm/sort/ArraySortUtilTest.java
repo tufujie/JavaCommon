@@ -125,4 +125,9 @@ public class ArraySortUtilTest {
         PrintUtil.printArray(array, "排序结果");
     }
 
+    @Test
+    public void testReOrderArray() {
+        PrintUtil.printArray(ArraySortUtil.reOrderArray(BasicConstant.INT_ARRAY));
+    }
+
 }

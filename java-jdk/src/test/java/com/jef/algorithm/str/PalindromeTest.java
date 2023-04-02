@@ -28,4 +28,9 @@ public class PalindromeTest {
         System.out.println(Palindrome.longestPalindromeSubseq("bbbab"));
     }
 
+    @Test
+    public void testBracketsPichDepth() {
+        System.out.println(Palindrome.bracketsPichDepth("(())"));
+    }
+
 }

@@ -172,4 +172,24 @@ public class ArraySearchUtil {
         return -1;
     }
 
+    /**
+     * 在⼀个⼆维数组中，每⼀⾏都按照从左到右递增的顺序排序，每⼀列都按照从上到下递增的顺序排序。请完成⼀个函数，输⼊这样的⼀个⼆维数组和⼀个整数，判断数组中是否含有该整数。
+     */
+    public static boolean array2Find(int[][] array, int target) {
+        //基本思路从左下⻆开始找，这样速度最快
+        int row = array.length - 1;//⾏
+        int column = 0;//列
+        //当⾏数⼤于0，当前列数⼩于总列数时循环条件成⽴
+        while ((row >= 0) && (column < array[0].length)) {
+            if (array[row][column] > target) {
+                row--;
+            } else if (array[row][column] < target) {
+                column++;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -240,6 +240,7 @@ public class BasicConstant {
 
     // int数组
     public static final int[] INT_ARRAY = {1, 4, 7, 3, 6, 8, 5, 2, 10, 9};
+    public static final int[][] INT_ARRAY2 = {{1, 4, 7, 3, 6}, {8, 5, 2, 10, 9}};
 
     // ES集群地址（多个机器ip的话用,隔开）
     public static final String ES_SERVER_IPS = "127.0.0.1:9300";

@@ -53,4 +53,13 @@ public class ArraySearchTest {
         PrintUtil.printf("搜索结果=%s", index);
     }
 
+    /**
+     * 输出：4
+     */
+    @Test
+    public void testArray2Find() {
+        boolean find = ArraySearchUtil.array2Find(BasicConstant.INT_ARRAY2, 5);
+        System.out.println(find);
+    }
+
 }

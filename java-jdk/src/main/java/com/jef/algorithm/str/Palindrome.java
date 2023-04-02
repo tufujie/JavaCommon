@@ -141,4 +141,30 @@ public class Palindrome {
         }
         return dp[0][len - 1];
     }
+
+    /**
+     * 括号匹配深度
+     * 输⼊描述:
+     * 输⼊包括⼀个合法的括号序列s,s⻓度length(2 ≤ length ≤ 50),序列中只包含'('和')'。
+     * 输出描述:
+     * 输出⼀个正整数,即这个序列的深度。
+     * 示例：
+     * 输⼊:
+     * (())
+     * 输出:
+     * 2
+     */
+    public static int bracketsPichDepth(String s) {
+        int cnt = 0, max = 0, i;
+        for (i = 0; i < s.length(); ++i) {
+            if (s.charAt(i) == '(') {
+                cnt++;
+            } else {
+                cnt--;
+            }
+            max = Math.max(max, cnt);
+        }
+        return max;
+    }
+
 }

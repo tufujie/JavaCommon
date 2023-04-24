@@ -229,4 +229,35 @@ public class WorkBusinessServiceImpl implements IWorkBusinessService {
         System.out.println(sb);
     }
 
+    @Override
+    public void testGetUpdateDemanPoolSQL() throws Exception {
+        List<Map<String, Object>> demandPoolList = workBusinessDao.getDemandPool();
+        // 创建Excel，读取文件内容
+        File file = new File("D:/download/demandPool.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(FileUtils.openInputStream(file));
+        // 两种方式读取工作表
+        // Sheet sheet=workbook.getSheet("Sheet0");
+        Sheet sheet = workbook.getSheetAt(0);
+        //获取sheet中最后一行行号
+        int lastRowNum = sheet.getLastRowNum();
+        // 合并过单元格的字段
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= lastRowNum; i++) {
+            Row row = sheet.getRow(i);
+            Cell cell = row.getCell(0);
+            String number = ExcelUtil.getValueFromCell(cell);
+            cell = row.getCell(1);
+            String dateField3 = ExcelUtil.getValueFromCell(cell);
+            String finalNumber = number;
+            List<Map<String, Object>> demandPoolPick = demandPoolList.stream().filter(obj -> finalNumber.equals(obj.get("number"))).collect(Collectors.toList());
+            if (demandPoolPick.size() > 0) {
+                String id = (String) demandPoolPick.get(0).get("id");
+                sb.append("update t_inv_demandpoolextension2 set FDateField3 = '" + dateField3 + "' where FID = '" + id + "' and FIsDelete = 0;\n");
+            } else {
+                System.out.println("客户异常" + number);
+            }
+        }
+        System.out.println(sb);
+    }
+
 }

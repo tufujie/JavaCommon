@@ -27,4 +27,6 @@ public interface IWorkBusinessDao extends IBaseDao {
 
     List<Map<String, Object>> getFloor();
 
+    List<Map<String, Object>> getDemandPool();
+
 }

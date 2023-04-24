@@ -81,5 +81,21 @@ public class WorkBusinessTest extends BaseTest {
 
     }
 
+    /**
+     * 工作业务获取用户信息
+     * 模拟service调用
+     *
+     * @date 2022/01/15
+     */
+    @Test
+    public void testGetUpdateDemanPoolSQL() throws Exception {
+        initMybatis("mapper/*Mapper.xml");
+        TestBeanUtil.addBean(WorkBusinessServiceImpl.class.getSimpleName(), WorkBusinessServiceImpl.class);
+        WorkBusinessServiceImpl workBusinessService = SpringContextHolder.getBean(WorkBusinessServiceImpl.class.getSimpleName());
+
+        workBusinessService.testGetUpdateDemanPoolSQL();
+
+    }
+
 
 }

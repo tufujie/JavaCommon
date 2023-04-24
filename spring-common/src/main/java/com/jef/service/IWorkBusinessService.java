@@ -37,6 +37,7 @@ public interface IWorkBusinessService {
      * @date 2022/1/15
      */
     void getUpdateContractTypeSQL() throws Exception;
+
     /**
      * 场景：客户提供excel用于更新数据
      * 数据从生产库捞取后（包括表结构和所需数据）后直连数据库处理：读取excel后增删改查
@@ -45,4 +46,13 @@ public interface IWorkBusinessService {
      * @date 2022/1/15
      */
     void testGetUpdateRoomBuildingTypeSQL() throws Exception;
+
+    /**
+     * 场景：客户提供excel用于更新数据
+     * 数据从生产库捞取后（包括表结构和所需数据）后直连数据库处理：读取excel后增删改查
+     *
+     * @author Jef
+     * @date 2022/1/15
+     */
+    void testGetUpdateDemanPoolSQL() throws Exception;
 }

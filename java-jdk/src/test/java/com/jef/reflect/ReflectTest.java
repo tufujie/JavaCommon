@@ -48,6 +48,9 @@ public class ReflectTest {
         PrintUtil.printSplitLine();
 
         ReflectionUtil.getObjectValue(testAll);
+
+        ReflectionUtil.invokeSetter(testAll, "testName", "invokeSetterName");
+        System.out.println("invokeGetter=" + ReflectionUtil.invokeGetter(testAll, "testName"));
     }
 
     /**

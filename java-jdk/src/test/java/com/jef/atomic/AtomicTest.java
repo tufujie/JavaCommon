@@ -21,7 +21,13 @@ public class AtomicTest {
         boolean updateFlag = atomicInteger.compareAndSet(2, 3);
         value = atomicInteger.get();
         System.out.println("updateFlag=" + updateFlag + ",value=" + value);
-        // update value = update where value = expect
+        // update table set value = update where value = expect
+        /*
+         * ABA问题解决
+         * 使用版本号
+         * select version from table where id = 1
+         * update table set value = update, version = version + 1 where id = 1 and version = #{version}
+         * */
         updateFlag = atomicInteger.compareAndSet(1, 3);
         value = atomicInteger.get();
         System.out.println("updateFlag=" + updateFlag + ",value=" + value);

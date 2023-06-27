@@ -1,17 +1,17 @@
-package com.jef.designpattern.creation.factoryMethod.withDesign;
+package com.jef.designpattern.creation.factoryMethod.withDesign.simpleFactory;
 
 import com.jef.designpattern.BasicDesign;
 import com.jef.util.PrintUtil;
 
 /**
- * 接口，输出文本实现，显示器
+ * 接口，输出文本实现
  * @author Jef
  * @create 20180707
  */
-public class SamsungScreenImpl implements IScreen {
+public class PhilipsScreenImpl implements IScreen {
     @Override
     public void operation(int n) {
-        String text = BasicDesign.SAMSUNG_SCREEN;
+        String text = BasicDesign.PHILIPS_SCREEN;
         System.out.println("开始制造" + n + "个" + text);
         System.out.println("制造结束");
         PrintUtil.printSplitLine();

@@ -35,11 +35,15 @@ public class StackAndQueueTest {
         queue.add("1");
         queue.add("2");
         queue.add("3");
-        // 获取队首：1
+        // 获取对头：1
         System.out.println("peek()=" + queue.peek());
-        // 获取队首：1，并移除
+        // 获取对头：1，并移除
         System.out.println("poll()=" + queue.poll());
-        // 重新获取队首：2
+        // 重新获取对头：2
+        System.out.println("peek()=" + queue.peek());
+        // 队尾添加元素
+        queue.offer("4");
+        // 重新获取对头：2
         System.out.println("peek()=" + queue.peek());
     }
 

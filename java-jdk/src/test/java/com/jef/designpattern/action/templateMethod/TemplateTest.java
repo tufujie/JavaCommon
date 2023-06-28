@@ -1,6 +1,6 @@
-package com.jef.designpattern.action.template;
+package com.jef.designpattern.action.templateMethod;
 
-import com.jef.designpattern.action.template.impl.JDNetMall;
+import com.jef.designpattern.action.templateMethod.impl.JDNetMall;
 import com.jef.util.PrintUtil;
 
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.template;
+package com.jef.designpattern.action.templateMethod;
 
 import java.io.BufferedReader;
 import java.io.IOException;

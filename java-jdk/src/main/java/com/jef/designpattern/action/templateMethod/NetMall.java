@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.template;
+package com.jef.designpattern.action.templateMethod;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

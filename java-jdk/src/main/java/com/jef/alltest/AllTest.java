@@ -13,7 +13,7 @@ import java.io.StringWriter;
  * 全部测试
  */
 public class AllTest {
-    public static void main(String[] args) {
-        System.out.println("test");
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        User user = (User) Class.forName("com.jef.entity.User").newInstance();
     }
 }

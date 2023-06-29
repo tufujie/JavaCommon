@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.bridge;
+package com.jef.designpattern.structure.bridge.one;
 
 /**
  * 刷脸支付

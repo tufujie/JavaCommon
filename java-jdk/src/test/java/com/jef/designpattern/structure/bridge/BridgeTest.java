@@ -1,5 +1,10 @@
 package com.jef.designpattern.structure.bridge;
 
+import com.jef.designpattern.structure.bridge.one.FacePayMode;
+import com.jef.designpattern.structure.bridge.one.FingerprintPayMode;
+import com.jef.designpattern.structure.bridge.one.Pay;
+import com.jef.designpattern.structure.bridge.one.WxPay;
+import com.jef.designpattern.structure.bridge.one.ZfbPay;
 import com.jef.util.PrintUtil;
 
 import org.junit.jupiter.api.Test;

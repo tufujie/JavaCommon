@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.duty;
+package com.jef.designpattern.action.chainOfResponsibility;
 
 /**
  * 责任链中返回对象定义

@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.duty;
+package com.jef.designpattern.action.chainOfResponsibility;
 
 import com.jef.constant.BasicConstant;
 import com.jef.util.PrintUtil;
@@ -17,7 +17,7 @@ import java.util.List;
  * @author Jef
  * @date 2021/12/11
  */
-public class DutyTest {
+public class ChainOfResponsibilityTest {
 
     @Test
     public void testDuty() throws ParseException {

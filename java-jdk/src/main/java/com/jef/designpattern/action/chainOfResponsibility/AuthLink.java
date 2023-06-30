@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.duty;
+package com.jef.designpattern.action.chainOfResponsibility;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

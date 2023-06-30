@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.duty.customerPrice;
+package com.jef.designpattern.action.chainOfResponsibility.customerPrice;
 
 import java.util.ArrayList;
 import java.util.List;

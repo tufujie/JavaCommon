@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.duty.customerPrice;
+package com.jef.designpattern.action.chainOfResponsibility.customerPrice;
 
 import com.jef.designpattern.action.strategy.Customer;
 import com.jef.designpattern.action.strategy.CustomerBuilder;

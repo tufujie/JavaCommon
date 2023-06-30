@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.look;
+package com.jef.designpattern.action.observer;
 
 /**
  * 模拟摇号系统

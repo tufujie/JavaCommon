@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.look;
+package com.jef.designpattern.action.observer;
 
 import com.jef.util.PrintUtil;
 

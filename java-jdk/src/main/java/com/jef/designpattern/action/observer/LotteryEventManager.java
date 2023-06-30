@@ -1,4 +1,4 @@
-package com.jef.designpattern.action.look;
+package com.jef.designpattern.action.observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 摇号事件管理
+ * 观察者模式-摇号事件管理
  *
  * @author Jef
  * @date 2021/12/11

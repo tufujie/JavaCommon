@@ -16,6 +16,11 @@ public class Student extends User {
         this.ranking = ranking;
     }
 
+    /**
+     * 学生接收访问者的访问
+     *
+     * @param visitor 访问者
+     */
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

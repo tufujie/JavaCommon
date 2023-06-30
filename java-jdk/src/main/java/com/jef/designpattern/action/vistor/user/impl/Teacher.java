@@ -16,6 +16,11 @@ public class Teacher extends User {
         this.entranceRatio = entranceRatio;
     }
 
+    /**
+     * 老师接收访问者的访问
+     *
+     * @param visitor 访问者
+     */
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

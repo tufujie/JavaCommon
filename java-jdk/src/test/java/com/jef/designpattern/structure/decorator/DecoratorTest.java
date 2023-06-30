@@ -1,6 +1,8 @@
 package com.jef.designpattern.structure.decorator;
 
 import com.jef.constant.BasicConstant;
+import com.jef.designpattern.structure.decorator.one.LoginSsoDecorator;
+import com.jef.designpattern.structure.decorator.one.SsoInterceptor;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

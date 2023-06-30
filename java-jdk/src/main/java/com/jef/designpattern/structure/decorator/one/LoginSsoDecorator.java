@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.decorator;
+package com.jef.designpattern.structure.decorator.one;
 
 import com.jef.constant.BasicConstant;
 

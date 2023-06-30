@@ -18,9 +18,9 @@ public class VistorTest {
     public void testVistor() {
         DataView dataView = new DataView();
         PrintUtil.printf("\r\n家长视角访问学生和老师");
-        dataView.show(new Parent()); // ਹᳩ
+        dataView.show(new Parent());
         PrintUtil.printf("\r\n校长视角访问学生和老师");
-        dataView.show(new Principal()); // ໊ᳩ
+        dataView.show(new Principal());
     }
 
 }

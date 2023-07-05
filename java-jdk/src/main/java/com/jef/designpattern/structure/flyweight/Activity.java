@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.share;
+package com.jef.designpattern.structure.flyweight;
 
 import java.util.Date;
 

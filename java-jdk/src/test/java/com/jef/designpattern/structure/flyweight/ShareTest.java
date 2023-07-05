@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.share;
+package com.jef.designpattern.structure.flyweight;
 
 import com.jef.util.PrintUtil;
 

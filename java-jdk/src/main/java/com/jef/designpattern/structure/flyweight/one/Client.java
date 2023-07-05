@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.share.flyweight;
+package com.jef.designpattern.structure.flyweight.one;
 
 /**
  * Client对象，通常会维持一个队Flyweight的引用

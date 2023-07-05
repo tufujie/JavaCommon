@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.share.flyweight;
+package com.jef.designpattern.structure.flyweight.one;
 
 /**
  * 享元状态

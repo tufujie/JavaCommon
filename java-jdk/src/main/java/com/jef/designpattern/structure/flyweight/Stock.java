@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.share;
+package com.jef.designpattern.structure.flyweight;
 
 /**
  * 变化的数据：库存扣减

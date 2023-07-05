@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.share.flyweight;
+package com.jef.designpattern.structure.flyweight.one;
 
 import java.util.HashMap;
 import java.util.Map;

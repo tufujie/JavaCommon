@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.share.flyweight;
+package com.jef.designpattern.structure.flyweight.one;
 
 /**
  * 享元接口，通过这个接口享元可以接受并作用于外部状态

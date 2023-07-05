@@ -1,4 +1,4 @@
-package com.jef.designpattern.structure.share;
+package com.jef.designpattern.structure.flyweight;
 
 /**
  * 统一查询控制管理类

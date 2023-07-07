@@ -246,7 +246,7 @@ public class ArraySortUtil {
         }
         // 求出每个桶的长度,这里必须使用Double
         double size = (double) (max - min + 1) / sum;
-        ArrayList<Integer> list[] = new ArrayList[sum];
+        ArrayList<Integer>[] list = new ArrayList[sum];
         for (int i = 0; i < sum; i++) {
             list[i] = new ArrayList<Integer>();
         }
@@ -636,7 +636,14 @@ public class ArraySortUtil {
         return array;
     }
 
-    //将待排序的数组构建成大根堆
+    /**
+     * 将待排序的数组构建成大根堆
+     *
+     * @param array
+     * @param end
+     * @author Jef
+     * @date 2023/7/7
+     */
     public static void buildbigheapV2(int[] array, int end) {
         // 从最后一个非叶子节点开始构建,依照从下往上,从右往左的顺序
         for (int i = end / 2; i >= 0; i--) {
@@ -703,7 +710,7 @@ public class ArraySortUtil {
      * @author Jef
      * @date 2022/1/5
      */
-    public static void merge(ArrayList<Integer> list[], int[] array) {
+    public static void merge(ArrayList<Integer>[] list, int[] array) {
         int k = 0;
         for (int i = 0; i < list.length; i++) {
             if (list[i] != null) {
@@ -718,8 +725,16 @@ public class ArraySortUtil {
         System.out.println();
     }
 
-    //将所有的元素分散到各个链表之中
-    public static void split(ArrayList<Integer> list[], int[] array, int k) {
+    /**
+     * 将所有的元素分散到各个链表之中
+     *
+     * @param list
+     * @param array
+     * @param k
+     * @author Jef
+     * @date 2023/7/7
+     */
+    public static void split(ArrayList<Integer>[] list, int[] array, int k) {
         for (int j = 0; j < array.length; j++) {
             list[array[j] / k % 10].add(array[j]);
         }
@@ -739,7 +754,7 @@ public class ArraySortUtil {
      * @date 2022/1/5
      */
     public static int[] radixSort(int[] array) {
-        ArrayList<Integer> list[] = new ArrayList[10];
+        ArrayList<Integer>[] list = new ArrayList[10];
         for (int i = 0; i < 10; i++) {
             list[i] = new ArrayList<Integer>();
         }

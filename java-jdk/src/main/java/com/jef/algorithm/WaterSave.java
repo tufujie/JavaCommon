@@ -9,7 +9,7 @@ package com.jef.algorithm;
 public class WaterSave {
 
     public static void main(String[] args) {
-        int[] arr = {0, 1, 2};
+        int[] arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
         System.out.println("v1=" + countWater(arr));
         System.out.println("v2=" + countWaterV2(arr));
     }
@@ -21,13 +21,13 @@ public class WaterSave {
         int count = 0;
         for (int i = 0; i < arr.length; i++) {
             int leftMax = 0, rightMax = 0;
-            for (int j = 0; j < i; j++) {
+            for (int j = i; j >= 0; j--) {
                 leftMax = Math.max(leftMax, arr[j]);
             }
             for (int j = i; j < arr.length; j++) {
                 rightMax = Math.max(rightMax, arr[j]);
             }
-            count += Math.max(leftMax, rightMax) - arr[i];
+            count += Math.min(leftMax, rightMax) - arr[i];
         }
         return count;
     }
@@ -38,17 +38,16 @@ public class WaterSave {
         }
         int count = 0;
         int[] leftMaxArr = new int[arr.length], rightMaxArr = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            int leftMax = 0, rightMax = 0;
-            for (int j = 0; j < i; j++) {
-                leftMaxArr[i] = Math.max(leftMax, arr[j]);
-            }
-            for (int j = i; j < arr.length; j++) {
-                rightMaxArr[i] = Math.max(rightMax, arr[j]);
-            }
+        leftMaxArr[0] = arr[0];
+        rightMaxArr[arr.length - 1] = arr[arr.length - 1];
+        for (int i = 1; i < arr.length; i++) {
+            leftMaxArr[i] = Math.max(leftMaxArr[i - 1], arr[i]);
+        }
+        for (int i = arr.length - 2; i >= 0; i--) {
+            rightMaxArr[i] = Math.max(rightMaxArr[i + 1], arr[i]);
         }
         for (int i = 0; i < arr.length; i++) {
-            count += Math.max(leftMaxArr[i], rightMaxArr[i]) - arr[i];
+            count += Math.min(leftMaxArr[i], rightMaxArr[i]) - arr[i];
         }
         return count;
     }

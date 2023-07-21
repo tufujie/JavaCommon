@@ -4,4 +4,10 @@
     <select id="getAllUser" resultType="com.jef.entity.User">
         select * from user
     </select>
+    <select id="getByUser" resultType="User" parameterType="User">
+        select * from user
+        where name = #{name}
+          and phone = #{phone}
+    </select>
+
 </mapper>

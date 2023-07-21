@@ -737,7 +737,7 @@
       <dependency>
         <groupId> e-iceblue </groupId>
         <artifactId>spire.pdf</artifactId>
-        <version>3.11.6</version>
+        <version>9.7.0</version>
       </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.github.houbb/ocr-tess4j -->

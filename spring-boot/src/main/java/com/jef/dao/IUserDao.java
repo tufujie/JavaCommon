@@ -17,4 +17,6 @@ public interface IUserDao extends IBaseDao {
 
     List<User> getAllUser();
 
+    User getByUser(User user);
+
 }

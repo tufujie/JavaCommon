@@ -8,4 +8,5 @@ public interface IUserService {
 
     List<User> getAllUser();
 
+    User getByUser(User user);
 }

@@ -2,9 +2,9 @@ package com.jef.controller;
 
 import com.jef.service.IUserService;
 import com.jef.util.StringUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,24 +23,14 @@ public class FunctionController {
     @Autowired
     private IUserService userService;
 
-    @RequestMapping("/hello")
-    public String hello(){
-        return "html/hello";
-    }
-
-    @RequestMapping("/user")
-    public String user(){
-        return "html/user";
-    }
-
-    @RequestMapping("/apollo")
-    public String apollo(){
-        return "html/apollo";
+    @RequestMapping("/{key}")
+    public String hello(@PathVariable String key) {
+        return "html/" + key;
     }
 
     @ResponseBody
     @RequestMapping("getUserNoChangeList")
-    public Map<String, Object> getUserNoChangeList(){
+    public Map<String, Object> getUserNoChangeList() {
         System.out.println("微信小程序正在调用。。。");
         Map<String, Object> resultMap = new HashMap<String, Object>();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();

@@ -17,7 +17,7 @@ spring:
           - dataId: message.yaml
             # 如果Group不为空这边必须要写Group
             group: jef-app
-            # 配置更新刷新
+            # 配置更新是否刷新本地缓存
             refresh: true
         # 是否启用，默认启用，如果不启用可以设置
 #        enabled: false

@@ -2,10 +2,8 @@ package com.jef.test.common;
 
 import com.jef.common.context.SpringContextHolder;
 import com.jef.service.impl.WorkBusinessServiceImpl;
-
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,8 +35,8 @@ public class WorkBusinessTest extends BaseTest {
 
     }
 
-    @org.junit.Test
-    public void testGetExcelInsertSQL() throws IOException {
+    @Test
+    public void testGetExcelInsertSQL() throws Exception {
         Map<String, String> mapParams = new HashMap<>();
         mapParams.put("男", "0");
         mapParams.put("女", "1");
@@ -95,6 +93,16 @@ public class WorkBusinessTest extends BaseTest {
 
         workBusinessService.testGetUpdateDemanPoolSQL();
 
+    }
+
+    @Test
+    public void testGetExcelInsertSQLOfBranchBank() throws Exception {
+        Map<String, String> mapParams = new HashMap<>();
+        initMybatis("mapper/*Mapper.xml");
+        TestBeanUtil.addBean(WorkBusinessServiceImpl.class.getSimpleName(), WorkBusinessServiceImpl.class);
+        WorkBusinessServiceImpl workBusinessService = SpringContextHolder.getBean(WorkBusinessServiceImpl.class.getSimpleName());
+        workBusinessService.getExcelInsertSQLOfBranchBank("E:/Desktop/branch_bank.xlsx", "branch_bank",
+                "bank_code, root_bank_code, branch_bank_name");
     }
 
 

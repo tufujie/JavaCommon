@@ -1,12 +1,11 @@
 package com.jef.service.impl;
 
+import com.google.common.collect.Lists;
 import com.jef.dao.IWorkBusinessDao;
 import com.jef.service.IWorkBusinessService;
 import com.jef.util.ExcelUtil;
 import com.jef.util.REIDIdentifier;
 import com.jef.util.StringUtils;
-
-import com.google.common.collect.Lists;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -46,7 +44,7 @@ public class WorkBusinessServiceImpl implements IWorkBusinessService {
      * @date 2022/1/6
      */
     @Override
-    public void getExcelInsertSQL(String fileUrl, String tableName, String columnNames, String ecID, Map<String, String> mapParams) throws IOException {
+    public void getExcelInsertSQL(String fileUrl, String tableName, String columnNames, String ecID, Map<String, String> mapParams) throws Exception {
         // 创建Excel，读取文件内容
         File file = new File(fileUrl);
         XSSFWorkbook workbook = new XSSFWorkbook(FileUtils.openInputStream(file));
@@ -256,6 +254,64 @@ public class WorkBusinessServiceImpl implements IWorkBusinessService {
             } else {
                 System.out.println("客户异常" + number);
             }
+        }
+        System.out.println(sb);
+    }
+
+    /**
+     * 获取excel形成的SQL
+     *
+     * @author Jef
+     * @date 2022/1/6
+     */
+    @Override
+    public void getExcelInsertSQLOfBranchBank(String fileUrl, String tableName, String columnNames) throws Exception {
+        // 创建Excel，读取文件内容
+        File file = new File(fileUrl);
+        XSSFWorkbook workbook = new XSSFWorkbook(FileUtils.openInputStream(file));
+        // 两种方式读取工作表
+        // Sheet sheet=workbook.getSheet("Sheet0");
+        Sheet sheet = workbook.getSheetAt(0);
+        //获取sheet中最后一行行号
+        int lastRowNum = sheet.getLastRowNum();
+        StringBuilder sb = new StringBuilder();
+        sb.append("insert into ").append(tableName);
+
+        sb.append("(").append(columnNames).append(") values\n");
+        List<Map<String, Object>> rootBankList = workBusinessDao.getAllRootBank();
+        for (int i = 1; i <= lastRowNum; i++) {
+            Row row = sheet.getRow(i);
+            //获取当前行最后单元格列号
+            int lastCellNum = row.getLastCellNum();
+            String tempStr = "(";
+            Cell cellOne = row.getCell(0);
+            Cell cellTwo = row.getCell(1);
+            Cell cellThree = row.getCell(2);
+            String branchBankCode = ExcelUtil.getValueFromCell(cellOne);
+            String rootBankCode = ExcelUtil.getValueFromCell(cellTwo);
+            String branchBankName = ExcelUtil.getValueFromCell(cellThree);
+            String finalRootBankCode = "0" + rootBankCode;
+            String finalRootBankCode1 = finalRootBankCode;
+            List<Map<String, Object>> pickBankList = rootBankList.stream().filter(obj -> finalRootBankCode1.equals(obj.get("bank_code"))).collect(Collectors.toList());
+            if (pickBankList.isEmpty()) {
+                String bankName = branchBankName.substring(0, branchBankName.indexOf("银行") + 2);
+                pickBankList = rootBankList.stream().filter(obj -> bankName.equals(obj.get("bank_name"))).collect(Collectors.toList());
+                if (pickBankList.isEmpty()) {
+                    System.out.println("未找到银行编码，银行编码为：" + finalRootBankCode + "，分行名称为：" + branchBankName + "，请检查");
+                } else {
+                    finalRootBankCode = (String) pickBankList.get(0).get("bank_code");
+                }
+            }
+            tempStr += "'" + branchBankCode + "',";
+            tempStr += "'" + finalRootBankCode + "',";
+            tempStr += "'" + branchBankName + "'";
+            sb.append(tempStr).append(")");
+            if (i < lastRowNum) {
+                sb.append(",");
+            } else {
+                sb.append(";");
+            }
+            sb.append("\n");
         }
         System.out.println(sb);
     }

@@ -2,7 +2,6 @@ package com.jef.service;
 
 //import com.github.pagehelper.PageInfo;
 
-import java.io.IOException;
 import java.util.Map;
 
 public interface IWorkBusinessService {
@@ -27,7 +26,7 @@ public interface IWorkBusinessService {
      * @author Jef
      * @date 2022/1/15
      */
-    void getExcelInsertSQL(String fileUrl, String tableName, String columnNames, String ecID, Map<String, String> mapParams) throws IOException;
+    void getExcelInsertSQL(String fileUrl, String tableName, String columnNames, String ecID, Map<String, String> mapParams) throws Exception;
 
     /**
      * 场景：客户提供excel用于更新数据
@@ -55,4 +54,14 @@ public interface IWorkBusinessService {
      * @date 2022/1/15
      */
     void testGetUpdateDemanPoolSQL() throws Exception;
+
+    /**
+     * 解析银行分行数据
+     *
+     * @param fileUrl
+     * @param tableName
+     * @param columnNames
+     * @throws Exception
+     */
+    void getExcelInsertSQLOfBranchBank(String fileUrl, String tableName, String columnNames) throws Exception;
 }

@@ -41,4 +41,8 @@
         from t_inv_demandpool a
         where a.FIsDelete = 0
     </select>
+    <select id="getAllRootBank" resultType="java.util.Map">
+        select bank_code, bank_name
+        from root_bank
+    </select>
 </mapper>

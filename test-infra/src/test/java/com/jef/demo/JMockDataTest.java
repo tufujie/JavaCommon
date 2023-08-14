@@ -1,13 +1,13 @@
-package com.jef.jmockdata;
+package com.jef.demo;
 
 import com.github.jsonzou.jmockdata.DataConfig;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.TypeReference;
 import com.github.jsonzou.jmockdata.mocker.IntegerMocker;
-import com.jef.dao.IUserDao;
-import com.jef.entity.User;
-import com.jef.service.impl.UserServiceImpl;
+import com.jef.demo.dao.IUserDao;
+import com.jef.demo.entity.User;
+import com.jef.demo.impl.UserServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,9 +18,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import static org.mockito.Mockito.when;
 
 import java.util.List;
+
+import static org.mockito.Mockito.when;
 
 /**
  * @author tufujie

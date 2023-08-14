@@ -1,7 +1,7 @@
-package com.jef.jmockdata;
+package com.jef.demo;
 
-import com.jef.dao.IUserDao;
-import com.jef.entity.User;
+import com.jef.demo.dao.IUserDao;
+import com.jef.demo.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

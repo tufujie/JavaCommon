@@ -202,12 +202,25 @@
         </dependency>
         <!-- spring-cloud ↑-->
         <!-- nacos配置中心 ↓-->
-        <dependency>
+<!--        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
             <version>2021.0.1.0</version>
-        </dependency>
+        </dependency>-->
         <!-- nacos配置中心 ↑-->
+
+        <dependency>
+            <groupId>com.yomahub</groupId>
+            <artifactId>liteflow-spring-boot-starter</artifactId>
+            <version>2.10.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yomahub</groupId>
+            <artifactId>liteflow-rule-nacos</artifactId>
+            <version>2.10.7</version>
+        </dependency>
+
 
     </dependencies>
 

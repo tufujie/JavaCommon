@@ -50,6 +50,14 @@ public class MockitoTest {
 //        可以自定义触发某个方法时，返回特定的内容。
         // 把user对象的值赋给userDao.getByUser(Mockito.any())，后面所有userDao.getByUser(Mockito.any())的值都是user对象
         when(userDao.getByUser(Mockito.any())).thenReturn(user);
+        User userSecond = userDao.getByUser(Mockito.any());
+        Assertions.assertEquals(user, userSecond);
+
+        List<User> userList = new ArrayList<>();
+        userList.add(new User());
+        when(userDao.getUserList(Mockito.any())).thenReturn(userList);
+        List<User> userListSecond = userDao.getUserList(Mockito.any());
+        Assertions.assertEquals(userList, userListSecond);
 //        对于有参数的方法，可以设定不论传入什么参数，都return特定值。anyInt()等同理。
         Map<String, String> map = mock(Map.class);
         String testValue = "testValue";

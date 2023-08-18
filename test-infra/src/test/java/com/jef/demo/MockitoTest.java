@@ -2,11 +2,18 @@ package com.jef.demo;
 
 import com.jef.demo.dao.IUserDao;
 import com.jef.demo.entity.User;
+import com.jef.demo.impl.UserServiceImpl;
+import okhttp3.mockwebserver.Dispatcher;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -29,14 +36,23 @@ import static org.mockito.Mockito.*;
  * @date 2023/7/21
  */
 @DisplayName("mockito测试")
-@ExtendWith(MockitoExtension.class)
+// @ExtendWith注解，使用MockitoExtension，会识别@InjectMocks和@Mock等注解
+@ExtendWith({MockitoExtension.class})
+// @MockitoSetting注解，设置为Strictness.LENIENT，忽略没被使用的mock方法，避免重复代码
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class MockitoTest {
 
     private static final String MOCKITO = "mockito";
 
+    // @Mock注解的对象会被加入到context中，自动组装给@InjectMocks注解的对象
     @Mock
     private IUserDao userDao;
+
+    // @InjectMocks注解的对象的代码会被真实调用，也是需要测试的代码
+    @InjectMocks
+    private UserServiceImpl userService;
+
+    private MockWebServer mockWebServer = new MockWebServer();
 
     @Test
     @DisplayName("mockito api 测试")
@@ -98,6 +114,9 @@ public class MockitoTest {
         verify(mockedList, times(1)).add("two");
         verify(mockedList, times(3)).add("three times");
         verify(mockedList, never()).isEmpty();
+        // 断言方法被调用过
+        User userSecond = userDao.getByUser(new User());
+        verify(userDao).getByUser(Mockito.any());
     }
 
 
@@ -144,6 +163,31 @@ public class MockitoTest {
 
         Assertions.assertEquals(2, argument.getValue().size());
         Assertions.assertEquals(list, argument.getValue());
+    }
+
+    @Test
+    @DisplayName("web server 200")
+    public void testWebServer() {
+        String url = "http://" + mockWebServer.getHostName() + ":" + mockWebServer.getPort() + "/interfaceName";
+        Dispatcher dispatcher = getDispatcher(url, "", 200);
+        mockWebServer.setDispatcher(dispatcher);
+    }
+
+    private Dispatcher getDispatcher(String url, String body, Integer httpStatus) {
+        return new Dispatcher() {
+            @NotNull
+            @Override
+            public MockResponse dispatch(@NotNull RecordedRequest recordedRequest) throws InterruptedException {
+                if (url.equals(recordedRequest.getPath())) {
+                    return new MockResponse()
+                            .setResponseCode(httpStatus)
+                            .setBody(body)
+                            .addHeader("Content-Type", "application/json");
+                } else {
+                    return new MockResponse().setResponseCode(404);
+                }
+            }
+        };
     }
 
 }

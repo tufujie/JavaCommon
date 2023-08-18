@@ -18,7 +18,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
 
@@ -85,6 +85,89 @@
       <artifactId>spring-cloud-commons</artifactId>
       <version>3.1.7</version>
     </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>mockwebserver</artifactId>
+      <version>4.11.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!--测试依赖-->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <exclusions>
+        <exclusion>
+          <artifactId>mockito-core</artifactId>
+          <groupId>org.mockito</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>junit-jupiter-api</artifactId>
+          <groupId>org.junit.jupiter</groupId>
+        </exclusion>
+      </exclusions>
+      <version>2.20.0</version>
+    </dependency>
+    <!--mockito的依赖项-->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-inline</artifactId>
+      <version>4.4.0</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>mockito-core</artifactId>
+          <groupId>org.mockito</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <exclusions>
+        <exclusion>
+          <artifactId>byte-buddy</artifactId>
+          <groupId>net.bytebuddy</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>byte-buddy-agent</artifactId>
+          <groupId>net.bytebuddy</groupId>
+        </exclusion>
+      </exclusions>
+      <version>4.4.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.bytebuddy</groupId>
+      <artifactId>byte-buddy</artifactId>
+      <version>1.12.9</version>
+    </dependency>
+    <dependency>
+      <groupId>net.bytebuddy</groupId>
+      <artifactId>byte-buddy-agent</artifactId>
+      <version>1.12.9</version>
+      <scope>test</scope>
+    </dependency>
+    <!--mybatisplus测试为仅加载mybatisplus引入的依赖项-->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter-test</artifactId>
+      <version>3.5.2</version>
+      <scope>test</scope>
+    </dependency>
+    <!--数据库测试引入的内嵌数据库-->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.1.214</version>
+      <scope>test</scope>
+    </dependency>
+    <!--pojo geter seter方法引入的组件-->
+    <dependency>
+      <groupId>com.openpojo</groupId>
+      <artifactId>openpojo</artifactId>
+      <version>0.9.1</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>

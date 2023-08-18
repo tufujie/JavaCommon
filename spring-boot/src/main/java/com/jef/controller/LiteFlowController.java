@@ -1,6 +1,10 @@
 package com.jef.controller;
 
 
+import com.jef.constant.CommonConstant;
+import com.jef.entity.User;
+import com.jef.service.BCmp;
+import com.jef.util.ThreadLocalUtil;
 import com.yomahub.liteflow.core.FlowExecutor;
 import com.yomahub.liteflow.core.FlowExecutorHolder;
 import com.yomahub.liteflow.flow.LiteflowResponse;
@@ -82,4 +86,59 @@ public class LiteFlowController {
         return before + "<br/>" + after;
     }
 
+    @ResponseBody
+    @RequestMapping("/outManyProperties")
+    public String outManyProperties(@RequestParam String fileName, @RequestParam String chainId) {
+        LiteflowConfig config = new LiteflowConfig();
+        config.setRuleSource("config/" + fileName + ".xml");
+        FlowExecutor flowExecutor = FlowExecutorHolder.loadInstance(config);
+        LiteflowResponse response = flowExecutor.execute2Resp(chainId, "arg");
+        return getOutOfProperties(response, "输出文件属性");
+    }
+
+    private String getOutOfProperties(LiteflowResponse response, String business) {
+        StringBuffer sb = new StringBuffer(business + "<br/>");
+        response.getExecuteStepQueue().stream().forEach(obj -> {
+            sb.append("nodeId=" + obj.getNodeId() + ";");
+            sb.append("nodeName=" + obj.getNodeName() + ";");
+            sb.append("tag=" + obj.getTag() + ";");
+            sb.append("class=" + obj.getClass() + ";");
+            sb.append("timeSpent=" + obj.getTimeSpent() + ";");
+            sb.append("stepType=" + obj.getStepType() + ";");
+            sb.append("<br/>");
+        });
+        try {
+            BCmp bCmp = response.getContextBean(BCmp.class);
+            sb.append("chainId=" + bCmp.getChainId());
+            sb.append("name=" + bCmp.getName());
+            sb.append("chainName=" + bCmp.getChainName());
+            sb.append("requestData=" + bCmp.getRequestData());
+            sb.append("tag=" + bCmp.getTag());
+        } catch (Exception e) {
+
+        }
+        return sb.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping("/businessUse")
+    public String businessUse(@RequestParam String fileName, @RequestParam String chainId) {
+        for (int i = 1; i < 3; i++) {
+            int finalI = i;
+            Thread thread1 = new Thread(() -> {
+                // 设置上下文开始
+                User user = new User();
+                user.setId(Long.valueOf(finalI));
+                user.setName("设置时的线程名称=" + Thread.currentThread().getName() + "，值为=" + CommonConstant.NAME + finalI);
+                ThreadLocalUtil.setThreadLocalUser(user);
+                // 设置上下文结束
+                LiteflowConfig config = new LiteflowConfig();
+                config.setRuleSource("config/" + fileName + ".xml");
+                FlowExecutor flowExecutor = FlowExecutorHolder.loadInstance(config);
+                LiteflowResponse response = flowExecutor.execute2Resp(chainId, "arg");
+            });
+            thread1.start();
+        }
+        return "success";
+    }
 }

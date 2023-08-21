@@ -22,6 +22,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <curator.version>4.1.0</curator.version>
+        <easyrule.version>4.1.0</easyrule.version>
     </properties>
 
     <dependencies>
@@ -224,7 +225,18 @@
         <dependency>
             <groupId>org.jeasy</groupId>
             <artifactId>easy-rules-core</artifactId>
-            <version>4.1.0</version>
+            <version>${easyrule.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-rules-mvel</artifactId>
+            <version>${easyrule.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-rules-support</artifactId>
+            <version>${easyrule.version}</version>
         </dependency>
 
     </dependencies>

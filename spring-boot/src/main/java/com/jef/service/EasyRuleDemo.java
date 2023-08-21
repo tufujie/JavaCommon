@@ -45,6 +45,7 @@ public class EasyRuleDemo {
         // 在已知的事实上执行规则
         // 定义事实列表
         Facts facts = new Facts();
+        // 传参，将业务的参数传进来
         facts.put("rain", true);
         rulesEngine.fire(rules, facts);
         System.out.println("------");

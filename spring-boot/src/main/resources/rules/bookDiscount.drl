@@ -1,6 +1,7 @@
 // 图书优惠规则
 package book.discount
 import com.jef.entity.Order
+import com.jef.entity.User
 
 // 规则一：所购图书总价在100元以下的没有优惠
 rule "book_discount_1"
@@ -38,3 +39,12 @@ rule "book_discount_4"
         System.out.println("成功匹配到规则四，所购图书总价在300元及以上");
 end
 
+
+// 规则五：所购图书总价在100~200元之间，购买者为男性，年龄大于20，优惠30元
+rule "book_discount_5"
+    when
+        $order: Order(originalPrice >= 100 && originalPrice < 200) and $user: User(age > 20 && gender == 'male')
+    then
+        $order.setRealPrice($order.getOriginalPrice() - 30);
+        System.out.println("成功匹配到规则五，所购图书总价在100~200元之间，购买者为男性，年龄大于20");
+end

@@ -29,6 +29,8 @@ public class User implements Serializable {
 
     private Integer tabIndex;
 
+    private String gender;
+
     public User() {
 
     }
@@ -105,5 +107,13 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "id=" + this.getId() + "；名称=" + this.getName() + "；年龄=" + this.getAge() + "；电话=" + this.getPhone();
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

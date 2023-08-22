@@ -128,8 +128,10 @@ public class LiteFlowController {
             Thread thread1 = new Thread(() -> {
                 // 设置上下文开始
                 User user = new User();
+                user.setPhone(CommonConstant.PHONE);
+                user.setName(CommonConstant.NAME);
                 user.setId(Long.valueOf(finalI));
-                user.setName("设置时的线程名称=" + Thread.currentThread().getName() + "，值为=" + CommonConstant.NAME + finalI);
+                user.setDescrription("设置时的线程名称=" + Thread.currentThread().getName() + "，值为=" + CommonConstant.NAME + finalI);
                 ThreadLocalUtil.setThreadLocalUser(user);
                 // 设置上下文结束
                 LiteflowConfig config = new LiteflowConfig();

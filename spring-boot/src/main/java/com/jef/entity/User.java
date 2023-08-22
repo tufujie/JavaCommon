@@ -31,6 +31,8 @@ public class User implements Serializable {
 
     private String gender;
 
+    private String descrription;
+
     public User() {
 
     }
@@ -115,5 +117,13 @@ public class User implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getDescrription() {
+        return descrription;
+    }
+
+    public void setDescrription(String descrription) {
+        this.descrription = descrription;
     }
 }

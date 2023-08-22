@@ -14,5 +14,9 @@ public interface CommonConstant {
      * name
      */
     String NAME = "Jef";
+    /**
+     * phone
+     */
+    String PHONE = "18390220001";
 
 }

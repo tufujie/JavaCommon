@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+    <title>驼峰与下划线互转</title>
+    <style>
+        .input__field--haruki {
+            padding: 0.4em 0.25em;
+            width: 100%;
+            background: transparent;
+            color: #AFB5BB;
+            font-size: 1.55em;
+        }
+        .input__field {
+            position: relative;
+            display: block;
+            float: left;
+            padding: 0.8em;
+            width: 100%;
+            border: none;
+            border-radius: 0;
+            background: #f0f0f0;
+            color: #aaa;
+            font-weight: bold;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-appearance: none;
+        }
+
+        .ant-btn {
+            line-height: 1.499;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+            white-space: nowrap;
+            text-align: center;
+            background-image: none;
+            border: 1px solid transparent;
+            -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.015);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.015);
+            cursor: pointer;
+            -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
+            transition: all .3s cubic-bezier(.645, .045, .355, 1);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            height: 32px;
+            padding: 0 15px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: rgba(0,0,0,0.65);
+            background-color: #fff;
+            border-color: #d9d9d9;
+        }
+
+        .ant-btn-primary {
+            color: #fff;
+            background-color: #1890ff;
+            border-color: #1890ff;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+            -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+        }
+
+        .ant-btn-red {
+            color: #fff;
+            background-color: #FF5A44;
+            border-color: #FF5A44;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+            -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align: center">驼峰与下划线互转</h1>
+驼峰值：
+<textarea style="margin: 0px; width: 100%; height: 200px;}" id="upperValue"></textarea>
+<button class="ant-btn ant-btn-primary" onclick="upperLetterChange()">转化</button><br><br><br>
+下划线值：
+<textarea style="margin: 0px; width: 100%; height: 200px;}" id="letterValue"></textarea>
+
+<script>
+    console.log("JS已引入");
+    function upperLetterChange() {
+        var upperValue = $.trim($('#upperValue').val());
+        var letterValue = $.trim($('#letterValue').val());
+        if (upperValue != '') {
+            $('#letterValue').val(upperValue.replace(/([A-Z])/g,"_$1").toLowerCase());
+        } else if (letterValue != '') {
+            $('#upperValue').val(letterValue.replace(/\_(\w)/g, (all,letter)=>letter.toUpperCase()));
+        }
+
+    }
+</script>
+</body>
+</html>

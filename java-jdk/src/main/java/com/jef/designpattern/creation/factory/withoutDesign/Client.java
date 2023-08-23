@@ -1,4 +1,4 @@
-package com.jef.designpattern.creation.factoryMethod.withoutDesign;
+package com.jef.designpattern.creation.factory.withoutDesign;
 
 import com.jef.designpattern.BasicDesign;
 

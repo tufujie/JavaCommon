@@ -1,4 +1,4 @@
-package com.jef.designpattern.creation.factoryMethod.withoutDesign;
+package com.jef.designpattern.creation.factory.withoutDesign;
 
 /**
  * 接口，输出文本接口

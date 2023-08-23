@@ -1,9 +1,9 @@
-package com.jef.designpattern.creation.factoryMethod.withDesign.factoryMethod;
+package com.jef.designpattern.creation.factory.withDesign.abstractFactory;
 
-import com.jef.designpattern.creation.factoryMethod.withDesign.factoryMethod.concrete.PhilipsScreenFactory;
-import com.jef.designpattern.creation.factoryMethod.withDesign.factoryMethod.concrete.SamsungScreenFactory;
-import com.jef.designpattern.creation.factoryMethod.withDesign.factoryMethod.framework.Screen;
-import com.jef.designpattern.creation.factoryMethod.withDesign.factoryMethod.framework.ScreenFactory;
+import com.jef.designpattern.creation.factory.withDesign.abstractFactory.concrete.PhilipsScreenFactory;
+import com.jef.designpattern.creation.factory.withDesign.abstractFactory.concrete.SamsungScreenFactory;
+import com.jef.designpattern.creation.factory.withDesign.abstractFactory.framework.Screen;
+import com.jef.designpattern.creation.factory.withDesign.abstractFactory.framework.ScreenFactory;
 
 /**
  * 工厂方法客户端

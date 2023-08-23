@@ -1,7 +1,7 @@
-package com.jef.designpattern.creation.factoryMethod.withDesign.factoryMethod.concrete;
+package com.jef.designpattern.creation.factory.withDesign.abstractFactory.concrete;
 
-import com.jef.designpattern.creation.factoryMethod.withDesign.factoryMethod.framework.Screen;
-import com.jef.designpattern.creation.factoryMethod.withDesign.factoryMethod.framework.ScreenFactory;
+import com.jef.designpattern.creation.factory.withDesign.abstractFactory.framework.Screen;
+import com.jef.designpattern.creation.factory.withDesign.abstractFactory.framework.ScreenFactory;
 
 /**
  * 具体产品工厂-三星显示器工厂

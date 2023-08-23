@@ -1,4 +1,4 @@
-package com.jef.designpattern.creation.factoryMethod.withDesign.factoryMethod.framework;
+package com.jef.designpattern.creation.factory.withDesign.abstractFactory.framework;
 
 /**
  * 产品-显示器

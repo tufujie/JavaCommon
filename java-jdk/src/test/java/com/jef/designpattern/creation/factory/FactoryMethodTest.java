@@ -1,9 +1,8 @@
-package com.jef.designpattern.creation.factoryMethod;
+package com.jef.designpattern.creation.factory;
 
 import com.jef.designpattern.BasicDesign;
-import com.jef.designpattern.creation.factoryMethod.withDesign.simpleFactory.IScreen;
-import com.jef.designpattern.creation.factoryMethod.withDesign.simpleFactory.ScreenFactory;
-
+import com.jef.designpattern.creation.factory.withDesign.factoryMethod.IScreen;
+import com.jef.designpattern.creation.factory.withDesign.factoryMethod.ScreenFactory;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -1,4 +1,4 @@
-package com.jef.designpattern.creation.factoryMethod.withDesign.simpleFactory;
+package com.jef.designpattern.creation.factory.withDesign.factoryMethod;
 
 import com.jef.designpattern.BasicDesign;
 import com.jef.util.PrintUtil;

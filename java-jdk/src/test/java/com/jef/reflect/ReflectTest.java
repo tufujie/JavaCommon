@@ -5,9 +5,9 @@ import com.jef.constant.BasicConstant;
 import com.jef.constant.BasicEntity;
 import com.jef.entity.TestAll;
 import com.jef.entity.User;
+import com.jef.util.JsonUtil;
 import com.jef.util.PrintUtil;
 import com.jef.util.ReflectionUtil;
-
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -106,4 +106,24 @@ public class ReflectTest {
         Method methodManyKindType = clazz.getDeclaredMethod("taskHasReturn", int.class, String.class);
         methodManyKindType.invoke(businessDemo, 10, "利用反射执行方法测试");
     }
+
+    /**
+     * 利用反射执行方法测试
+     */
+    @Test
+    public void testReflectInvokeMethodEquals() throws Exception {
+        // 模拟数据库的真实数据
+        User user = new User();
+        user.setName(BasicConstant.USER_NAME);
+        user.setPhone(BasicConstant.USER_PHONE);
+        // 动态配置
+        String setParams = "{\"name\": \"Jef\",\"phone\": \"18390220001\"}";
+        Map<String, Object> map = JsonUtil.json2map(setParams);
+        ReflectionUtil.pick(map, user);
+        PrintUtil.printSplitLine();
+
+        user.setName(BasicConstant.USER_NAME_LISI);
+        ReflectionUtil.pick(map, user);
+    }
+
 }

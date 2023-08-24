@@ -2,14 +2,15 @@ package com.jef.designpattern.creation.factory.withDesign.abstractFactory.framew
 
 /**
  * 产品-显示器
- *
+ * 使用接口的原因：让实现类各自实现，即方法实现不同
  * @author Jef
  * @date 2023/6/27
  */
-public abstract class Screen {
+public interface Screen {
 
     /**
      * 看-显示器
+     * 模拟的是不同的功能
      */
-    public abstract void watch();
+    void watch();
 }

@@ -8,7 +8,7 @@ import com.jef.designpattern.creation.factory.withDesign.abstractFactory.framewo
  * @author Jef
  * @date 2023/6/27
  */
-public class SamsungScreen extends Screen {
+public class SamsungScreen implements Screen {
 
     public SamsungScreen() {
         System.out.println("制造三星显示器");

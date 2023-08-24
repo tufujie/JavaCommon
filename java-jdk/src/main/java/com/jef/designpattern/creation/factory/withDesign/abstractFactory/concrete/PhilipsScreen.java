@@ -8,7 +8,7 @@ import com.jef.designpattern.creation.factory.withDesign.abstractFactory.framewo
  * @author Jef
  * @date 2023/6/27
  */
-public class PhilipsScreen extends Screen {
+public class PhilipsScreen implements Screen {
 
     public PhilipsScreen() {
         System.out.println("制造飞利浦显示器");

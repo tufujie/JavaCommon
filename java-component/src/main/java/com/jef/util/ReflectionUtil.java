@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -1186,26 +1185,6 @@ public abstract class ReflectionUtil {
         byte[] items = fildeName.getBytes();
         items[0] = (byte) ((char) items[0] - 'a' + 'A');
         return new String(items);
-    }
-
-
-    public static void pick(Map<String, Object> map, Object obj) throws Exception {
-        int pick = 0;
-        Class clazz = obj.getClass();
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            Method methodMap = clazz.getDeclaredMethod("get" + StringUtils.capitalize(entry.getKey()));
-            Object value = methodMap.invoke(obj);
-            if (entry.getValue().equals(value)) {
-                pick++;
-            } else {
-                System.out.println("key=" + entry.getKey() + ",真实value=" + value + ",设置的value=" + entry.getValue());
-            }
-        }
-        if (pick != 0 && pick == map.size()) {
-            System.out.println("所有参数都匹配，做些业务");
-        } else {
-            System.out.println("不是所有参数都匹配，做些业务");
-        }
     }
 
 }

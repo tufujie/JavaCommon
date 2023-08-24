@@ -1,13 +1,12 @@
 package com.jef.alibaba.fastjson;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.jef.constant.BasicConstant;
 import com.jef.entity.User;
 import com.jef.util.DateTimeUtil;
 import com.jef.util.PrintUtil;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
 import java.util.Date;
@@ -27,7 +26,7 @@ public class FastJsonTest {
      */
     private static final String JSON_USER = "{'name': 'Jef','phone': '18390220001', 'age': 20, 'isMain': 0}";
     /**
-     * 模拟页面传过来的数据，单个对象集合时
+     * 模拟页面传过来的数据，多个对象集合时
      */
     private static final String JSON_ARRAY = "[{'name':'Jef','phone': '18390220001', 'age': 20},{'name':'Ran','phone': '18390220002', 'age': 19}]";
     /**

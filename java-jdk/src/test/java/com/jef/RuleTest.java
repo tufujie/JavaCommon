@@ -28,11 +28,13 @@ public class RuleTest {
         String setParams = "{\"name\": \"Jef\",\"phone\": \"18390220001\"}";
         Map<String, Object> map = JsonUtil.json2map(setParams);
         ActualRule actualRule = new ActualRule();
-        actualRule.pickAndHandle(map, user);
+        String ruleCode = "ruleCodeTest";
+        // 可以设置 规则编码=chainId=componentName
+        actualRule.pickAndHandle(map, user, ruleCode);
         PrintUtil.printSplitLine();
 
         user.setName(BasicConstant.USER_NAME_LISI);
-        actualRule.pickAndHandle(map, user);
+        actualRule.pickAndHandle(map, user, ruleCode);
     }
 
 }

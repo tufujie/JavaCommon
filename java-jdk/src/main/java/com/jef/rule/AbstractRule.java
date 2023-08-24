@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public abstract class AbstractRule {
 
-    public boolean pickAndHandle(Map<String, Object> map, Object obj) {
+    public boolean pickAndHandle(Map<String, Object> map, Object obj, String ruleCode) {
         int pick = 0;
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             Object value = ReflectionUtil.invokeGetter(obj, entry.getKey());
@@ -22,6 +22,9 @@ public abstract class AbstractRule {
         }
         if (pick != 0 && pick == map.size()) {
             System.out.println("所有参数都匹配，做些业务");
+            // 调用规则开始
+            System.out.println("规则编码=" + ruleCode + "，调用规则触发完毕");
+            // 调用规则结束
             handle(obj);
             return true;
         } else {

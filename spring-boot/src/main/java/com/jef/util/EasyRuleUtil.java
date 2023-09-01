@@ -49,7 +49,7 @@ public class EasyRuleUtil {
     public static Rule getAgeRule() {
         Rule ageRule = new MVELRule()
                 .name("age rule")
-                .description("Check if person's age is > 18 and marks the person as adult")
+                .description("检查此人的年龄是否超过18，超过了18就设置他为成年人")
                 .priority(1)
                 .when("person.age > 18")
                 .then("person.setAdult(true);");
@@ -59,20 +59,20 @@ public class EasyRuleUtil {
     public static Rule getAlcoholRule() {
         Rule ageRule = new MVELRule()
                 .name("alcohol rule")
-                .description("children are not allowed to buy alcohol")
+                .description("未成年人禁止买酒")
                 .priority(2)
                 .when("person.isAdult() == false")
-                .then("System.out.println(\"Shop: Sorry \" + person.name +  \", you are not allowed to buy alcohol\");");
+                .then("System.out.println(\"店铺: 对不起 \" + person.name +  \", 你是未成年人，不允许你买酒\");");
         return ageRule;
     }
 
     public static Rule getAlcoholAuditRule() {
         Rule ageRule = new MVELRule()
                 .name("alcohol rule")
-                .description("children are not allowed to buy alcohol")
+                .description("未成年人禁止买酒")
                 .priority(3)
                 .when("person.isAdult() == true")
-                .then("System.out.println(\"Shop: Ok \" + person.name +  \", you are allowed to buy alcohol\")");
+                .then("System.out.println(\"Shop: Ok \" + person.name +  \", 你是成年人，允许你买酒\")");
         return ageRule;
     }
 

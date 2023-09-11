@@ -29,8 +29,7 @@
         <dependency>
             <groupId>com.jef</groupId>
             <artifactId>java-component</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>

@@ -15,8 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -275,45 +278,65 @@ public class WorkBusinessServiceImpl implements IWorkBusinessService {
         //获取sheet中最后一行行号
         int lastRowNum = sheet.getLastRowNum();
         StringBuilder sb = new StringBuilder();
-        sb.append("insert into ").append(tableName);
-
-        sb.append("(").append(columnNames).append(") values\n");
         List<Map<String, Object>> rootBankList = workBusinessDao.getAllRootBank();
+        int maxLine = 10000;
+        File fileDown = new File("E://download" + UUID.randomUUID() + ".sql");
+        FileWriter fWriter = null;
+        fileDown.createNewFile();
+        fWriter = new FileWriter(fileDown);
+        int notPickCount = 0;
         for (int i = 1; i <= lastRowNum; i++) {
+            if ((i - 1) % maxLine == 0) {
+                sb.append("insert into ").append(tableName);
+                sb.append("(").append(columnNames).append(") values\n");
+            }
+            String tempStr = "(";
             Row row = sheet.getRow(i);
             //获取当前行最后单元格列号
             int lastCellNum = row.getLastCellNum();
-            String tempStr = "(";
+
             Cell cellOne = row.getCell(0);
             Cell cellTwo = row.getCell(1);
             Cell cellThree = row.getCell(2);
             String branchBankCode = ExcelUtil.getValueFromCell(cellOne);
             String rootBankCode = ExcelUtil.getValueFromCell(cellTwo);
             String branchBankName = ExcelUtil.getValueFromCell(cellThree);
+            Map<String, String> bankNameMap = new HashMap<>();
+            bankNameMap.put("建行", "建设银行");
+            bankNameMap.put("招行", "招商银行");
+            bankNameMap.put("工行", "工商银行");
+            bankNameMap.put("花旗银行（中国）有限公司", "花旗银行有限公司");
+            bankNameMap.put("中国农业发展银行", "农业银行");
             String finalRootBankCode = "0" + rootBankCode;
-            String finalRootBankCode1 = finalRootBankCode;
-            List<Map<String, Object>> pickBankList = rootBankList.stream().filter(obj -> finalRootBankCode1.equals(obj.get("bank_code"))).collect(Collectors.toList());
-            if (pickBankList.isEmpty()) {
-                String bankName = branchBankName.substring(0, branchBankName.indexOf("银行") + 2);
-                pickBankList = rootBankList.stream().filter(obj -> bankName.equals(obj.get("bank_name"))).collect(Collectors.toList());
-                if (pickBankList.isEmpty()) {
-                    System.out.println("未找到银行编码，银行编码为：" + finalRootBankCode + "，分行名称为：" + branchBankName + "，请检查");
-                } else {
-                    finalRootBankCode = (String) pickBankList.get(0).get("bank_code");
+            String branchBankNameAll = branchBankName;
+            for (String key : bankNameMap.keySet()) {
+                if (branchBankName.contains(key)) {
+                    branchBankNameAll = branchBankName.replace(key, bankNameMap.get(key));
+                    break;
                 }
+            }
+            String bankName = branchBankNameAll.substring(0, branchBankNameAll.indexOf("银行") + 2);
+            List<Map<String, Object>> pickBankList = rootBankList.stream().filter(obj -> bankName.contains(obj.get("bank_name").toString())).collect(Collectors.toList());
+            if (pickBankList.isEmpty()) {
+                notPickCount++;
+                System.out.println("未找到银行编码，银行编码为：" + finalRootBankCode + "，分行名称为：" + branchBankName + "，请检查");
+            } else {
+                finalRootBankCode = (String) pickBankList.get(0).get("bank_code");
             }
             tempStr += "'" + branchBankCode + "',";
             tempStr += "'" + finalRootBankCode + "',";
             tempStr += "'" + branchBankName + "'";
             sb.append(tempStr).append(")");
-            if (i < lastRowNum) {
-                sb.append(",");
-            } else {
+            if (i % maxLine == 0 || i >= lastRowNum) {
                 sb.append(";");
+            } else {
+                sb.append(",");
             }
             sb.append("\n");
         }
-        System.out.println(sb);
+        fWriter.append(sb);
+        fWriter.flush();
+        System.out.println("没有匹配的银行数为：" + notPickCount);
     }
 
 }

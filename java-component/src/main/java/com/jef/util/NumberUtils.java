@@ -1300,4 +1300,12 @@ public class NumberUtils {
     public static int divideUp(int num, int numTwo) {
         return num / numTwo + (num % numTwo == 0 ? 0 : 1);
     }
+
+    public static BigDecimal getPercent(Object obj, int scale) {
+        return divide(obj, ONE_HUNDRED, scale);
+    }
+
+    public static BigDecimal getRateValue(Object obj, Object rate, int scale) {
+        return divide(multiply(obj, rate, scale), ONE_HUNDRED, scale);
+    }
 }

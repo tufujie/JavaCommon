@@ -64,4 +64,12 @@ public interface IWorkBusinessService {
      * @throws Exception
      */
     void getExcelInsertSQLOfBranchBank(String fileUrl, String tableName, String columnNames) throws Exception;
+
+    /**
+     * 将excel的数据形成json方便生成实体
+     *
+     * @param fileUrl
+     * @throws Exception
+     */
+    void getExcelToJson(String fileUrl) throws Exception;
 }

@@ -1,11 +1,11 @@
 package com.jef.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.jef.constant.BasicConstant;
+import com.jef.constant.CommonConstant;
 import com.jef.entity.User;
-import com.jef.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -108,7 +108,7 @@ public class EsController {
     @ResponseBody
     @RequestMapping("/testAddDocument/{id}")
     String testAddDocument(@PathVariable("id") String id) throws IOException {
-        User userEntity = new User(30, BasicConstant.USER_NAME);
+        User userEntity = new User(30, CommonConstant.USER_NAME);
         // 创建请求
         IndexRequest request = new IndexRequest(INDEX_NAME);
         // 规则 put /kuang_index/_doc/1

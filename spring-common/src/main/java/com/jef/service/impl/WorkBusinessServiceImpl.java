@@ -1,5 +1,6 @@
 package com.jef.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.jef.dao.IWorkBusinessDao;
 import com.jef.service.IWorkBusinessService;
@@ -337,6 +338,73 @@ public class WorkBusinessServiceImpl implements IWorkBusinessService {
         fWriter.append(sb);
         fWriter.flush();
         System.out.println("没有匹配的银行数为：" + notPickCount);
+    }
+
+    @Override
+    public void getExcelToJson(String fileUrl) throws Exception {
+        // 创建Excel，读取文件内容
+        File file = new File(fileUrl);
+        XSSFWorkbook workbook = new XSSFWorkbook(FileUtils.openInputStream(file));
+        // 两种方式读取工作表
+        // Sheet sheet=workbook.getSheet("Sheet0");
+        Sheet sheet = workbook.getSheetAt(0);
+        //获取sheet中最后一行行号
+        int lastRowNum = sheet.getLastRowNum();
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        int maxLine = 10000;
+        File fileDown = new File("E://download" + UUID.randomUUID() + ".sql");
+        FileWriter fWriter = null;
+        fileDown.createNewFile();
+        fWriter = new FileWriter(fileDown);
+        boolean parent = false;
+        Map<String, Object> map = new HashMap<>();
+        String parentKey = "";
+        for (int i = 0; i <= lastRowNum; i++) {
+            Row row = sheet.getRow(i);
+            Cell cellKey = row.getCell(0);
+            Cell cellSub = row.getCell(0);
+            Cell cellDesc = row.getCell(1);
+            Cell cellType = row.getCell(2);
+            Cell cellComment = row.getCell(4);
+            String key = ExcelUtil.getValueFromCell(cellKey);
+            String subkey = ExcelUtil.getValueFromCell(cellSub);
+            String desc = ExcelUtil.getValueFromCell(cellDesc);
+            String type = ExcelUtil.getValueFromCell(cellType);
+            String comment = ExcelUtil.getValueFromCell(cellComment);
+            /*comment = comment.replaceAll(" ", "");
+            comment = comment.replaceAll("/", "");
+            comment = comment.replaceAll(":", "");*/
+            if (type.contains("string") || type.contains("String")) {
+            }
+            String value = desc + comment;
+            boolean thisIsParent = type == null || "".equals(type);
+            boolean commonAppend = false;
+            if (parent) {
+                map.put(subkey, value);
+            } else if (!thisIsParent) {
+                commonAppend = true;
+            }
+            if ((key != null && !"".equals(key) && type != null && !"".equals(type)) || i == lastRowNum) {
+                parent = false;
+                if (!map.isEmpty()) {
+                    key = parentKey;
+                    value = JSONObject.toJSONString(map);
+                    commonAppend = true;
+                }
+            }
+            if (commonAppend) {
+                sb.append(key).append(":'").append(value).append("',").append("\n");
+            }
+            if (thisIsParent) {
+                parent = true;
+                parentKey = key;
+                map = new HashMap<>();
+            }
+        }
+        sb.append("}");
+        fWriter.append(sb);
+        fWriter.flush();
     }
 
 }

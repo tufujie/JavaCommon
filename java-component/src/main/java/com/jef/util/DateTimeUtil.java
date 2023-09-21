@@ -10,16 +10,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * 时间转化工具全，对原始工具类进行拓展
@@ -224,6 +215,14 @@ public class DateTimeUtil extends DateUtils {
      */
     public static Date date(int year, int month, int day) {
         return date(year, month - 1, day, 0, 0, 0);
+    }
+
+    /**
+     * 获取今天的开始时间
+     * 0点0分0秒
+     */
+    public static Date getToday() {
+        return getDate0Time(new Date());
     }
 
     /**
@@ -1986,7 +1985,7 @@ public class DateTimeUtil extends DateUtils {
         if (date == null) {
             return null;
         }
-        return getDateLast(date);
+        return getDate0Time(date);
     }
 
     public static Date getDateEnd(Date date) throws ParseException {

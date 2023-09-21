@@ -1,8 +1,7 @@
 package com.jef.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jef.constant.BasicConstant;
+import com.jef.constant.CommonConstant;
 import com.jef.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +36,7 @@ public class MQTemplateController {
     @RequestMapping("/syncSend")
     public String syncSend() {
         User user = new User();
-        user.setName(BasicConstant.USER_NAME);
+        user.setName(CommonConstant.USER_NAME);
         String msgStr = JSONObject.toJSONString(user);
         Message<String> msg = MessageBuilder.withPayload(msgStr).build();
         String topic = "topic_name_jef_test";
@@ -50,7 +49,7 @@ public class MQTemplateController {
     @RequestMapping("/asyncSend")
     public String asyncSend() {
         User user = new User();
-        user.setName(BasicConstant.USER_NAME);
+        user.setName(CommonConstant.USER_NAME);
         String msgStr = JSONObject.toJSONString(user);
         Message<String> msgs = MessageBuilder.withPayload(msgStr).build();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

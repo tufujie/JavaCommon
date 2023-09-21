@@ -34,7 +34,7 @@ spring:
     name: cloud-payment-service
   # 数据源基本配置
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/all_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: root

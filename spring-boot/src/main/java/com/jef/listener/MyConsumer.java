@@ -1,7 +1,6 @@
 package com.jef.listener;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,7 @@ import java.util.Date;
  * @author tufujie
  * @date 2023/9/7
  */
-@RocketMQMessageListener(topic = "topic_name_jef_test", consumerGroup = "topic_name_jef_test_Group")
+//@RocketMQMessageListener(topic = "topic_name_jef_test", consumerGroup = "topic_name_jef_test_Group")
 @Component
 @Slf4j
 public class MyConsumer implements RocketMQListener<String> {

@@ -43,4 +43,10 @@ public class DateTimeUtilTest {
         Date lastDate = DateTimeUtil.getLastDayOfWeek(new Date(), 1);
         System.out.println(DateTimeUtil.formatDate(lastDate));
     }
+
+    @Test
+    public void testGetToday() {
+        Date today = DateTimeUtil.getToday();
+        System.out.println(DateTimeUtil.formatDate(today, DateTimeUtil.DEFAULT_DATE_FORMAT));
+    }
 }

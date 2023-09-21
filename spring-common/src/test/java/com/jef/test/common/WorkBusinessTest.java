@@ -105,5 +105,14 @@ public class WorkBusinessTest extends BaseTest {
                 "bank_code, root_bank_code, branch_bank_name");
     }
 
+    @Test
+    public void testGetExcelToJson() throws Exception {
+        Map<String, String> mapParams = new HashMap<>();
+        initMybatis("mapper/*Mapper.xml");
+        TestBeanUtil.addBean(WorkBusinessServiceImpl.class.getSimpleName(), WorkBusinessServiceImpl.class);
+        WorkBusinessServiceImpl workBusinessService = SpringContextHolder.getBean(WorkBusinessServiceImpl.class.getSimpleName());
+        workBusinessService.getExcelToJson("E:/Desktop/MyGet/testCreateJSON.xlsx");
+    }
+
 
 }

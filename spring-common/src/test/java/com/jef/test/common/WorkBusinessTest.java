@@ -111,7 +111,7 @@ public class WorkBusinessTest extends BaseTest {
         initMybatis("mapper/*Mapper.xml");
         TestBeanUtil.addBean(WorkBusinessServiceImpl.class.getSimpleName(), WorkBusinessServiceImpl.class);
         WorkBusinessServiceImpl workBusinessService = SpringContextHolder.getBean(WorkBusinessServiceImpl.class.getSimpleName());
-        workBusinessService.getExcelToJson("E:/Desktop/MyGet/testCreateJSON.xlsx");
+        workBusinessService.getExcelToJson("E:/Desktop/MyGet/testCreateJSON.xlsx", 1);
     }
 
 

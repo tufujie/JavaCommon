@@ -341,7 +341,7 @@ public class WorkBusinessServiceImpl implements IWorkBusinessService {
     }
 
     @Override
-    public void getExcelToJson(String fileUrl) throws Exception {
+    public void getExcelToJson(String fileUrl, int levelType) throws Exception {
         // 创建Excel，读取文件内容
         File file = new File(fileUrl);
         XSSFWorkbook workbook = new XSSFWorkbook(FileUtils.openInputStream(file));
@@ -360,16 +360,26 @@ public class WorkBusinessServiceImpl implements IWorkBusinessService {
         boolean parent = false;
         Map<String, Object> map = new HashMap<>();
         String parentKey = "";
-        for (int i = 0; i <= lastRowNum; i++) {
+        // 第1行为表头
+        // 支持第1列和第2列为字段值
+        // 表头：字段 字段名 长度 必填 说明
+        for (int i = 1; i <= lastRowNum; i++) {
             Row row = sheet.getRow(i);
             Cell cellKey = row.getCell(0);
             Cell cellSub = row.getCell(0);
-            Cell cellDesc = row.getCell(1);
+            Cell cellKeyName = row.getCell(1);
             Cell cellType = row.getCell(2);
             Cell cellComment = row.getCell(4);
+            if (levelType == 2) {
+                // 支持字段中有子字段，第1列和第2列是字段 后面是 字段名 长度 必填 说明
+                cellSub = row.getCell(1);
+                cellKeyName = row.getCell(2);
+                cellType = row.getCell(3);
+                cellComment = row.getCell(5);
+            }
             String key = ExcelUtil.getValueFromCell(cellKey);
             String subkey = ExcelUtil.getValueFromCell(cellSub);
-            String desc = ExcelUtil.getValueFromCell(cellDesc);
+            String keyName = ExcelUtil.getValueFromCell(cellKeyName);
             String type = ExcelUtil.getValueFromCell(cellType);
             String comment = ExcelUtil.getValueFromCell(cellComment);
             /*comment = comment.replaceAll(" ", "");
@@ -377,7 +387,7 @@ public class WorkBusinessServiceImpl implements IWorkBusinessService {
             comment = comment.replaceAll(":", "");*/
             if (type.contains("string") || type.contains("String")) {
             }
-            String value = desc + comment;
+            String value = keyName + comment;
             boolean thisIsParent = type == null || "".equals(type);
             boolean commonAppend = false;
             if (parent) {

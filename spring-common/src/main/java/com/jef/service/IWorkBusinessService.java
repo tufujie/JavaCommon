@@ -71,5 +71,5 @@ public interface IWorkBusinessService {
      * @param fileUrl
      * @throws Exception
      */
-    void getExcelToJson(String fileUrl) throws Exception;
+    void getExcelToJson(String fileUrl, int levelType) throws Exception;
 }

@@ -26,10 +26,22 @@ public class TestJefContainer {
     @Autowired
     IUserService userService;
 
+/*    @Autowired
+    RedisTemplate<String, String> redisTemplate;*/
+
     @Test
-    @DisplayName("测试获取用户信息")
-    public void testGetUserList() {
+    @DisplayName("测试通过数据库获取用户信息")
+    public void testGetUserListOfMySQL() {
         List<User> userList = userService.getAllUser();
         System.out.println(userList);
     }
+
+   /* @Test
+    @DisplayName("测试通过Redis设置并获取数据")
+    public void testGetDataByREdis() {
+        String key = "test", value = CommonConstant.NAME;
+        redisTemplate.opsForValue().set(key, value);
+        String redisValue = redisTemplate.opsForValue().get(key);
+        Assertions.assertEquals(value, redisValue);
+    }*/
 }

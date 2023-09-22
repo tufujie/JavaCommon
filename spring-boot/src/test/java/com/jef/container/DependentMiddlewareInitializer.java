@@ -1,6 +1,7 @@
 package com.jef.container;
 
 import org.springframework.boot.test.context.TestConfiguration;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.MySQLContainer;
 
 /**
@@ -11,6 +12,8 @@ import org.testcontainers.containers.MySQLContainer;
 public class DependentMiddlewareInitializer {
 
     private static final MySQLContainer<?> MYSQL = ContainerHelper.createMySqlContainer();
+
+    private static final GenericContainer<?> REDIS = ContainerHelper.createRedisContainer();
 
     static {
         System.setProperty("spring.datasource.url", MYSQL.getJdbcUrl());

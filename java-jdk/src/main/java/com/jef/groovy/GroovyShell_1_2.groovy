@@ -1,3 +1,4 @@
+package com.jef.groovy
 // 带参数的groovy方法
 def sayHello(name) {
     println "Hello " + name + "."

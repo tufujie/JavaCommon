@@ -1,3 +1,4 @@
+package com.jef.groovy
 // 不带参数的groovy方法
 def sayHello() {
     println 'Hello World.'

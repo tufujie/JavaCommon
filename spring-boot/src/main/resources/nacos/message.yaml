@@ -1,9 +1,0 @@
-business:
-  mq:
-    message:
-      topic: DEV-message-create
-      group: DEV-message
-password:
-  rsa:
-    pwd-private-key: privateKey-test
-    pwd-public-key: publicKey-test

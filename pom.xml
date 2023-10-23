@@ -10,8 +10,6 @@
     <module>dubbo-provider</module>
     <module>dubbo-consumer</module>
     <module>dubbo-consumer2</module>
-    <module>java-jdk</module>
-    <module>spring-boot</module>
     <module>shiro-info</module>
     <module>spring-common</module>
   </modules>

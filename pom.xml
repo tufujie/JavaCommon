@@ -14,7 +14,6 @@
     <module>spring-boot</module>
     <module>shiro-info</module>
     <module>spring-common</module>
-    <module>java-component</module>
   </modules>
   <name>JavaCommon Maven Webapp</name>
   <url>http://maven.apache.org</url>

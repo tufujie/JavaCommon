@@ -26,8 +26,10 @@
     <dubbo:protocol name="rmi" port="20890" />
     <dubbo:protocol name="hessian" port="20900" />
     <!-- 服务提供者暴露服务配置，声明需要暴露的服务接口，使用 dubbo 协议实现定义好的 api.DemoService 接口 -->
+    <!-- 可以配置序列化协议   -->
     <dubbo:service interface="com.jef.dubbo.api.DemoService" ref="demoServiceImpl" protocol="dubbo" weight="100" timeout="3000"
-                   retries="2" cluster="failsafe" loadbalance="roundrobin" registry="shenzhenRegistry" group="demoGroup" version="1.0.1" validation="">
+                   retries="2" cluster="failsafe" loadbalance="roundrobin" registry="shenzhenRegistry"
+                   group="demoGroup" version="1.0.1" validation="" serialization="hessian2">
         <!-- 方法级配置 -->
 <!--        <dubbo:method name="getByNameAndPhone" retries="2" timeout="3000">-->
             <!-- 方法参数配置 -->

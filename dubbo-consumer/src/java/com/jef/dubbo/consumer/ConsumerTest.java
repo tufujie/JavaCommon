@@ -31,7 +31,8 @@ public class ConsumerTest {
         ClassPathXmlApplicationContext context = DubooUtil.getConsumerContext();
         DemoService demoService = context.getBean(DemoService.class);
         System.out.println("开始doSomeThing()");
-        demoService.doSomeThing(1L);
+        User user = demoService.doSomeThing(1L);
+        System.out.println("消费者获取数据：userName=" + user.getName());
     }
 
     /**

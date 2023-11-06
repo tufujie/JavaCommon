@@ -41,11 +41,12 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    public void doSomeThing(Long id) {
+    public User doSomeThing(Long id) {
         System.out.println("消费者1号 获取权限" + getPermissions(id));
         User user = getByID(String.valueOf(id));
         System.out.println("消费者2号 获取用户名称=" + user.getName());
         User userNameAndPhone = getByNameAndPhone("Jef", "13266860001");
         System.out.println("消费者3号 获取用户名称=" + userNameAndPhone.getName());
+        return user;
     }
 }

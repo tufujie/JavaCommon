@@ -43,5 +43,5 @@ public interface DemoService {
     /**
      * 做一些事项
      */
-    void doSomeThing(Long id);
+    User doSomeThing(Long id);
 }

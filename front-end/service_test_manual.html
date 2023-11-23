@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Dubbo服务接口测试(手动)</title>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <style>
+        .input__field--haruki {
+            padding: 0.4em 0.25em;
+            width: 100%;
+            background: transparent;
+            color: #AFB5BB;
+            font-size: 1.55em;
+        }
+        .input__field {
+            position: relative;
+            display: block;
+            float: left;
+            padding: 0.8em;
+            width: 100%;
+            border: none;
+            border-radius: 0;
+            background: #f0f0f0;
+            color: #aaa;
+            font-weight: bold;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-appearance: none;
+        }
+
+        .ant-btn {
+            line-height: 1.499;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+            white-space: nowrap;
+            text-align: center;
+            background-image: none;
+            border: 1px solid transparent;
+            -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.015);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.015);
+            cursor: pointer;
+            -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
+            transition: all .3s cubic-bezier(.645, .045, .355, 1);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            height: 32px;
+            padding: 0 15px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: rgba(0,0,0,0.65);
+            background-color: #fff;
+            border-color: #d9d9d9;
+        }
+
+        .ant-btn-primary {
+            color: #fff;
+            background-color: #1890ff;
+            border-color: #1890ff;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+            -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+        }
+
+        .ant-btn-red {
+            color: #fff;
+            background-color: #FF5A44;
+            border-color: #FF5A44;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+            -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+        }
+        .alert-box{display:none;position:fixed;top:30%;width:30%;left:35%;z-index:9999;text-align:center}
+        .alert{padding:15px;margin-bottom:20px;border:1px solid transparent;border-radius:4px}
+        .alert-success{color:#3c763d;background-color:#dff0d8;border-color:#d6e9c6}
+    </style>
+ </head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery_extend.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+	 
+});
+
+ 	function createUrl() {
+	 	var url = $("#baseUrl").val()+$("#serviceUrl").val()+"?serviceName="+$("#serviceName").val()+"&methodName="+$("#methodName").val()+"&paramterInput="+$("#paramterInput").val();
+		var encodeURL = encodeURI(url);
+		$("#url_content").val(encodeURL);
+		$('#url_content').select();
+			document.execCommand("copy");
+		showSuccessBox('复制成功');
+		/*$('#copyUrlShow').text('复制成功！');
+		// 每一秒执行一次
+		var timerID = setInterval(function(){
+				console.log('文字隐藏倒计时');
+		}, 1000);
+		// 5秒后清除
+		setTimeout(function() {
+				$('#copyUrlShow').text('');
+		    clearInterval(timerID);
+		}, 5000);*/
+	 }
+
+	 function createJSON() {
+       // var jsonString = $('#paramterInput').val();
+       // var jsonString = jsonData.replace(/\s*/g, "");
+        // jsonData = jsonData.replace(" ", "");
+        // var formattedJSON = JSON.stringify(jsonData, null, 2);
+/*        var formattedJSON = JSON.stringify(jsonData);
+        formattedJSON = formattedJSON.replace("\"", '');
+        formattedJSON = formattedJSON.replace("\"", '');
+        formattedJSON = formattedJSON.replace("\"", '');
+        formattedJSON = formattedJSON.replace("\"", '');
+        var $pre = $('<pre>').text(formattedJSON);
+        $('body').append($pre);
+        var show = $('pre').text();*/
+
+       // 将 JSON 字符串解析为 JavaScript 对象
+/*        var jsonObject = $.parseJSON(jsonString);
+
+// 将 JavaScript 对象转换为格式化后的 JSON 字符串
+        var formattedJsonString = JSON.stringify(jsonObject, null, 2);
+
+        $('#paramterInput').val(formattedJsonString);*/
+
+        var key = $.trim($('#key').val()), value = $.trim($('#value').val());
+        if (key == '' || value == '') {
+            alert('key value必填');
+            return false;
+        }
+        var keyList = key.split(' '), valueList = value.split(' ');
+        if (keyList.length != valueList.length) {
+            alert('key value大小不一致');
+            return false;
+        }
+        var json = {};
+        for (var i = 0; i < keyList.length; i++) {
+            json[keyList[i]] = valueList[i];
+        }
+        $('#paramterInput').val(JSON.stringify(json));
+    }
+
+    function showSuccessBox(msg){$("body").append("<div class='alert alert-success alert-box' id='successbox'></div>");var successbox=$('#successbox');successbox.text(msg);successbox.fadeIn();setTimeout(function(){successbox.fadeOut();},2000)};
+
+    function copyReference(type) {
+        var copyUrl = $('#copyReference').val();
+        var arr = copyUrl.split("#");
+        var first = arr[0];
+        var methodName = arr[1];
+        var firstArray = first.split('.');
+        var firstArrayLast = firstArray[firstArray.length - 1];
+        var firstNum = firstArrayLast.charAt(0);
+        var firstNumLower = firstNum.toLocaleLowerCase();
+        var notFirstNum = firstArrayLast.substring(1,firstArrayLast.length);
+        var serviceName = firstNumLower + notFirstNum;
+        if (type == 1) {
+            serviceName = serviceName.replace("Impl", "");
+        }
+        $("#serviceName").val(serviceName);
+        $("#methodName").val(methodName);
+    }
+
+</script>
+ <body>
+	<div class="main">
+  <table width=100%  border=1  cellpadding="5" cellspacing="0" bordercolorlight="#cccccc" bordercolordark="#FFFFFF">
+  <tr>
+	<td>baseUrl</td>
+	<td><input id="baseUrl" style="width:100%;height:100%" value="http://172.18.7.108:8080"></td>
+  </tr>
+  <tr>
+    <td>Class Copy Reference<button class="ant-btn ant-btn-primary" onclick="copyReference(0)" >未定义生成</button>
+<button class="ant-btn ant-btn-primary" onclick="copyReference(1)" >定义生成</button>
+    </td>
+    <td><input id="copyReference" style="width:100%;height:100%" value="com.weimob.saas.ec.coupon.service.third.impl.ThirdOmpCouponServiceImpl#receiveOmpCoupon"></td>
+  </tr>
+	<tr>
+	<td width=10%>Service Name</td>
+	<td width=45%>
+	<input type="hidden" id="serviceUrl" style="width:100%;height:100%" value="/service">
+	<input type="text" id="serviceName" style="width:100%;height:100%" class="input__field input__field--haruki" value="couponExportService">
+	</td>
+  </tr>
+   <tr>
+	<td>Method Name</td>
+	<td>
+	   <input type="text" id="methodName" style="width:100%;height:100%" class="input__field input__field--haruki" value="getUserCouponNotify">
+	</td>
+	
+  </tr>
+  <tr>
+  	<td>key</td>
+  	<td><input name="key" id="key" type="text" style="width:100%;height:100%" value="pid wid" /></td>
+  </tr>
+  <tr>
+  	<td>value<button class="ant-btn ant-btn-primary" onclick="createJSON()" >生成JSON</button></td>
+		<td><input name="value" id="value" type="text" style="width:100%;height:100%" value="1 100297403" /></td>
+  </tr>
+  </tr>
+  <tr>
+	<td>Paramter Input<br>(JSON)</td>
+	<td height=300px><textarea id="paramterInput" row="100" style="width:100%;height:100%;font-size:25px">
+{
+pid: 1,
+wid: 100297403
+}
+	</textarea></td>
+  </tr>
+  <tr>
+      <td>URL <span style="color: red;font-size: 30px;" id="copyUrlShow"></span></td>
+	  <td colspan=2 height=200px><textarea id="url_content" onclick="createUrl();" row="100" style="width:100%;height:100%;font-size:25px"></textarea></td>
+  </tr>
+  
+  </table>
+ </div>
+ </body>
+</html>

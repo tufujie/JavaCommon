@@ -94,8 +94,10 @@
             return false;
         }
         var timestamp = parseInt(beforeValue); // 日期时间戳
-        // 秒转毫秒
-        timestamp *= 1000;
+         // 秒转毫秒
+        if (beforeValue.length != 13) {
+            timestamp *= 1000;
+        }
         var date = new Date(timestamp); // 创建Date对象
         var year = date.getFullYear(); // 获取年份
         var month = date.getMonth() + 1; // 获取月份（注意月份是从0开始的，所以要加1）
@@ -103,6 +105,21 @@
         var hour = date.getHours(); // 获取小时
         var minute = date.getMinutes(); // 获取分钟
         var second = date.getSeconds(); // 获取秒
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (hour < 10) {
+            hour = "0" + hour;
+        }
+        if (minute < 10) {
+            minute = "0" + minute;
+        }
+        if (second < 10) {
+            second = "0" + second;
+        }
         $('#afterValue').val(year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second);
     }
 
@@ -124,8 +141,7 @@
         var minute = hourMinuteSecondArray[1]; // 获取分钟
         var second = hourMinuteSecondArray[2]; // 获取秒
         var utime = new Date(Date.UTC(year, month - 1, day, hour-8, minute, second));
-        // 毫秒转秒
-        $('#beforeValue').val(utime.getTime() / 1000);
+        $('#beforeValue').val(utime.getTime());
     }
 </script>
 </body>

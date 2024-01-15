@@ -79,14 +79,22 @@
 
 <h1 style="text-align: center">时间戳与时间互转</h1>
 时间戳
-<textarea style="margin: 0px; width: 100%; height: 200px;" id="beforeValue"></textarea>
-<button class="ant-btn ant-btn-primary" onclick="timestampToTime()">时间戳转时间</button><br><br><br>
-<button class="ant-btn ant-btn-red" onclick="timeToTimestamp()">时间转时间戳</button><br><br><br>
+<textarea style="margin: 0px; width: 100%; height: 100px;" onkeyup="timestampToTimeKeyUp()" id="beforeValue"></textarea>
+<!-- <button class="ant-btn ant-btn-primary" onclick="timestampToTime()">时间戳转时间</button><br><br><br>
+<button class="ant-btn ant-btn-red" onclick="timeToTimestamp()">时间转时间戳</button><br><br><br> -->
 时间
-<textarea style="margin: 0px; width: 100%; height: 200px;" id="afterValue"></textarea>
+<textarea style="margin: 0px; width: 100%; height: 100px;" onkeyup="timeToTimestampKeyUp()" id="afterValue"></textarea><br><br><br>
+<!-- <button class="ant-btn ant-btn-red" onclick="currentDateAddOneMinute(1)">当前时间+1分钟</button> -->
+<span style="color: #1890ff; font-weight: bold;">当前时间+</span>
+<input type="" name="" id="addNMinute" value="1" onkeyup="changeAddMinite()" />
+<span style="color: #FF5A44; font-weight: bold;">分钟</span>
+<!-- <button class="ant-btn ant-btn-red" id="currentDateAddNMinuteButton" onclick="currentDateAddNMinute()">当前时间+11分钟</button><br><br><br> -->
 
 <script>
-    console.log("时间戳为精确到秒");
+    // 进入默认当前时间加1分钟
+    currentDateAddOneMinute(1);
+
+    /* 时间戳转时间 */
     function timestampToTime() {
         var beforeValue = $.trim($('#beforeValue').val());
         if (beforeValue == '') {
@@ -123,6 +131,7 @@
         $('#afterValue').val(year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second);
     }
 
+    /* 时间转时间戳 */
     function timeToTimestamp() {
         var afterValue = $.trim($('#afterValue').val());
         if (afterValue == '') {
@@ -142,6 +151,76 @@
         var second = hourMinuteSecondArray[2]; // 获取秒
         var utime = new Date(Date.UTC(year, month - 1, day, hour-8, minute, second));
         $('#beforeValue').val(utime.getTime());
+    }
+
+    /* 当前时间添加分钟数 */
+    function currentDateAddOneMinute(addMinute) {
+        var date = new Date(); // 创建Date对象
+        var year = date.getFullYear(); // 获取年份
+        var month = date.getMonth() + 1; // 获取月份（注意月份是从0开始的，所以要加1）
+        var day = date.getDate(); // 获取日期
+        var hour = date.getHours(); // 获取小时
+        var minute = date.getMinutes(); // 获取分钟
+        var second = date.getSeconds(); // 获取秒
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        // 加1分钟进位
+        minute += parseInt(addMinute);
+        if (minute > 59) {
+            var addHour = parseInt(minute / 60);
+            hour += addHour;
+            minute = minute - addHour * 60;
+        }
+        if (hour < 10) {
+            hour = "0" + hour;
+        }
+        if (minute < 10) {
+            minute = "0" + minute;
+        }
+        if (second < 10) {
+            second = "0" + second;
+        }
+        $('#afterValue').val(year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second);
+        timeToTimestamp();
+    }
+
+    /* 页面进入触发 */
+    function currentDateAddNMinute() {
+        var n = $('#addNMinute').val();
+        if (n == '') {
+            n = 1;
+        }
+        currentDateAddOneMinute(n);
+    }
+
+    /* 输入添加的分钟数触发 */
+    function changeAddMinite() {
+        var n = $('#addNMinute').val();
+        if (n == '') {
+            n = 1;
+        }
+        currentDateAddOneMinute(n);
+        $('#currentDateAddNMinuteButton').text('当前时间+' + n + '分钟');
+    }
+
+    /* 时间戳输入框触发 */
+    function timestampToTimeKeyUp() {
+        var beforeValue = $.trim($('#beforeValue').val());
+        if (beforeValue.length == 13 || beforeValue.length == 10) {
+            timestampToTime();
+        }
+    }
+
+    /* 时间输入框触发 */
+    function timeToTimestampKeyUp() {
+        var afterValue = $.trim($('#afterValue').val());
+        if (afterValue.length == 19) {
+            timeToTimestamp();
+        }
     }
 </script>
 </body>
